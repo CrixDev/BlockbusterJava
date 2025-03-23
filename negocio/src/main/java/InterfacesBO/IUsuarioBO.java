@@ -6,6 +6,7 @@ package InterfacesBO;
 
 import DTOs.NewUsuarioDTO;
 import exception.NegocioException;
+import java.util.List;
 
 /**
  *
@@ -14,5 +15,6 @@ import exception.NegocioException;
 public interface IUsuarioBO {
     
     public NewUsuarioDTO guardarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException;
+    public List<NewUsuarioDTO> getUsuariosRegistrados() throws NegocioException;
     
 }
