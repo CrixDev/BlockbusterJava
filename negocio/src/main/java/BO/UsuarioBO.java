@@ -5,8 +5,11 @@
 package BO;
 
 import DTOs.NewUsuarioDTO;
+import ISubsistemas.IRegistrarUsuario;
 import InterfacesBO.IUsuarioBO;
 import exception.NegocioException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,8 +17,13 @@ import exception.NegocioException;
  */
 public class UsuarioBO implements IUsuarioBO {
 
+    private List<NewUsuarioDTO> usuariosRegistrados = new ArrayList<>();
+    private IRegistrarUsuario validarUsuario;
+    
     @Override
-    public NewUsuarioDTO registrarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
+    public NewUsuarioDTO guardarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
+        validarUsuario.registrarUsuario(nuevoUsuario);
+        usuariosRegistrados.add(nuevoUsuario);
         return nuevoUsuario;
     }
     

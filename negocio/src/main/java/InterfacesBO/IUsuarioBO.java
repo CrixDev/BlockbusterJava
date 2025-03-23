@@ -13,6 +13,6 @@ import exception.NegocioException;
  */
 public interface IUsuarioBO {
     
-    public NewUsuarioDTO registrarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException;
+    public NewUsuarioDTO guardarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException;
     
 }
