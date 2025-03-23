@@ -8,6 +8,7 @@ import DTOs.NewUsuarioDTO;
 import ISubsistemas.IRegistrarUsuario;
 import exception.NegocioException;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -94,8 +95,64 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         }
         return nuevoUsuario;
     }
-    
-    public NewUsuarioDTO validarFormatoCorreo(NewUsuarioDTO nuevoUsuario) throws NegocioException{
-        
+
+    public NewUsuarioDTO validarFormatoCorreo(NewUsuarioDTO nuevoUsuario) throws NegocioException {
+        if (nuevoUsuario.getCorreoElectronico() == null) {
+            throw new NegocioException("El correo no puede estar vacio");
+        }
+        if (nuevoUsuario.getCorreoElectronico().matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            throw new NegocioException("El formato del correo no es valido");
+        }
+        return nuevoUsuario;
     }
+
+    public NewUsuarioDTO validarformatoContrasenia(NewUsuarioDTO nuevoUsuario) throws NegocioException {
+        if (nuevoUsuario.getContrasenia() == null) {
+            throw new NegocioException("La contrasenia no puede estar vacia");
+        }
+        if (nuevoUsuario.getContrasenia().length() < 8 || nuevoUsuario.getContrasenia().length() > 15) {
+            throw new NegocioException("La contrasenia deber tener entre 8 y 15 caracteres");
+        }
+        if (!nuevoUsuario.getContrasenia().matches(".*[A-Z].*")) {
+            throw new NegocioException("La contraseña debe contener al menos una letra mayúscula.");
+        }
+
+        if (!nuevoUsuario.getContrasenia().matches(".*[a-z].*")) {
+            throw new NegocioException("La contraseña debe contener al menos una letra minúscula.");
+        }
+
+        if (!nuevoUsuario.getContrasenia().matches(".*\\d.*")) {
+            throw new NegocioException("La contraseña debe contener al menos un número.");
+        }
+
+        if (!nuevoUsuario.getContrasenia().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*")) {
+            throw new NegocioException("La contraseña debe contener al menos un carácter especial.");
+        }
+
+        if (nuevoUsuario.getContrasenia().contains(" ")) {
+            throw new NegocioException("La contraseña no debe contener espacios.");
+        }
+        if (nuevoUsuario.getConfirmarContrasenia() == null) {
+            throw new NegocioException("Asegurate de poner la misma contrasenia");
+        }
+        if (nuevoUsuario.getConfirmarContrasenia().equals(nuevoUsuario.getContrasenia())) {
+            throw new NegocioException("La contrasenias no son las mismas, verificalas");
+        }
+        return nuevoUsuario;
+    }
+
+    public NewUsuarioDTO validarUsuario(NewUsuarioDTO nuevoUsuario, List<NewUsuarioDTO> usuariosRegistrados) throws NegocioException {
+        for (NewUsuarioDTO usuario : usuariosRegistrados) {
+            if (usuario.getCorreoElectronico().equalsIgnoreCase(nuevoUsuario.getCorreoElectronico())) {
+                throw new NegocioException("Este correo ya esta registrado");
+            }
+        }
+        for (NewUsuarioDTO usuario : usuariosRegistrados) {
+            if (usuario.getNumTelefono().equalsIgnoreCase(nuevoUsuario.getNumTelefono())) {
+                throw new NegocioException("Este numero de telefono ya esta registrado");
+            }
+        }
+        return nuevoUsuario;
+    }
+
 }

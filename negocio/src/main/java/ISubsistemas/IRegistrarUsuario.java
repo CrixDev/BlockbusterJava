@@ -5,6 +5,7 @@
 package ISubsistemas;
 
 import DTOs.NewUsuarioDTO;
+import exception.NegocioException;
 
 /**
  *
