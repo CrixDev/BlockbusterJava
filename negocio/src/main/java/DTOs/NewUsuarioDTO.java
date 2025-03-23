@@ -18,21 +18,19 @@ public class NewUsuarioDTO {
     private String contrasenia;
     private String pais;
     private Date fechaNacimiento;
-    private String direccion;
     private String correoElectronico;
     private String confirmarContrasenia;
 
     public NewUsuarioDTO() {
     }
 
-    public NewUsuarioDTO(String nombre, String apellido, String numTelefono, String contrasenia, String pais, Date fechaNacimiento, String direccion, String correoElectronico, String confirmarContrasenia) {
+    public NewUsuarioDTO(String nombre, String apellido, String numTelefono, String contrasenia, String pais, Date fechaNacimiento, String correoElectronico, String confirmarContrasenia) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.numTelefono = numTelefono;
         this.contrasenia = contrasenia;
         this.pais = pais;
         this.fechaNacimiento = fechaNacimiento;
-        this.direccion = direccion;
         this.correoElectronico = correoElectronico;
         this.confirmarContrasenia = confirmarContrasenia;
     }
@@ -101,17 +99,9 @@ public class NewUsuarioDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     @Override
     public String toString() {
-        return "NewUsuarioDTO{" + "nombre=" + nombre + ", apellido=" + apellido + ", numTelefono=" + numTelefono + ", contrasenia=" + contrasenia + ", pais=" + pais + ", fechaNacimiento=" + fechaNacimiento + ", direccion=" + direccion + '}';
+        return "NewUsuarioDTO{" + "nombre=" + nombre + ", apellido=" + apellido + ", numTelefono=" + numTelefono + ", contrasenia=" + contrasenia + ", pais=" + pais + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
 
 }
