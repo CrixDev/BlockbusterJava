@@ -19,11 +19,13 @@ public class NewUsuarioDTO {
     private String pais;
     private Date fechaNacimiento;
     private String direccion;
+    private String correoElectronico;
+    private String confirmarContrasenia;
 
     public NewUsuarioDTO() {
     }
 
-    public NewUsuarioDTO(String nombre, String apellido, String numTelefono, String contrasenia, String pais, Date fechaNacimiento, String direccion) {
+    public NewUsuarioDTO(String nombre, String apellido, String numTelefono, String contrasenia, String pais, Date fechaNacimiento, String direccion, String correoElectronico, String confirmarContrasenia) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.numTelefono = numTelefono;
@@ -31,6 +33,24 @@ public class NewUsuarioDTO {
         this.pais = pais;
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
+        this.correoElectronico = correoElectronico;
+        this.confirmarContrasenia = confirmarContrasenia;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
+    }
+
+    public String getConfirmarContrasenia() {
+        return confirmarContrasenia;
+    }
+
+    public void setConfirmarContrasenia(String confirmarContrasenia) {
+        this.confirmarContrasenia = confirmarContrasenia;
     }
 
     public String getNombre() {
