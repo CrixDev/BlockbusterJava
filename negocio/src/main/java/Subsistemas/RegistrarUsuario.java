@@ -4,11 +4,15 @@
  */
 package Subsistemas;
 
+import BO.UsuarioBO;
 import DTOs.NewUsuarioDTO;
 import ISubsistemas.IRegistrarUsuario;
+import InterfacesBO.IUsuarioBO;
 import exception.NegocioException;
-import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,16 +20,29 @@ import java.util.List;
  */
 public class RegistrarUsuario implements IRegistrarUsuario {
 
+    private IUsuarioBO registrar = new UsuarioBO();
+
     @Override
     public NewUsuarioDTO registrarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
-        validarFormatoNombre(nuevoUsuario);
-        validarFormatoApellido(nuevoUsuario);
+        try {
+            List<NewUsuarioDTO> usuarios = registrar.getUsuariosRegistrados();
+            validarFormatoNombre(nuevoUsuario);
+            validarFormatoApellido(nuevoUsuario);
+            validarFormatoNumeroTelefonico(nuevoUsuario);
+            validarPaisExistente(nuevoUsuario);
+            validarFormatoCorreo(nuevoUsuario);
+            validarformatoContrasenia(nuevoUsuario);
+            validarUsuario(nuevoUsuario, usuarios);
+            registrar.guardarUsuario(nuevoUsuario);
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+        }
         return nuevoUsuario;
     }
 
     public NewUsuarioDTO validarFormatoNombre(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         if (nuevoUsuario.getNombre() == null) {
-            throw new NegocioException("El nombre no puede venir vacio");
+            throw new NegocioException("El nombre no puede estar vacio");
         }
         if (nuevoUsuario.getNombre().length() < 2 || nuevoUsuario.getNombre().length() > 50) {
             throw new NegocioException("El nombre es demasiado largo");
@@ -33,11 +50,11 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         if (nuevoUsuario.getNombre().matches(".*\\d.*")) {
             throw new NegocioException("El nombre no debe contener números.");
         }
-        if (nuevoUsuario.getNombre().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\\\s-]+")) {
+        if (!nuevoUsuario.getNombre().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s\\-]+")) {
             throw new NegocioException("El nombre tiene caracteres no validos");
         }
         if (nuevoUsuario.getNombre().contains("@")) {
-            throw new NegocioException("Tu nombre de usuario no puede contener tu nombre");
+            throw new NegocioException("Tu nombre de usuario no puede contener un correo electronico");
         }
         return nuevoUsuario;
     }
@@ -55,14 +72,14 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         if (nuevoUsuario.getApellido().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\\\s-]")) {
             throw new NegocioException("El nombre tiene caracteres no validos");
         }
-        if (nuevoUsuario.getNombre().contains("@")) {
+        if (nuevoUsuario.getApellido().contains("@")) {
             throw new NegocioException("Tu nombre de usuario no puede contener tu apellido");
         }
         return nuevoUsuario;
     }
 
     public NewUsuarioDTO validarFormatoNumeroTelefonico(NewUsuarioDTO nuevoUsuario) throws NegocioException {
-        String[] areaCodeValid = {"+52"};
+        // String[] areaCodeValid = {"+52"};
 
         if (nuevoUsuario.getNumTelefono() == null) {
             throw new NegocioException("El numero telefonico no puede estar vacio");
@@ -70,11 +87,13 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         if (nuevoUsuario.getNumTelefono().length() != 10) {
             throw new NegocioException("Le faltan digitos a tu numero telefonico");
         }
+        /* queda pendientee
         boolean ladaValida = Arrays.stream(areaCodeValid)
                 .anyMatch(nuevoUsuario.getNumTelefono()::startsWith);
         if (!ladaValida) {
             throw new NegocioException("El código de área no es válido.");
         }
+         */
         if (nuevoUsuario.getNumTelefono().matches("\\d{10}")) {
         }
         return nuevoUsuario;
@@ -96,11 +115,40 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    public NewUsuarioDTO validarFormatoFecha(NewUsuarioDTO nuevoUsuario) throws NegocioException {
+        Date fechaNacimiento = nuevoUsuario.getFechaNacimiento();
+        if (fechaNacimiento == null) {
+            throw new NegocioException("La fecha de nacimiento no puede estar vacia");
+        }
+
+        Date hoy = new Date();
+        if (fechaNacimiento.after(hoy)) {
+            throw new NegocioException("La fecha de nacimiento no puede estar en el futuro");
+        }
+
+        Calendar nacimiento = Calendar.getInstance();
+        nacimiento.setTime(fechaNacimiento);
+        Calendar actual = Calendar.getInstance();
+
+        int edad = actual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR);
+        if (actual.get(Calendar.MONTH) < nacimiento.get(Calendar.MONTH)
+                || (actual.get(Calendar.MONTH) == nacimiento.get(Calendar.MONTH)
+                && actual.get(Calendar.DAY_OF_MONTH) < nacimiento.get(Calendar.DAY_OF_MONTH))) {
+            edad--;
+        }
+
+        if (edad < 18) {
+            throw new NegocioException("El usuario debe tener al menos 18 años.");
+        }
+
+        return nuevoUsuario;
+    }
+
     public NewUsuarioDTO validarFormatoCorreo(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         if (nuevoUsuario.getCorreoElectronico() == null) {
             throw new NegocioException("El correo no puede estar vacio");
         }
-        if (nuevoUsuario.getCorreoElectronico().matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+        if (!nuevoUsuario.getCorreoElectronico().matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
             throw new NegocioException("El formato del correo no es valido");
         }
         return nuevoUsuario;
@@ -135,23 +183,22 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         if (nuevoUsuario.getConfirmarContrasenia() == null) {
             throw new NegocioException("Asegurate de poner la misma contrasenia");
         }
-        if (nuevoUsuario.getConfirmarContrasenia().equals(nuevoUsuario.getContrasenia())) {
-            throw new NegocioException("La contrasenias no son las mismas, verificalas");
-        }
         return nuevoUsuario;
     }
 
     public NewUsuarioDTO validarUsuario(NewUsuarioDTO nuevoUsuario, List<NewUsuarioDTO> usuariosRegistrados) throws NegocioException {
         for (NewUsuarioDTO usuario : usuariosRegistrados) {
             if (usuario.getCorreoElectronico().equalsIgnoreCase(nuevoUsuario.getCorreoElectronico())) {
-                throw new NegocioException("Este correo ya esta registrado");
+                throw new NegocioException("Este correo ya está registrado");
             }
         }
+
         for (NewUsuarioDTO usuario : usuariosRegistrados) {
             if (usuario.getNumTelefono().equalsIgnoreCase(nuevoUsuario.getNumTelefono())) {
-                throw new NegocioException("Este numero de telefono ya esta registrado");
+                throw new NegocioException("Este número de teléfono ya está registrado");
             }
         }
+
         return nuevoUsuario;
     }
 
