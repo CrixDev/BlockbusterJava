@@ -4,6 +4,15 @@
  */
 package main.presentacion.Login;
 
+import BO.UsuarioBO;
+import InterfacesBO.IUsuarioBO;
+import DTOs.CredencialesUsuarioDTO;
+import DTOs.NewUsuarioDTO;
+import exception.NegocioException;
+import javax.swing.JOptionPane;
+import main.presentacion.registrarUsuario;
+import seleccionGenero.SeleccionGeneros;
+
 /**
  *
  * @author devor
@@ -15,6 +24,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        limpiarCampos();
     }
 
     /**
@@ -252,7 +262,11 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        registrarUsuario ventanaRegistrar = new registrarUsuario();
+        
+        ventanaRegistrar.setVisible(true);
+        ventanaRegistrar.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -264,7 +278,29 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        IUsuarioBO usuarioBO = new UsuarioBO();
+        
+        String correo = jTextField1.getText().trim();
+        String contraseña = new String(jPasswordField1.getPassword()).trim();
+        
+        if (correo.isEmpty() || contraseña.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar correo y contraseña", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+       }
+        
+        try{
+            CredencialesUsuarioDTO credenciales = new CredencialesUsuarioDTO(correo, contraseña);
+            NewUsuarioDTO usuario = usuarioBO.validarUsuario(credenciales.getCorreo(), credenciales.getContraseña());
+            
+            SeleccionGeneros ventanaGeneros = new SeleccionGeneros();
+            ventanaGeneros.setVisible(true);
+            ventanaGeneros.setLocationRelativeTo(null);
+            this.dispose();
+            
+        }catch(NegocioException ex){
+           JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+           limpiarCampos();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -302,6 +338,11 @@ public class Login extends javax.swing.JFrame {
         });
     }
 
+    private void limpiarCampos() {
+        jTextField1.setText("");
+        jPasswordField1.setText("");
+        jTextField1.requestFocus();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
