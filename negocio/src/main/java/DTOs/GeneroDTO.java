@@ -1,16 +1,13 @@
-
 package DTOs;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author payde
  */
 public class GeneroDTO {
+
     private String nombre;
-    private List<GeneroDTO> generos = new ArrayList<>();
+    private boolean seleccionado;
 
     public GeneroDTO(String nombre) {
         this.nombre = nombre;
@@ -24,17 +21,16 @@ public class GeneroDTO {
         this.nombre = nombre;
     }
 
-    public List<GeneroDTO> getGeneros() {
-        return generos;
+    public boolean isSeleccionado() {
+        return seleccionado;
     }
 
-    public void setGeneros(List<GeneroDTO> generos) {
-        this.generos = generos;
+    public void setSeleccionado(boolean seleccionado) {
+        this.seleccionado = seleccionado;
     }
 
     @Override
     public String toString() {
-        return "GeneroDTO{" + "nombre=" + nombre + ", generos=" + generos + '}';
+        return "GeneroDTO{" + "nombre=" + nombre + ", seleccionado=" + seleccionado + '}';
     }
-
 }
