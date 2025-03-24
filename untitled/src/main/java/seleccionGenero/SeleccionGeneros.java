@@ -4,6 +4,7 @@
  */
 package seleccionGenero;
 
+import DTOs.GeneroDTO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +17,8 @@ import java.util.List;
  * @author devor a
  */
 public class SeleccionGeneros extends javax.swing.JFrame {
-    private List<Genero> generos;
+
+    private List<GeneroDTO> generos;
     private int indiceActual = 0;
 
     /**
@@ -30,17 +32,18 @@ public class SeleccionGeneros extends javax.swing.JFrame {
 
     private void inicializarGeneros() {
         generos = new ArrayList<>();
-        generos.add(new Genero("Drama"));
- 
-        generos.add(new Genero("Terror"));
-        generos.add(new Genero("Comedia"));
-  
+        generos.add(new GeneroDTO("Drama"));
+
+        generos.add(new GeneroDTO("Terror"));
+        generos.add(new GeneroDTO("Comedia"));
+    }
+
     private void configurarInterfaz() {
         // Configurar el panel principal
         jPanel1.setBackground(new Color(26, 43, 76));
         jPanel2.setBackground(new Color(26, 43, 76));
         jPanel3.setBackground(new Color(16, 23, 41));
-        
+
         // Configurar el editor pane
         jEditorPane1.setBackground(new Color(16, 23, 41));
         jEditorPane1.setForeground(new Color(252, 193, 39));
@@ -59,7 +62,7 @@ public class SeleccionGeneros extends javax.swing.JFrame {
     }
 
     private void seleccionarGenero() {
-        Genero genero = generos.get(indiceActual);
+        GeneroDTO genero = generos.get(indiceActual);
         genero.setSeleccionado(!genero.isSeleccionado());
         String mensaje = genero.getNombre() + (genero.isSeleccionado() ? " seleccionado" : " deseleccionado");
         JOptionPane.showMessageDialog(this, mensaje);
@@ -292,9 +295,20 @@ public class SeleccionGeneros extends javax.swing.JFrame {
             public void run() {
                 new SeleccionGeneros().setVisible(true);
             }
-            
+
         });
     }
+
+    public List<GeneroDTO> getGenerosSeleccionados() {
+        List<GeneroDTO> seleccionados = new ArrayList<>();
+        for (GeneroDTO genero : generos) {
+            if (genero.isSeleccionado()) {
+                seleccionados.add(genero);
+            }
+        }
+        return seleccionados;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Comedia;
