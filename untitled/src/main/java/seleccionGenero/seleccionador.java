@@ -32,12 +32,7 @@ public class seleccionador extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        generos = new ArrayList<>();
-        generos.add(new Genero("Drama"));
-        generos.add(new Genero("Acción"));
-        generos.add(new Genero("Terror"));
-        generos.add(new Genero("Comedia"));
-
+    
         labelGenero = new JLabel(generos.get(indiceActual).getNombre(), SwingConstants.CENTER);
         labelGenero.setFont(new Font("Arial", Font.BOLD, 24));
         add(labelGenero, BorderLayout.CENTER);
