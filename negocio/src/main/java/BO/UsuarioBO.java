@@ -51,4 +51,18 @@ public class UsuarioBO implements IUsuarioBO {
         }
         
     }
+
+    @Override
+    public NewUsuarioDTO validarUsuario(String correo, String contraseña) throws NegocioException {      
+        for(NewUsuarioDTO usuario : usuariosRegistrados){
+            if (usuario.getCorreoElectronico().equals(correo)) {
+               if (usuario.getContrasenia().equals(contraseña)) {
+                return usuario;
+            }else{
+                throw new NegocioException("La contraseña es incorrecta");
+              }      
+           }        
+        }
+       throw new NegocioException("No se encontro el correo");
+    }
 }

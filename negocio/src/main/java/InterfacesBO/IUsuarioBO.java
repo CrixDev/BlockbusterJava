@@ -17,4 +17,5 @@ public interface IUsuarioBO {
     public NewUsuarioDTO guardarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException;
     public List<NewUsuarioDTO> getUsuariosRegistrados() throws NegocioException;
     
+    public NewUsuarioDTO validarUsuario(String correo, String contraseña) throws NegocioException;
 }
