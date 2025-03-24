@@ -18,13 +18,37 @@ import java.util.List;
 public class UsuarioBO implements IUsuarioBO {
 
     private List<NewUsuarioDTO> usuariosRegistrados = new ArrayList<>();
-    private IRegistrarUsuario validarUsuario;
-    
+
     @Override
     public NewUsuarioDTO guardarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
-        validarUsuario.registrarUsuario(nuevoUsuario);
         usuariosRegistrados.add(nuevoUsuario);
+        imprimirUsuarios(usuariosRegistrados);
         return nuevoUsuario;
     }
-    
+
+    public void imprimirUsuarios(List<NewUsuarioDTO> usuariosRegistrados) {
+        if (usuariosRegistrados.isEmpty()) {
+            System.out.println("📭 No hay usuarios registrados.");
+            return;
+        }
+        System.out.println("Lista de usuarios registrados:");
+        for (NewUsuarioDTO usuario : usuariosRegistrados) {
+            System.out.println("----------------------------------");
+            System.out.println("Nombre: " + usuario.getNombre());
+            System.out.println("Apellido: " + usuario.getApellido());
+            System.out.println("Teléfono: " + usuario.getNumTelefono());
+            System.out.println("Correo: " + usuario.getCorreoElectronico());
+            System.out.println("País: " + usuario.getPais());
+            System.out.println("Fecha de nacimiento: " + usuario.getFechaNacimiento());
+        }
+    }
+
+    public List<NewUsuarioDTO> getUsuariosRegistrados() throws NegocioException{
+        try{
+            return usuariosRegistrados;
+        }catch(Exception e){
+            throw new NegocioException("No se pudiero substraer la lista de usuarios");
+        }
+        
+    }
 }

@@ -14,4 +14,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <name>presentacion</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE240</version>
+        </dependency>
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>negocio</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -4,17 +4,15 @@
  */
 package InterfacesBO;
 
-import DTOs.NewUsuarioDTO;
+import DTOs.MetodoPagoDTO;
 import exception.NegocioException;
-import java.util.List;
 
 /**
  *
- * @author jrasc
+ * @author Usuario
  */
-public interface IUsuarioBO {
+public interface IMetodoPagoBO {
     
-    public NewUsuarioDTO guardarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException;
-    public List<NewUsuarioDTO> getUsuariosRegistrados() throws NegocioException;
+    public MetodoPagoDTO procesarPago(MetodoPagoDTO pagarMembresia) throws NegocioException;
     
 }
