@@ -6,7 +6,7 @@ package seleccionGenero;
 
 /**
  *
- * @author devor
+ * @author devora
  */
 import java.awt.BorderLayout;
 import java.awt.Font;

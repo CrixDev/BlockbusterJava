@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author devor
+ * @author devor a
  */
 public class SeleccionGeneros extends javax.swing.JFrame {
     private List<Genero> generos;

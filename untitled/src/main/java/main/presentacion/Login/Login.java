@@ -11,7 +11,7 @@ package main.presentacion.Login;
 public class Login extends javax.swing.JFrame {
 
     /**
-     * Creates new form Login
+     * Creates new form Login a
      */
     public Login() {
         initComponents();
