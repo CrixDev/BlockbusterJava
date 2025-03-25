@@ -4,15 +4,8 @@
  */
 package main.presentacion;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7ce21f1b7963e60a1fd64b438f435bf0366c47bd
-import DTOs.CredencialesUsuarioDTO;
-import DTOs.NewUsuarioDTO;
 
 import javax.swing.JOptionPane;
-import main.presentacion.registrarUsuario;
 /**
  *
  * @author devor
@@ -262,7 +255,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        registrarUsuario ventanaRegistrar = new registrarUsuario();
+        RegistroUsuario ventanaRegistrar = new RegistroUsuario();
         
         ventanaRegistrar.setVisible(true);
         ventanaRegistrar.setLocationRelativeTo(null);
