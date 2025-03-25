@@ -43,6 +43,12 @@ public class ControlGUI {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }
+    
+    public void cerrarMostrarRegistroUsuario(javax.swing.JFrame ventanaActual){
+        if (ventanaActual != null) {
+            ventanaActual.dispose();
+        }
+    }
 
     public void mostrarLogin() {
         Login login = new Login();

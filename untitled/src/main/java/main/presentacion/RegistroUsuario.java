@@ -206,6 +206,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         String confirmarContrasenia2 = limpiarTexto(confirmarContrasenia, "Confirmar contrasenia");
         NewUsuarioDTO nuevoUsuario = new NewUsuarioDTO(nombreUsuario, apellidoUsuario, numeroTelefonico, contra, paisUsuario, fechaNacimiento, correoElectronico, confirmarContrasenia2);
         ControlGUI.getInstancia().intentarRegistrarUsuario(nuevoUsuario);
+        ControlGUI.getInstancia().cerrarMostrarRegistroUsuario(this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
