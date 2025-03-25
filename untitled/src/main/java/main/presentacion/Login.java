@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main.presentacion;
-
+/*
 <<<<<<< HEAD
 
 =======
@@ -278,7 +278,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordFieldIngresarContraseñaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-   
+   /**
+ *
         String correo = jTextFieldIngresarUsuario.getText().trim();
         String contraseña = new String(jPasswordFieldIngresarContraseña.getPassword()).trim();
         
@@ -288,6 +289,8 @@ public class Login extends javax.swing.JFrame {
        }
         
      
+ * 
+ */
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -348,3 +351,4 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldIngresarUsuario;
     // End of variables declaration//GEN-END:variables
 }
+

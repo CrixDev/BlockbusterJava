@@ -21,9 +21,15 @@ public class PanelGenero extends javax.swing.JPanel {
         LabelNombre.setText(genero.getNombre());
         CheckBoxSeleccionar.setSelected(genero.isSeleccionado());
 
+         if (genero.getImagen() != null) {
+            LabelImagen.setIcon(genero.getImagen());
+        }
+
         CheckBoxSeleccionar.addActionListener(e -> {
             genero.setSeleccionado(CheckBoxSeleccionar.isSelected());
         });
+        
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,9 +42,17 @@ public class PanelGenero extends javax.swing.JPanel {
 
         LabelNombre = new javax.swing.JLabel();
         CheckBoxSeleccionar = new javax.swing.JCheckBox();
+        LabelImagen = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 102, 0));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         LabelNombre.setText("Nombre Categoria");
+        LabelNombre.setToolTipText("");
+        LabelNombre.setVerifyInputWhenFocusTarget(false);
+        LabelNombre.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 210, -1));
 
         CheckBoxSeleccionar.setText("Seleccionar");
         CheckBoxSeleccionar.addActionListener(new java.awt.event.ActionListener() {
@@ -46,30 +60,8 @@ public class PanelGenero extends javax.swing.JPanel {
                 CheckBoxSeleccionarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(LabelNombre))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(CheckBoxSeleccionar)))
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(121, Short.MAX_VALUE)
-                .addComponent(LabelNombre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CheckBoxSeleccionar)
-                .addGap(21, 21, 21))
-        );
+        add(CheckBoxSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 128, 77));
+        add(LabelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void CheckBoxSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxSeleccionarActionPerformed
@@ -79,6 +71,7 @@ public class PanelGenero extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox CheckBoxSeleccionar;
+    private javax.swing.JLabel LabelImagen;
     private javax.swing.JLabel LabelNombre;
     // End of variables declaration//GEN-END:variables
 }

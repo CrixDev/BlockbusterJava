@@ -1,5 +1,7 @@
 package DTOs;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author payde
@@ -8,9 +10,11 @@ public class GeneroDTO {
 
     private String nombre;
     private boolean seleccionado;
+    private ImageIcon imagen;
 
-    public GeneroDTO(String nombre) {
+    public GeneroDTO(String nombre, ImageIcon imagen) {
         this.nombre = nombre;
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -20,6 +24,15 @@ public class GeneroDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    public ImageIcon getImagen() {
+        return imagen;
+    }
+    
+      public void setImagen(ImageIcon imagen) {
+        this.imagen = imagen;
+    }
+
 
     public boolean isSeleccionado() {
         return seleccionado;
