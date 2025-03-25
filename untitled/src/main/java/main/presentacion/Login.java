@@ -4,15 +4,12 @@
  */
 package main.presentacion;
 
-import BO.UsuarioBO;
-import InterfacesBO.IUsuarioBO;
+
 import DTOs.CredencialesUsuarioDTO;
 import DTOs.NewUsuarioDTO;
-import exception.NegocioException;
+
 import javax.swing.JOptionPane;
 import main.presentacion.registrarUsuario;
-import seleccionGenero.SeleccionGeneros;
-
 /**
  *
  * @author devor
@@ -278,8 +275,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordFieldIngresarContraseñaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        IUsuarioBO usuarioBO = new UsuarioBO();
-        
+   
         String correo = jTextFieldIngresarUsuario.getText().trim();
         String contraseña = new String(jPasswordFieldIngresarContraseña.getPassword()).trim();
         
@@ -288,19 +284,7 @@ public class Login extends javax.swing.JFrame {
             return;
        }
         
-        try{
-            CredencialesUsuarioDTO credenciales = new CredencialesUsuarioDTO(correo, contraseña);
-            NewUsuarioDTO usuario = usuarioBO.validarUsuario(credenciales.getCorreo(), credenciales.getContraseña());
-            
-            SeleccionGeneros ventanaGeneros = new SeleccionGeneros();
-            ventanaGeneros.setVisible(true);
-            ventanaGeneros.setLocationRelativeTo(null);
-            this.dispose();
-            
-        }catch(NegocioException ex){
-           JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
-           limpiarCampos();
-        }
+     
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
