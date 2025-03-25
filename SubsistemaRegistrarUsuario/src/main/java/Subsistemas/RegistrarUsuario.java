@@ -20,22 +20,19 @@ import javax.swing.JOptionPane;
 public class RegistrarUsuario implements IRegistrarUsuario {
 
     private List<NewUsuarioDTO> usuariosRegistrados = new ArrayList<>();
+
     @Override
     public NewUsuarioDTO validarRegistroUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
-        try {
-            List<NewUsuarioDTO> usuarios = usuariosRegistrados;
-            validarFormatoNombre(nuevoUsuario);
-            validarFormatoApellido(nuevoUsuario);
-            validarFormatoNumeroTelefonico(nuevoUsuario);
-            validarPaisExistente(nuevoUsuario);
-            validarFormatoCorreo(nuevoUsuario);
-            validarformatoContrasenia(nuevoUsuario);
-            validarUsuario(nuevoUsuario, usuariosRegistrados);
-            validarFormatoFecha(nuevoUsuario);
-            guardarUsuario(nuevoUsuario);
-        } catch (NegocioException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
-        }
+        List<NewUsuarioDTO> usuarios = usuariosRegistrados;
+        validarFormatoNombre(nuevoUsuario);
+        validarFormatoApellido(nuevoUsuario);
+        validarFormatoNumeroTelefonico(nuevoUsuario);
+        validarPaisExistente(nuevoUsuario);
+        validarFormatoCorreo(nuevoUsuario);
+        validarformatoContrasenia(nuevoUsuario);
+        validarUsuario(nuevoUsuario, usuariosRegistrados);
+        validarFormatoFecha(nuevoUsuario);
+        guardarUsuario(nuevoUsuario);
         return nuevoUsuario;
     }
 
@@ -231,5 +228,4 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         }
 
     }*/
-
 }
