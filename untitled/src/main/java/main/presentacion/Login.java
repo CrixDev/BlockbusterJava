@@ -6,7 +6,7 @@ package main.presentacion;
 
 import DTOs.CredencialesUsuarioDTO;
 import DTOs.NewUsuarioDTO;
-import exception.NegocioException;
+//import exception.NegocioException;
 import javax.swing.JOptionPane;
 //import main.presentacion.registrarUsuario;
 //import seleccionGenero.SeleccionGeneros;

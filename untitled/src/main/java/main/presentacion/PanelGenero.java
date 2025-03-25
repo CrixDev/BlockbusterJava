@@ -5,6 +5,8 @@
 package main.presentacion;
 
 import DTOs.GeneroDTO;
+import java.awt.Dimension;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,19 +20,26 @@ public class PanelGenero extends javax.swing.JPanel {
     public PanelGenero(GeneroDTO genero) {
         this.genero = genero;
         initComponents();
-        LabelNombre.setText(genero.getNombre());
-        CheckBoxSeleccionar.setSelected(genero.isSeleccionado());
-
-         if (genero.getImagen() != null) {
-            LabelImagen.setIcon(genero.getImagen());
+        setupPanel();
         }
-
+       private void setupPanel() {
+     
+        LabelNombre.setText(genero.getNombre());
+  
+        CheckBoxSeleccionar.setSelected(genero.isSeleccionado());
+        
+        
         CheckBoxSeleccionar.addActionListener(e -> {
             genero.setSeleccionado(CheckBoxSeleccionar.isSelected());
         });
         
-        
+
+        setPreferredSize(new Dimension(300, 200));
     }
+
+        
+        
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

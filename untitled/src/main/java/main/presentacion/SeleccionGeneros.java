@@ -35,13 +35,23 @@ public class SeleccionGeneros extends javax.swing.JFrame {
 
     private void inicializarGeneros() {
         generos = new ArrayList<>();
-        ImageIcon dramaIcon = new ImageIcon(getClass().getClassLoader().getResource("imagenes/drama.png"));
-        generos.add(new GeneroDTO("Drama", dramaIcon));
-        generos.add(new GeneroDTO("Drama", new ImageIcon(getClass().getClassLoader().getResource("imagenes/drama.png"))));
-        generos.add(new GeneroDTO("Terror", dramaIcon));
-        generos.add(new GeneroDTO("Comedia", dramaIcon));
+        
+     
+    generos.add(new GeneroDTO("Drama"));
+    generos.add(new GeneroDTO("Terror"));
+    generos.add(new GeneroDTO("Comedia"));
     }
 
+    
+    private ImageIcon createImageIcon(String path, String description) {
+       try {
+        return new ImageIcon(getClass().getResource(path));
+    } catch (Exception e) {
+        System.err.println("Error loading image: " + path);
+        return null;
+    }
+}
+    
   private void configurarInterfaz() {
        
      panelContenedorPrincipal = new JPanel();
