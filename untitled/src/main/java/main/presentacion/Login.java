@@ -4,7 +4,10 @@
  */
 package main.presentacion;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7ce21f1b7963e60a1fd64b438f435bf0366c47bd
 import DTOs.CredencialesUsuarioDTO;
 import DTOs.NewUsuarioDTO;
 
