@@ -5,6 +5,7 @@
 package main.presentacion;
 
 import DTOs.NewUsuarioDTO;
+import control.ControlGUI;
 import java.util.Date;
 import javax.swing.JTextField;
 
@@ -12,12 +13,12 @@ import javax.swing.JTextField;
  *
  * @author jrasc
  */
-public class registrarUsuario extends javax.swing.JFrame {
+public class RegistroUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form registrarUsuario
      */
-    public registrarUsuario() {
+    public RegistroUsuario() {
         initComponents();
         agregarCampoTexto(nombre, "Nombre");
         agregarCampoTexto(apellido, "Apellido");
@@ -198,12 +199,14 @@ public class registrarUsuario extends javax.swing.JFrame {
         String nombreUsuario = limpiarTexto(nombre, "Nombre"); // should NOT be null or empty
         String apellidoUsuario = limpiarTexto(apellido, "Apellido");
         String numeroTelefonico = limpiarTexto(telefono, "Numero telefonico");
-        String contra = limpiarTexto(contrasenia,"Contraseña");
+        String contra = limpiarTexto(contrasenia, "Contraseña");
         String paisUsuario = limpiarTexto(pais, "Pais");
         Date fechaNacimiento = fechaN.getDate();
         String correoElectronico = limpiarTexto(correo, "Correo electronico");
         String confirmarContrasenia2 = limpiarTexto(confirmarContrasenia, "Confirmar contrasenia");
         NewUsuarioDTO nuevoUsuario = new NewUsuarioDTO(nombreUsuario, apellidoUsuario, numeroTelefonico, contra, paisUsuario, fechaNacimiento, correoElectronico, confirmarContrasenia2);
+        ControlGUI.getInstancia().intentarRegistrarUsuario(nuevoUsuario);
+        ControlGUI.getInstancia().cerrarMostrarRegistroUsuario(this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -223,27 +226,28 @@ public class registrarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(registrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(registrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(registrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(registrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registrarUsuario().setVisible(true);
+                new RegistroUsuario().setVisible(true);
             }
         });
     }
-
+    
     private void agregarCampoTexto(JTextField field, String campoTexto) {
         field.setText(campoTexto);
-
+        
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -251,7 +255,7 @@ public class registrarUsuario extends javax.swing.JFrame {
                     field.setText("");
                 }
             }
-
+            
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (field.getText().isEmpty()) {
@@ -260,7 +264,7 @@ public class registrarUsuario extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private String limpiarTexto(JTextField field, String campoTexto) {
         String text = field.getText().trim();
         return text.equals(campoTexto) ? null : text;
