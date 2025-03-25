@@ -4,8 +4,6 @@
  */
 package main.presentacion;
 
-import BO.UsuarioBO;
-import InterfacesBO.IUsuarioBO;
 import DTOs.CredencialesUsuarioDTO;
 import DTOs.NewUsuarioDTO;
 import exception.NegocioException;
