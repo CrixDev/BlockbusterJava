@@ -4,11 +4,10 @@
  */
 package Subsistemas;
 
-import BO.UsuarioBO;
 import DTOs.NewUsuarioDTO;
 import ISubsistemas.IRegistrarUsuario;
-import InterfacesBO.IUsuarioBO;
 import exception.NegocioException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,20 +19,20 @@ import javax.swing.JOptionPane;
  */
 public class RegistrarUsuario implements IRegistrarUsuario {
 
-    private IUsuarioBO registrar = new UsuarioBO();
-
+    private List<NewUsuarioDTO> usuariosRegistrados = new ArrayList<>();
     @Override
-    public NewUsuarioDTO registrarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
+    public NewUsuarioDTO validarRegistroUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         try {
-            List<NewUsuarioDTO> usuarios = registrar.getUsuariosRegistrados();
+            List<NewUsuarioDTO> usuarios = usuariosRegistrados;
             validarFormatoNombre(nuevoUsuario);
             validarFormatoApellido(nuevoUsuario);
             validarFormatoNumeroTelefonico(nuevoUsuario);
             validarPaisExistente(nuevoUsuario);
             validarFormatoCorreo(nuevoUsuario);
             validarformatoContrasenia(nuevoUsuario);
-            validarUsuario(nuevoUsuario, usuarios);
-            registrar.guardarUsuario(nuevoUsuario);
+            validarUsuario(nuevoUsuario, usuariosRegistrados);
+            validarFormatoFecha(nuevoUsuario);
+            guardarUsuario(nuevoUsuario);
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
         }
@@ -69,7 +68,7 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         if (nuevoUsuario.getApellido().matches(".*\\d.*")) {
             throw new NegocioException("El apellido no puede contener numeros");
         }
-        if (nuevoUsuario.getApellido().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\\\s-]")) {
+        if (!nuevoUsuario.getApellido().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s\\-]+")) {
             throw new NegocioException("El nombre tiene caracteres no validos");
         }
         if (nuevoUsuario.getApellido().contains("@")) {
@@ -94,8 +93,6 @@ public class RegistrarUsuario implements IRegistrarUsuario {
             throw new NegocioException("El código de área no es válido.");
         }
          */
-        if (nuevoUsuario.getNumTelefono().matches("\\d{10}")) {
-        }
         return nuevoUsuario;
     }
 
@@ -201,5 +198,38 @@ public class RegistrarUsuario implements IRegistrarUsuario {
 
         return nuevoUsuario;
     }
+
+    @Override
+    public NewUsuarioDTO guardarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
+        usuariosRegistrados.add(nuevoUsuario);
+        return nuevoUsuario;
+    }
+
+    /*
+    public void imprimirUsuarios(List<NewUsuarioDTO> usuariosRegistrados) {
+        if (usuariosRegistrados.isEmpty()) {
+            System.out.println("📭 No hay usuarios registrados.");
+            return;
+        }
+        System.out.println("Lista de usuarios registrados:");
+        for (NewUsuarioDTO usuario : usuariosRegistrados) {
+            System.out.println("----------------------------------");
+            System.out.println("Nombre: " + usuario.getNombre());
+            System.out.println("Apellido: " + usuario.getApellido());
+            System.out.println("Teléfono: " + usuario.getNumTelefono());
+            System.out.println("Correo: " + usuario.getCorreoElectronico());
+            System.out.println("País: " + usuario.getPais());
+            System.out.println("Fecha de nacimiento: " + usuario.getFechaNacimiento());
+        }
+    }
+
+    public List<NewUsuarioDTO> getUsuariosRegistrados() throws NegocioException {
+        try {
+            return usuariosRegistrados;
+        } catch (Exception e) {
+            throw new NegocioException("No se pudiero substraer la lista de usuarios");
+        }
+
+    }*/
 
 }

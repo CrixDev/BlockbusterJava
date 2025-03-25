@@ -5,8 +5,6 @@
 package main.presentacion;
 
 import DTOs.NewUsuarioDTO;
-import ISubsistemas.IRegistrarUsuario;
-import Subsistemas.RegistrarUsuario;
 import java.util.Date;
 import javax.swing.JTextField;
 
@@ -16,14 +14,11 @@ import javax.swing.JTextField;
  */
 public class registrarUsuario extends javax.swing.JFrame {
 
-    private IRegistrarUsuario registrarUsuario;
-
     /**
      * Creates new form registrarUsuario
      */
     public registrarUsuario() {
         initComponents();
-        this.registrarUsuario = new RegistrarUsuario();
         agregarCampoTexto(nombre, "Nombre");
         agregarCampoTexto(apellido, "Apellido");
         agregarCampoTexto(telefono, "Numero telefonico");
@@ -209,12 +204,6 @@ public class registrarUsuario extends javax.swing.JFrame {
         String correoElectronico = limpiarTexto(correo, "Correo electronico");
         String confirmarContrasenia2 = limpiarTexto(confirmarContrasenia, "Confirmar contrasenia");
         NewUsuarioDTO nuevoUsuario = new NewUsuarioDTO(nombreUsuario, apellidoUsuario, numeroTelefonico, contra, paisUsuario, fechaNacimiento, correoElectronico, confirmarContrasenia2);
-        try {
-            registrarUsuario.registrarUsuario(nuevoUsuario);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

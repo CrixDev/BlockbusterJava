@@ -6,57 +6,50 @@ package DTOs;
 
 /**
  *
- * @author payde
+ * @author jrasc
  */
 public class MembresiaDTO {
-    private String nombreMembresia;
-    private float precioMembrecia;
-    private String descripcionMembresia;
-    private Integer tiempoAcceso;
+    
+    private String nombre;
+    private String descripcion;
+    private double monto;
 
-    public MembresiaDTO(String nombreMembresia, float precioMembrecia, String descripcionMembresia, Integer tiempoAcceso) {
-        this.nombreMembresia = nombreMembresia;
-        this.precioMembrecia = precioMembrecia;
-        this.descripcionMembresia = descripcionMembresia;
-        this.tiempoAcceso = tiempoAcceso;
+    public MembresiaDTO() {
     }
 
-    public String getNombreMembresia() {
-        return nombreMembresia;
+    public MembresiaDTO(String nombre, String descripcion, double monto) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.monto = monto;
     }
 
-    public void setNombreMembresia(String nombreMembresia) {
-        this.nombreMembresia = nombreMembresia;
+    public String getNombre() {
+        return nombre;
     }
 
-    public float getPrecioMembrecia() {
-        return precioMembrecia;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setPrecioMembrecia(float precioMembrecia) {
-        this.precioMembrecia = precioMembrecia;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public String getDescripcionMembresia() {
-        return descripcionMembresia;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public void setDescripcionMembresia(String descripcionMembresia) {
-        this.descripcionMembresia = descripcionMembresia;
+    public double getMonto() {
+        return monto;
     }
 
-    public Integer getTiempoAcceso() {
-        return tiempoAcceso;
-    }
-
-    public void setTiempoAcceso(Integer tiempoAcceso) {
-        this.tiempoAcceso = tiempoAcceso;
+    public void setMonto(double monto) {
+        this.monto = monto;
     }
 
     @Override
     public String toString() {
-        return "MembresiaDTO{" + "nombreMembresia=" + nombreMembresia + ", precioMembrecia=" + precioMembrecia + ", descripcionMembresia=" + descripcionMembresia + ", tiempoAcceso=" + tiempoAcceso + '}';
+        return "MembresiaDTO{" + "nombre=" + nombre + ", descripcion=" + descripcion + ", monto=" + monto + '}';
     }
-    
     
 }
