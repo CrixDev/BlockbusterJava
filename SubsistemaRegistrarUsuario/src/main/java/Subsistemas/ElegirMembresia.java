@@ -16,7 +16,7 @@ public class ElegirMembresia implements IElegirMembresia {
 
     @Override
     public MembresiaDTO validarEleccionMembresia(MembresiaDTO elegirMembresia) throws NegocioException {
-
+        
     }
 
 }

@@ -27,12 +27,12 @@
         </dependency>
         <dependency>
             <groupId>com.mycompany</groupId>
-            <artifactId>SubsistemaRegistrarUsuario</artifactId>
+            <artifactId>SubsistemaGestionarMembresia</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.mycompany</groupId>
-            <artifactId>SubsistemaGestionarMembresia</artifactId>
+            <artifactId>SubsistemaRegistrarUsuario</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
