@@ -14,12 +14,21 @@ public class NuevoPagoDTO {
     
     private String nombreTitular;
     private String numero;
-    private Date fechaExpiracion;
+    private int mesCaducidad;
+    private int anioCaducidad;
     private String cvv;
 
     public NuevoPagoDTO() {
     }
 
+    public NuevoPagoDTO(String nombreTitular, String numero, int mesCaducidad, int anioCaducidad, String cvv) {
+        this.nombreTitular = nombreTitular;
+        this.numero = numero;
+        this.mesCaducidad = mesCaducidad;
+        this.anioCaducidad = anioCaducidad;
+        this.cvv = cvv;
+    }
+  
     public String getNombreTitular() {
         return nombreTitular;
     }
@@ -36,13 +45,22 @@ public class NuevoPagoDTO {
         this.numero = numero;
     }
 
-    public Date getFechaExpiracion() {
-        return fechaExpiracion;
+    public int getMesCaducidad() {
+        return mesCaducidad;
     }
 
-    public void setFechaExpiracion(Date fechaExpiracion) {
-        this.fechaExpiracion = fechaExpiracion;
+    public void setMesCaducidad(int mesCaducidad) {
+        this.mesCaducidad = mesCaducidad;
     }
+
+    public int getAnioCaducidad() {
+        return anioCaducidad;
+    }
+
+    public void setAnioCaducidad(int anioCaducidad) {
+        this.anioCaducidad = anioCaducidad;
+    }
+
 
     public String getCvv() {
         return cvv;
@@ -54,7 +72,8 @@ public class NuevoPagoDTO {
 
     @Override
     public String toString() {
-        return "NuevoPagoDTO{" + "nombreTitular=" + nombreTitular + ", numero=" + numero + ", fechaExpiracion=" + fechaExpiracion + ", cvv=" + cvv + '}';
+        return "NuevoPagoDTO{" + "nombreTitular=" + nombreTitular + ", numero=" + numero + ", mesCaducidad=" + mesCaducidad + ", anioCaducidad=" + anioCaducidad + ", cvv=" + cvv + '}';
     }
-    
+
+
 }
