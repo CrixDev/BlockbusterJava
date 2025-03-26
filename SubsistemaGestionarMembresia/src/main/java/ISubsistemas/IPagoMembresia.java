@@ -14,5 +14,6 @@ import exception.NegocioException;
  */
 public interface IPagoMembresia {
     
-     public MetodoPagoDTO validarEleccionMembresia(MetodoPagoDTO MetodoPago)throws NegocioException;
+     public MetodoPagoDTO validarFormatoPago(MetodoPagoDTO metodoPago)throws NegocioException;
+     public MetodoPagoDTO guardarPago(MetodoPagoDTO metodoPago) throws NegocioException;
 }
