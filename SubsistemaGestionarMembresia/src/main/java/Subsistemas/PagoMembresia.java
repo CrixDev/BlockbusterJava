@@ -28,7 +28,6 @@ public class PagoMembresia implements IPagoMembresia {
         validarDireccion(metodoPago);
         validarFechaCaducidad(metodoPago.getMesCaducidad(), metodoPago.getAnioCaducidad());
         validarTarjeta(metodoPago);
-        guardarPago(metodoPago);
         return metodoPago;
     }
 
@@ -132,7 +131,6 @@ public class PagoMembresia implements IPagoMembresia {
     }
 
     public MetodoPagoDTO guardarPago(MetodoPagoDTO metodoPago) throws NegocioException {
-        validarFormatoPago(metodoPago);
         pagosRegistrados.add(metodoPago);
         return metodoPago;
     }
