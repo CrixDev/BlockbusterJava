@@ -5,13 +5,14 @@
 package ISubsistemas;
 
 import DTOs.MembresiaDTO;
+import DTOs.MetodoPagoDTO;
 import exception.NegocioException;
 
 /**
  *
  * @author Usuario
  */
-public interface IElegirMembresia {
+public interface IPagoMembresia {
     
-     public MembresiaDTO validarEleccionMembresia(MembresiaDTO elegirMembresia)throws NegocioException;
+     public MetodoPagoDTO validarEleccionMembresia(MetodoPagoDTO MetodoPago)throws NegocioException;
 }
