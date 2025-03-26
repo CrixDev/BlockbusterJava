@@ -5,6 +5,7 @@
 package main.presentacion;
 
 import DTOs.MembresiaDTO;
+import control.ControlGUI;
 import javax.swing.JOptionPane;
 
 /**
@@ -63,7 +64,7 @@ public class Membresias extends javax.swing.JFrame {
     }
      private void mostrarSeleccion(MembresiaDTO membresia) {
           JOptionPane.showMessageDialog(this, "Has seleccionado: " + membresia.getNombre());
-        
+          ControlGUI.getInstancia().cerrarVentana(this);
      }
     
     /**
