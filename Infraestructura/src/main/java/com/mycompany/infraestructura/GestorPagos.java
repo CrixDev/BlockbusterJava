@@ -6,6 +6,7 @@ package com.mycompany.infraestructura;
 
 import DTOs.MembresiaDTO;
 import DTOs.NuevoPagoDTO;
+import Interfaces.IGestorPagos;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class GestorPagos {
+public class GestorPagos implements IGestorPagos {
 
     private List<Tarjeta> tarjetasRegistradas;
 
@@ -25,10 +26,23 @@ public class GestorPagos {
     }
 
     private void cargarTarjetasRegistradas() {
+        Date fecha1 = new Date(2025 - 1900, 11, 1);
+        tarjetasRegistradas.add(new Tarjeta("Juan Pérez", "1234567812345678", fecha1, "123"));
+
+        Date fecha2 = new Date(2026 - 1900, 4, 1);
+        tarjetasRegistradas.add(new Tarjeta("Ana López", "8765432187654321", fecha2, "456"));
     }
 
+    @Override
     public PagoRegistradoDTO procesarPago(NuevoPagoDTO dto, MembresiaDTO membresia) {
-        Tarjeta tarjetaEntrada = new Tarjeta(dto.getNombreTitular(), dto.getNumero(), dto.getFechaExpiracion(), dto.getCvv());
+        Date fechaExpiracion = new Date(dto.getAnioCaducidad() - 1900, dto.getMesCaducidad(), 1);
+
+        Tarjeta tarjetaEntrada = new Tarjeta(
+                dto.getNombreTitular(),
+                dto.getNumero(),
+                fechaExpiracion,
+                dto.getCvv()
+        );
 
         if (!tarjetaEntrada.esValida()) {
             return new PagoRegistradoDTO(false, 0, null);
@@ -41,5 +55,4 @@ public class GestorPagos {
             return new PagoRegistradoDTO(false, 0, null);
         }
     }
-
 }
