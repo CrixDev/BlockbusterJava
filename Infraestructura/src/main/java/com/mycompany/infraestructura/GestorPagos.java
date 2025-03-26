@@ -4,6 +4,7 @@
  */
 package com.mycompany.infraestructura;
 
+import DTOs.PagoRegistradoDTO;
 import DTOs.MembresiaDTO;
 import DTOs.NuevoPagoDTO;
 import Interfaces.IGestorPagos;

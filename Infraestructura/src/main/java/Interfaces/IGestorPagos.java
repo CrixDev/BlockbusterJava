@@ -6,7 +6,7 @@ package Interfaces;
 
 import DTOs.MembresiaDTO;
 import DTOs.NuevoPagoDTO;
-import com.mycompany.infraestructura.PagoRegistradoDTO;
+import DTOs.PagoRegistradoDTO;
 
 /**
  *

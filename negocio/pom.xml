@@ -7,13 +7,6 @@
     <groupId>Juego</groupId>
     <artifactId>negocio</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <dependencies>
-        <dependency>
-            <groupId>com.mycompany</groupId>
-            <artifactId>Infraestructura</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>

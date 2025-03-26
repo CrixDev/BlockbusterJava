@@ -4,7 +4,6 @@
  */
 package DTOs;
 
-import com.mycompany.infraestructura.PagoRegistradoDTO;
 import java.util.List;
 
 /**

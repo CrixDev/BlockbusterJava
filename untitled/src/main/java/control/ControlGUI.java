@@ -19,7 +19,7 @@ import Subsistemas.GeneroSeleccionado;
 import Subsistemas.PagoMembresia;
 import Subsistemas.RegistrarUsuario;
 import com.mycompany.infraestructura.GestorPagos;
-import com.mycompany.infraestructura.PagoRegistradoDTO;
+import DTOs.PagoRegistradoDTO;
 import exception.NegocioException;
 import java.util.List;
 import javax.swing.JOptionPane;

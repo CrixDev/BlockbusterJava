@@ -10,7 +10,7 @@ import DTOs.MetodoPagoDTO;
 import DTOs.NewUsuarioDTO;
 import DTOs.UsuarioDTO;
 import Subsistemas.PagoMembresia;
-import com.mycompany.infraestructura.PagoRegistradoDTO;
+import DTOs.PagoRegistradoDTO;
 import control.ControlGUI;
 import java.util.List;
 import javax.swing.JOptionPane;
