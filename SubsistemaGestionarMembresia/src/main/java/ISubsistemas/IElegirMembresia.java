@@ -12,7 +12,7 @@ import exception.NegocioException;
  *
  * @author Usuario
  */
-public interface IPagoMembresia {
+public interface IElegirMembresia {
     
-     public MetodoPagoDTO validarEleccionMembresia(MetodoPagoDTO MetodoPago)throws NegocioException;
+     public MembresiaDTO validarEleccionMembresia(MembresiaDTO membresia)throws NegocioException;
 }
