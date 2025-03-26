@@ -5,10 +5,9 @@
 package main.presentacion;
 
 import DTOs.GeneroDTO;
+import control.ControlGUI;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,6 @@ public class SeleccionGeneros extends javax.swing.JFrame {
     inicializarGeneros();
     configurarInterfaz();
     mostrarGenero(0); // Mostrar el primer género al iniciar
-    setLocationRelativeTo(null); // Centrar la ventana
 }
 
     private void inicializarGeneros() {
@@ -138,6 +136,7 @@ private void actualizarEstadoBotones() {
         jBtnAnterior = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jBtnSiguiente = new javax.swing.JButton();
+        btnSiguienteVentana = new javax.swing.JButton();
         jPanelGeneroContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -214,21 +213,34 @@ private void actualizarEstadoBotones() {
             }
         });
 
+        btnSiguienteVentana.setText("Siguiente");
+        btnSiguienteVentana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteVentanaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addComponent(jBtnSiguiente)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSiguienteVentana)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(138, 138, 138)
                 .addComponent(jBtnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addComponent(btnSiguienteVentana)
+                .addGap(36, 36, 36))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);
@@ -257,6 +269,11 @@ private void actualizarEstadoBotones() {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnAnteriorActionPerformed
 
+    private void btnSiguienteVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteVentanaActionPerformed
+        List<GeneroDTO> seleccionados = getGenerosSeleccionados();
+        ControlGUI.getInstancia().seleccionarGeneroPreferido(seleccionados);
+        ControlGUI.getInstancia().cerrarVentana(this);
+    }//GEN-LAST:event_btnSiguienteVentanaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -300,6 +317,7 @@ private void actualizarEstadoBotones() {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSiguienteVentana;
     private javax.swing.JButton jBtnAnterior;
     private javax.swing.JButton jBtnSiguiente;
     private javax.swing.JPanel jPanel1;

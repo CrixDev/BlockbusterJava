@@ -4,12 +4,17 @@
  */
 package control;
 
+import DTOs.GeneroDTO;
 import DTOs.NewUsuarioDTO;
+import ISubsistemas.IGeneroSeleccionado;
 import ISubsistemas.IRegistrarUsuario;
+import Subsistemas.GeneroSeleccionado;
 import Subsistemas.RegistrarUsuario;
 import exception.NegocioException;
+import java.util.List;
 import javax.swing.JOptionPane;
 import main.presentacion.Login;
+import main.presentacion.Membresias;
 import main.presentacion.MetodoPago;
 import main.presentacion.SeleccionGeneros;
 import main.presentacion.RegistroUsuario;
@@ -22,6 +27,7 @@ public class ControlGUI {
 
     private static ControlGUI instancia;
     private static IRegistrarUsuario usuarioNuevo = new RegistrarUsuario();
+    private static IGeneroSeleccionado generoPreferido = new GeneroSeleccionado();
 
     private ControlGUI() {
     }
@@ -37,16 +43,19 @@ public class ControlGUI {
         try {
             if (usuarioNuevo.validarRegistroUsuario(nuevoUsuario) == nuevoUsuario) {
                 usuarioNuevo.guardarUsuario(nuevoUsuario);
-                mostrarMetodoPago();
+                mostrarSeleccionGeneros();
             }
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
-    public void cerrarMostrarRegistroUsuario(javax.swing.JFrame ventanaActual){
-        if (ventanaActual != null) {
-            ventanaActual.dispose();
+
+    public void seleccionarGeneroPreferido(List<GeneroDTO> generos) {
+        try {
+            generoPreferido.getGenerosSeleccionados(generos);
+            mostrarMembresia();
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -73,5 +82,16 @@ public class ControlGUI {
         seleccion.setVisible(true);
         seleccion.setLocationRelativeTo(null);
     }
+    
+    public void mostrarMembresia(){
+        Membresias membresia = new Membresias();
+        membresia.setVisible(true);
+        membresia.setLocationRelativeTo(null);
+    }
 
+    public void cerrarVentana(javax.swing.JFrame ventanaActual) {
+        if (ventanaActual != null) {
+            ventanaActual.dispose();
+        }
+    }
 }

@@ -17,9 +17,6 @@ public class GeneroDTO {
      
         this.seleccionado =false;
     }
-    
-    
-
     public String getNombre() {
         return nombre;
     }
