@@ -18,24 +18,23 @@ public class MetodoPagoDTO {
     private String direccionFacturacion;
     private String numeroTarjeta;
     private String cvv;
-    private Date fechaExpiracion;
+    private Date fechaCaducidad;
     private String metodoPago;     // Oxxo o PayPal
     private String plan;     // Premium o Pro        
-    private BigDecimal monto;
 
     public MetodoPagoDTO() {
     }
 
-    public MetodoPagoDTO(String nombreTitular, String apellidoTitular, String direccionFacturacion, String numeroTarjeta, String cvv, Date fechaExpiracion, String metodoPago, String plan, BigDecimal monto) {
+    public MetodoPagoDTO(String nombreTitular, String apellidoTitular, String direccionFacturacion, String numeroTarjeta, String cvv, Date fechaCaducidad, String metodoPago, String plan) {
         this.nombreTitular = nombreTitular;
         this.apellidoTitular = apellidoTitular;
         this.direccionFacturacion = direccionFacturacion;
         this.numeroTarjeta = numeroTarjeta;
         this.cvv = cvv;
-        this.fechaExpiracion = fechaExpiracion;
+        this.fechaCaducidad = fechaCaducidad;
         this.metodoPago = metodoPago;
         this.plan = plan;
-        this.monto = monto;
+  
     }
 
     public String getNombreTitular() {
@@ -78,12 +77,12 @@ public class MetodoPagoDTO {
         this.cvv = cvv;
     }
 
-    public Date getFechaExpiracion() {
-        return fechaExpiracion;
+    public Date getFechaCaducidad() {
+        return fechaCaducidad;
     }
 
-    public void setFechaExpiracion(Date fechaExpiracion) {
-        this.fechaExpiracion = fechaExpiracion;
+    public void setFechaCaducidad(Date fechaCaducidad) {
+        this.fechaCaducidad = fechaCaducidad;
     }
 
     public String getMetodoPago() {
@@ -102,17 +101,9 @@ public class MetodoPagoDTO {
         this.plan = plan;
     }
 
-    public BigDecimal getMonto() {
-        return monto;
-    }
-
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
-    }
-
     @Override
     public String toString() {
-        return "MetodoPagoDTO{" + "nombreTitular=" + nombreTitular + ", apellidoTitular=" + apellidoTitular + ", direccionFacturacion=" + direccionFacturacion + ", numeroTarjeta=" + numeroTarjeta + ", cvv=" + cvv + ", fechaExpiracion=" + fechaExpiracion + ", metodoPago=" + metodoPago + ", plan=" + plan + ", monto=" + monto + '}';
+        return "MetodoPagoDTO{" + "nombreTitular=" + nombreTitular + ", apellidoTitular=" + apellidoTitular + ", direccionFacturacion=" + direccionFacturacion + ", numeroTarjeta=" + numeroTarjeta + ", cvv=" + cvv + ", fechaCaducidad=" + fechaCaducidad + ", metodoPago=" + metodoPago + ", plan=" + plan + '}';
     }
-
+    
 }

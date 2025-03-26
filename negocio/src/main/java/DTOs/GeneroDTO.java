@@ -1,5 +1,7 @@
 package DTOs;
 
+
+
 /**
  *
  * @author payde
@@ -9,10 +11,12 @@ public class GeneroDTO {
     private String nombre;
     private boolean seleccionado;
 
-    public GeneroDTO(String nombre) {
-        this.nombre = nombre;
-    }
 
+    public GeneroDTO(String nombre ) {
+        this.nombre = nombre;
+     
+        this.seleccionado =false;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -20,6 +24,7 @@ public class GeneroDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
 
     public boolean isSeleccionado() {
         return seleccionado;

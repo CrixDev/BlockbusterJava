@@ -6,7 +6,8 @@ package main.presentacion;
 
 import DTOs.CredencialesUsuarioDTO;
 import DTOs.NewUsuarioDTO;
-import exception.NegocioException;
+import control.ControlGUI;
+//import exception.NegocioException;
 import javax.swing.JOptionPane;
 //import main.presentacion.registrarUsuario;
 //import seleccionGenero.SeleccionGeneros;
@@ -271,11 +272,8 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        registrarUsuario ventanaRegistrar = new registrarUsuario();
-//
-//        ventanaRegistrar.setVisible(true);
-//        ventanaRegistrar.setLocationRelativeTo(null);
-//        this.dispose();
+        ControlGUI.getInstancia().mostrarRegistroUsuario();
+        ControlGUI.getInstancia().cerrarVentana(this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -371,3 +369,4 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldIngresarUsuario;
     // End of variables declaration//GEN-END:variables
 }
+

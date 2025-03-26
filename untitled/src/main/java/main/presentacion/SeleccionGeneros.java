@@ -5,10 +5,9 @@
 package main.presentacion;
 
 import DTOs.GeneroDTO;
+import control.ControlGUI;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,49 +17,67 @@ import java.util.List;
  */
 public class SeleccionGeneros extends javax.swing.JFrame {
 
-    private List<GeneroDTO> generos;
+   private List<GeneroDTO> generos;
     private int indiceActual = 0;
-    private JEditorPane jEditorPane1; // Añade esta línea
-    private PanelGenero panelGeneroActual;
+    private JPanel panelContenedorPrincipal;
 
     /**
      * Creates new form SeleccionGeneros
      */
-    public SeleccionGeneros() {
-        initComponents();
-        inicializarGeneros();
-        configurarInterfaz();
-    }
+ public SeleccionGeneros() {
+    initComponents();
+    inicializarGeneros();
+    configurarInterfaz();
+    mostrarGenero(0); // Mostrar el primer género al iniciar
+}
 
     private void inicializarGeneros() {
         generos = new ArrayList<>();
-        generos.add(new GeneroDTO("Drama"));
-
-        generos.add(new GeneroDTO("Terror"));
-        generos.add(new GeneroDTO("Comedia"));
+        
+     
+    generos.add(new GeneroDTO("Drama"));
+    generos.add(new GeneroDTO("Terror"));
+    generos.add(new GeneroDTO("Comedia"));
     }
 
+    
+    private ImageIcon createImageIcon(String path, String description) {
+       try {
+        return new ImageIcon(getClass().getResource(path));
+    } catch (Exception e) {
+        System.err.println("Error loading image: " + path);
+        return null;
+    }
+}
+    
   private void configurarInterfaz() {
        
-        panelGeneroActual = new PanelGenero(generos.get(0));
-        jPanelContenedor.removeAll(); 
-        jPanelContenedor.add(panelGeneroActual);
-        jPanelContenedor.revalidate();
-        jPanelContenedor.repaint();
-        jPanelGeneroContainer = new JPanel();
-        jPanelGeneroContainer.setLayout(new BorderLayout());
-        jPanel1.add(jPanelGeneroContainer, BorderLayout.CENTER);
-        
-        mostrarGeneroActual();
+     panelContenedorPrincipal = new JPanel();
+    panelContenedorPrincipal.setLayout(new CardLayout()); // Usamos CardLayout para navegar
+    panelContenedorPrincipal.setBackground(new Color(26, 43, 76));
+    
+    // Añade el panel al frame (ajusta según tu diseño)
+    getContentPane().add(panelContenedorPrincipal, BorderLayout.CENTER);
+    
+    // Carga todos los paneles de género
+    cargarPanelesGeneros();
+    
+    // Configura botones de navegación
+    configurarBotonesNavegacion();
     }
   
- private void mostrarGeneroActual() {
-        jPanelGeneroContainer.removeAll();
-        PanelGenero panel = new PanelGenero(generos.get(indiceActual));
-        jPanelGeneroContainer.add(panel);
-        jPanelGeneroContainer.revalidate();
-        jPanelGeneroContainer.repaint();
+  private void cargarPanelesGeneros() {
+    for (GeneroDTO genero : generos) {
+        PanelGenero panel = new PanelGenero(genero);
+        panelContenedorPrincipal.add(panel, genero.getNombre());
     }
+}
+  private void mostrarGenero(int indice) {
+    CardLayout cl = (CardLayout)(panelContenedorPrincipal.getLayout());
+    cl.show(panelContenedorPrincipal, generos.get(indice).getNombre());
+    indiceActual = indice;
+    actualizarEstadoBotones();
+}
   
     private void actualizarVisualizacionGeneros() {
     // Limpia el contenedor
@@ -70,16 +87,38 @@ public class SeleccionGeneros extends javax.swing.JFrame {
     GeneroDTO generoActual = generos.get(indiceActual);
     panelGeneroActual = new PanelGenero(generoActual);
     jPanelContenedor.add(panelGeneroActual);
+  
     
     // Actualiza la interfaz
     jPanelContenedor.revalidate();
     jPanelContenedor.repaint();
 }
     
-      private void cambiarGenero(int direccion) {
-        indiceActual = (indiceActual + direccion + generos.size()) % generos.size();
-        mostrarGeneroActual();
-    }
+    private void configurarBotonesNavegacion() {
+    // Asume que tienes jBtnAnterior y jBtnSiguiente en tu diseño
+    jBtnAnterior.addActionListener(e -> {
+        if (indiceActual > 0) {
+            mostrarGenero(indiceActual - 1);
+        }
+    });
+    
+    jBtnSiguiente.addActionListener(e -> {
+        if (indiceActual < generos.size() - 1) {
+            mostrarGenero(indiceActual + 1);
+        }
+    });
+    
+    actualizarEstadoBotones();
+}
+
+private void actualizarEstadoBotones() {
+    jBtnAnterior.setEnabled(indiceActual > 0);
+    jBtnSiguiente.setEnabled(indiceActual < generos.size() - 1);
+}
+   
+
+  
+
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,54 +130,150 @@ public class SeleccionGeneros extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelContenedor = new javax.swing.JPanel();
-        jPanelGeneroContainer = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        panelGeneroActual = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jBtnAnterior = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jBtnSiguiente = new javax.swing.JButton();
+        btnSiguienteVentana = new javax.swing.JButton();
+        jPanelGeneroContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout jPanelContenedorLayout = new javax.swing.GroupLayout(jPanelContenedor);
         jPanelContenedor.setLayout(jPanelContenedorLayout);
         jPanelContenedorLayout.setHorizontalGroup(
             jPanelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelContenedorLayout.setVerticalGroup(
             jPanelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanelContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, -1));
-
-        javax.swing.GroupLayout jPanelGeneroContainerLayout = new javax.swing.GroupLayout(jPanelGeneroContainer);
-        jPanelGeneroContainer.setLayout(jPanelGeneroContainerLayout);
-        jPanelGeneroContainerLayout.setHorizontalGroup(
-            jPanelGeneroContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanelGeneroContainerLayout.setVerticalGroup(
-            jPanelGeneroContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanelGeneroContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, -1, -1));
+        getContentPane().add(jPanelContenedor, java.awt.BorderLayout.NORTH);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
+
+        javax.swing.GroupLayout panelGeneroActualLayout = new javax.swing.GroupLayout(panelGeneroActual);
+        panelGeneroActual.setLayout(panelGeneroActualLayout);
+        panelGeneroActualLayout.setHorizontalGroup(
+            panelGeneroActualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelGeneroActualLayout.setVerticalGroup(
+            panelGeneroActualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 409, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(panelGeneroActual, java.awt.BorderLayout.CENTER);
+
+        jBtnAnterior.setText("jButton2");
+        jBtnAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAnteriorActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBtnAnterior)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addComponent(jBtnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(168, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.WEST);
+
+        jBtnSiguiente.setText("jButton1");
+        jBtnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSiguienteActionPerformed(evt);
+            }
+        });
+
+        btnSiguienteVentana.setText("Siguiente");
+        btnSiguienteVentana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteVentanaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(jBtnSiguiente)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSiguienteVentana)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addComponent(jBtnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addComponent(btnSiguienteVentana)
+                .addGap(36, 36, 36))
+        );
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);
+
+        javax.swing.GroupLayout jPanelGeneroContainerLayout = new javax.swing.GroupLayout(jPanelGeneroContainer);
+        jPanelGeneroContainer.setLayout(jPanelGeneroContainerLayout);
+        jPanelGeneroContainerLayout.setHorizontalGroup(
+            jPanelGeneroContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 770, Short.MAX_VALUE)
+        );
+        jPanelGeneroContainerLayout.setVerticalGroup(
+            jPanelGeneroContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 73, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanelGeneroContainer, java.awt.BorderLayout.NORTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBtnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSiguienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnSiguienteActionPerformed
+
+    private void jBtnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAnteriorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnAnteriorActionPerformed
+
+    private void btnSiguienteVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteVentanaActionPerformed
+        List<GeneroDTO> seleccionados = getGenerosSeleccionados();
+        ControlGUI.getInstancia().seleccionarGeneroPreferido(seleccionados);
+        ControlGUI.getInstancia().cerrarVentana(this);
+    }//GEN-LAST:event_btnSiguienteVentanaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,8 +317,14 @@ public class SeleccionGeneros extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSiguienteVentana;
+    private javax.swing.JButton jBtnAnterior;
+    private javax.swing.JButton jBtnSiguiente;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelContenedor;
     private javax.swing.JPanel jPanelGeneroContainer;
+    private javax.swing.JPanel panelGeneroActual;
     // End of variables declaration//GEN-END:variables
 }
