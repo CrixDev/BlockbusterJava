@@ -4,6 +4,10 @@
  */
 package main.presentacion;
 
+import DTOs.MetodoPagoDTO;
+import Subsistemas.PagoMembresia;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
@@ -43,9 +47,8 @@ public class MetodoPago extends javax.swing.JFrame {
         cvv = new javax.swing.JTextField();
         separadorCvv = new javax.swing.JSeparator();
         botonPagar = new utils.RoundedPanel();
-        jLabel7 = new javax.swing.JLabel();
         roundedPanel2 = new utils.RoundedPanel();
-        jLabel8 = new javax.swing.JLabel();
+        Pagar = new javax.swing.JButton();
         botonOxxo = new utils.RoundedPanel();
         jLabel9 = new javax.swing.JLabel();
         botonPaypal = new utils.RoundedPanel();
@@ -175,34 +178,38 @@ public class MetodoPago extends javax.swing.JFrame {
         botonPagar.setRoundTopLeft(30);
         botonPagar.setRoundTopRight(30);
 
-        jLabel7.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 36)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(26, 43, 76));
-        jLabel7.setText("Pagar");
-
         roundedPanel2.setBackground(new java.awt.Color(234, 205, 54));
         roundedPanel2.setRoundBottomLeft(30);
         roundedPanel2.setRoundBottomRight(30);
         roundedPanel2.setRoundTopLeft(30);
         roundedPanel2.setRoundTopRight(30);
 
-        jLabel8.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 36)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(26, 43, 76));
-        jLabel8.setText("Pagar");
+        Pagar.setBackground(new java.awt.Color(234, 205, 54));
+        Pagar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
+        Pagar.setForeground(new java.awt.Color(26, 43, 76));
+        Pagar.setText("Pagar");
+        Pagar.setBorder(null);
+        Pagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PagarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout roundedPanel2Layout = new javax.swing.GroupLayout(roundedPanel2);
         roundedPanel2.setLayout(roundedPanel2Layout);
         roundedPanel2Layout.setHorizontalGroup(
             roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundedPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel8)
-                .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Pagar)
+                .addContainerGap())
         );
         roundedPanel2Layout.setVerticalGroup(
             roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel8)
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(Pagar)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout botonPagarLayout = new javax.swing.GroupLayout(botonPagar);
@@ -210,25 +217,16 @@ public class MetodoPago extends javax.swing.JFrame {
         botonPagarLayout.setHorizontalGroup(
             botonPagarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botonPagarLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel7)
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(botonPagarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonPagarLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(roundedPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(roundedPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         botonPagarLayout.setVerticalGroup(
             botonPagarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botonPagarLayout.createSequentialGroup()
-                .addComponent(jLabel7)
-                .addGap(0, 7, Short.MAX_VALUE))
-            .addGroup(botonPagarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonPagarLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(roundedPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(roundedPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel1.add(botonPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, 140, 50));
@@ -315,15 +313,15 @@ public class MetodoPago extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_nombreActionPerformed
 
     private void apellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_apellidoActionPerformed
 
     private void direccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_direccionActionPerformed
 
     private void roundedPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roundedPanel1MouseClicked
@@ -331,15 +329,15 @@ public class MetodoPago extends javax.swing.JFrame {
     }//GEN-LAST:event_roundedPanel1MouseClicked
 
     private void tarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarjetaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_tarjetaActionPerformed
 
     private void fechaCaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaCaducidadActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_fechaCaducidadActionPerformed
 
     private void cvvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cvvActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cvvActionPerformed
 
     private void roundedPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roundedPanel2MouseClicked
@@ -349,6 +347,19 @@ public class MetodoPago extends javax.swing.JFrame {
     private void roundedPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roundedPanel3MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_roundedPanel3MouseClicked
+
+    private void PagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagarActionPerformed
+
+        String nombreTxt = nombre.getText().trim();
+        String apellidoTxt = apellido.getText().trim();
+        String direccionTxt = direccion.getText().trim();
+        String tarjetaTxt = tarjeta.getText().trim();
+        String fechaTxt = fechaCaducidad.getText().trim();
+        String cvvTxt = cvv.getText().trim();
+        
+        // elerror esta en el constructor no se porque no funciona
+//        MetodoPagoDTO pago=new MetodoPagoDTO(nombreTxt, apellidoTxt, direccionTxt, nombreTxt, cvvTxt, fechaCaducidad fechaTxt, cvvTxt);
+    }//GEN-LAST:event_PagarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,9 +395,10 @@ public class MetodoPago extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Pagar;
     private javax.swing.JTextField apellido;
     private utils.RoundedPanel botonOxxo;
     private utils.RoundedPanel botonPagar;
@@ -396,8 +408,6 @@ public class MetodoPago extends javax.swing.JFrame {
     private javax.swing.JTextField fechaCaducidad;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel leyendaMetodoDePago;
