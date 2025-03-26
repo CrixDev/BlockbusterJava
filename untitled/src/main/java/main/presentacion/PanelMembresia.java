@@ -5,7 +5,6 @@
 package main.presentacion;
 
 import DTOs.MembresiaDTO;
-import control.ControlGUI;
 
 /**
  *
@@ -13,9 +12,18 @@ import control.ControlGUI;
  */
 public class PanelMembresia extends javax.swing.JPanel {
     private MembresiaDTO membresia;
+    private MembresiaSeleccionadaListener listener;
     /**
      * Creates new form TemplateMembresia
      */
+    
+     public interface MembresiaSeleccionadaListener {
+        void onMembresiaSeleccionada(MembresiaDTO membresia);
+    }
+      public void setMembresiaSeleccionadaListener(MembresiaSeleccionadaListener listener) {
+        this.listener = listener;
+    }
+     
     public PanelMembresia(MembresiaDTO membresia) {
         this.membresia = membresia;
         initComponents();
@@ -199,7 +207,9 @@ public class PanelMembresia extends javax.swing.JPanel {
 
     private void BtnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeleccionarActionPerformed
         
-  
+     if (listener != null) {
+            listener.onMembresiaSeleccionada(this.membresia);
+        }
         
     }//GEN-LAST:event_BtnSeleccionarActionPerformed
 

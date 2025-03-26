@@ -5,13 +5,14 @@
 package main.presentacion;
 
 import DTOs.MembresiaDTO;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author devor
  */
 public class Membresias extends javax.swing.JFrame {
-
+    private MembresiaDTO membresiaSeleccionada;
     /**
      * Creates new form Membresias
      */
@@ -31,6 +32,21 @@ public class Membresias extends javax.swing.JFrame {
         PanelMembresia panel1 = new PanelMembresia(membresia1);
         PanelMembresia panel2 = new PanelMembresia(membresia2);
         PanelMembresia panel3 = new PanelMembresia(membresia3);
+        
+            panel1.setMembresiaSeleccionadaListener(membresia -> {
+            this.membresiaSeleccionada = membresia;
+             mostrarSeleccion(membresia);
+        });
+        
+        panel2.setMembresiaSeleccionadaListener(membresia -> {
+            this.membresiaSeleccionada = membresia;
+          mostrarSeleccion(membresia);
+        });
+        
+        panel3.setMembresiaSeleccionadaListener(membresia -> {
+            this.membresiaSeleccionada = membresia;
+          mostrarSeleccion(membresia);
+        });
 
         // Configurar el layout y añadir los paneles
         panelContenedor.setLayout(new java.awt.GridLayout(1, 3, 10, 10));
@@ -42,6 +58,13 @@ public class Membresias extends javax.swing.JFrame {
         panelContenedor2.add(panel3);
     }
 
+    public MembresiaDTO getMembresiaSeleccionada() {
+        return membresiaSeleccionada;
+    }
+     private void mostrarSeleccion(MembresiaDTO membresia) {
+          JOptionPane.showMessageDialog(this, "Has seleccionado: " + membresia.getNombre());
+        
+     }
     
     /**
      * This method is called from within the constructor to initialize the form.

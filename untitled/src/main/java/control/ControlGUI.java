@@ -49,7 +49,7 @@ public class ControlGUI {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
+ 
     public void seleccionarGeneroPreferido(List<GeneroDTO> generos) {
         try {
             generoPreferido.getGenerosSeleccionados(generos);
