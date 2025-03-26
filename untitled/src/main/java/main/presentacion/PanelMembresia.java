@@ -5,39 +5,42 @@
 package main.presentacion;
 
 import DTOs.MembresiaDTO;
+import control.ControlGUI;
 
 /**
  *
  * @author devor
  */
 public class PanelMembresia extends javax.swing.JPanel {
+
     private MembresiaDTO membresia;
     private MembresiaSeleccionadaListener listener;
+
     /**
      * Creates new form TemplateMembresia
      */
-    
-     public interface MembresiaSeleccionadaListener {
+
+    public interface MembresiaSeleccionadaListener {
+
         void onMembresiaSeleccionada(MembresiaDTO membresia);
     }
-      public void setMembresiaSeleccionadaListener(MembresiaSeleccionadaListener listener) {
+
+    public void setMembresiaSeleccionadaListener(MembresiaSeleccionadaListener listener) {
         this.listener = listener;
     }
-     
+
     public PanelMembresia(MembresiaDTO membresia) {
         this.membresia = membresia;
         initComponents();
         setupPanel();
     }
-    
-    private void setupPanel(){
-        
+
+    private void setupPanel() {
+
         LabelNombre.setText(membresia.getNombre());
         LabelDescripcion.setText(membresia.getDescripcion());
-        LabelMonto.setText(String.format("$%.2f",  membresia.getMonto()));
-        
-        
-        
+        LabelMonto.setText(String.format("$%.2f", membresia.getMonto()));
+
     }
 
     /**
@@ -206,11 +209,7 @@ public class PanelMembresia extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeleccionarActionPerformed
-        
-     if (listener != null) {
-            listener.onMembresiaSeleccionada(this.membresia);
-        }
-        
+        ControlGUI.getInstancia().seleccionarMembresia(this.membresia);
     }//GEN-LAST:event_BtnSeleccionarActionPerformed
 
 
