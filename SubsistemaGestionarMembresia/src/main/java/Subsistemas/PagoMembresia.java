@@ -88,12 +88,6 @@ public class PagoMembresia implements IPagoMembresia {
         if (numeroTarjeta == null || numeroTarjeta.trim().isEmpty()) {
             throw new NegocioException("El número de tarjeta no puede estar vacío.");
         }
-
-        // Validar formato: xxxx-xxxx-xxxx-xxxx (16 dígitos con guiones)
-        if (!numeroTarjeta.matches("^\\d{4}-\\d{4}-\\d{4}-\\d{4}$")) {
-            throw new NegocioException("El número de tarjeta debe tener el formato xxxx-xxxx-xxxx-xxxx.");
-        }
-
         return metodoPago;
     }
 

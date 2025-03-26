@@ -107,6 +107,7 @@ public class ControlGUI {
             if (resultado.isEsValida()) {
                 pagarMembresia.guardarPago(pagoDTO);
                 JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Monto: $" + resultado.getMonto());
+                mostrarLogin();
                 return resultado;
             } else {
                 JOptionPane.showMessageDialog(null, "La tarjeta no está registrada o no es válida.", "Error", JOptionPane.ERROR_MESSAGE);

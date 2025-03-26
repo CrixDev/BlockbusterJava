@@ -247,8 +247,6 @@ public class MetodoPago extends javax.swing.JFrame {
             List<GeneroDTO> generos = ControlGUI.getInstancia().getGenerosSeleccionados();
             UsuarioDTO usuarioGuardar = new UsuarioDTO(datosUsuario, membresia, generos, pagoRegistrado);
         }
-        
-        
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**

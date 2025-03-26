@@ -6,8 +6,12 @@ package main.presentacion;
 
 import DTOs.NewUsuarioDTO;
 import control.ControlGUI;
+import exception.NegocioException;
 import java.util.Date;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -196,7 +200,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmarContraseniaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombreUsuario = limpiarTexto(nombre, "Nombre"); // should NOT be null or empty
+        String nombreUsuario = limpiarTexto(nombre, "Nombre");
         String apellidoUsuario = limpiarTexto(apellido, "Apellido");
         String numeroTelefonico = limpiarTexto(telefono, "Numero telefonico");
         String contra = limpiarTexto(contrasenia, "Contraseña");
@@ -206,7 +210,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         String confirmarContrasenia2 = limpiarTexto(confirmarContrasenia, "Confirmar contrasenia");
         NewUsuarioDTO nuevoUsuario = new NewUsuarioDTO(nombreUsuario, apellidoUsuario, numeroTelefonico, contra, paisUsuario, fechaNacimiento, correoElectronico, confirmarContrasenia2);
         ControlGUI.getInstancia().intentarRegistrarUsuario(nuevoUsuario);
-        ControlGUI.getInstancia().cerrarVentana(this);
+        ((JFrame) SwingUtilities.getWindowAncestor(jButton1)).dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -244,10 +248,10 @@ public class RegistroUsuario extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void agregarCampoTexto(JTextField field, String campoTexto) {
         field.setText(campoTexto);
-        
+
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -255,7 +259,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
                     field.setText("");
                 }
             }
-            
+
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (field.getText().isEmpty()) {
@@ -264,7 +268,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private String limpiarTexto(JTextField field, String campoTexto) {
         String text = field.getText().trim();
         return text.equals(campoTexto) ? null : text;

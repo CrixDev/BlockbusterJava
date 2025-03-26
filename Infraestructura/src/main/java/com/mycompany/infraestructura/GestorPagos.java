@@ -27,11 +27,11 @@ public class GestorPagos implements IGestorPagos {
     }
 
     private void cargarTarjetasRegistradas() {
-        Date fecha1 = new Date(2025 - 1900, 11, 1);
-        tarjetasRegistradas.add(new Tarjeta("Juan Pérez", "1234567812345678", fecha1, "123"));
+        Date fecha1 = new Date(2025 - 1900, 11, 1); // Diciembre 2025
+        tarjetasRegistradas.add(new Tarjeta("Luis", "1234567812345678", fecha1, "321"));
 
-        Date fecha2 = new Date(2026 - 1900, 4, 1);
-        tarjetasRegistradas.add(new Tarjeta("Ana López", "8765432187654321", fecha2, "456"));
+        Date fecha2 = new Date(2026 - 1900, 5, 1); // Junio 2026
+        tarjetasRegistradas.add(new Tarjeta("Maria", "8765432187654321", fecha2, "456"));
     }
 
     @Override
