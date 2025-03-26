@@ -18,23 +18,35 @@ public class MetodoPagoDTO {
     private String direccionFacturacion;
     private String numeroTarjeta;
     private String cvv;
-    private Date fechaCaducidad;
+    private int anioCaducidad;
+    private int mesCaducidad;
     private String metodoPago;     // Oxxo o PayPal
     private String plan;     // Premium o Pro        
 
     public MetodoPagoDTO() {
     }
 
-    public MetodoPagoDTO(String nombreTitular, String apellidoTitular, String direccionFacturacion, String numeroTarjeta, String cvv, Date fechaCaducidad, String metodoPago, String plan) {
+    public MetodoPagoDTO(String nombreTitular, String apellidoTitular, String direccionFacturacion, String numeroTarjeta, String cvv, int anioCaducidad, int mesCaducidad) {
         this.nombreTitular = nombreTitular;
         this.apellidoTitular = apellidoTitular;
         this.direccionFacturacion = direccionFacturacion;
         this.numeroTarjeta = numeroTarjeta;
         this.cvv = cvv;
-        this.fechaCaducidad = fechaCaducidad;
+        this.anioCaducidad = anioCaducidad;
+        this.mesCaducidad = mesCaducidad;
+    }
+
+    
+    public MetodoPagoDTO(String nombreTitular, String apellidoTitular, String direccionFacturacion, String numeroTarjeta, String cvv, int anioCaducidad, int mesCaducidad, String metodoPago, String plan) {
+        this.nombreTitular = nombreTitular;
+        this.apellidoTitular = apellidoTitular;
+        this.direccionFacturacion = direccionFacturacion;
+        this.numeroTarjeta = numeroTarjeta;
+        this.cvv = cvv;
+        this.anioCaducidad = anioCaducidad;
+        this.mesCaducidad = mesCaducidad;
         this.metodoPago = metodoPago;
         this.plan = plan;
-  
     }
 
     public String getNombreTitular() {
@@ -77,12 +89,20 @@ public class MetodoPagoDTO {
         this.cvv = cvv;
     }
 
-    public Date getFechaCaducidad() {
-        return fechaCaducidad;
+    public int getAnioCaducidad() {
+        return anioCaducidad;
     }
 
-    public void setFechaCaducidad(Date fechaCaducidad) {
-        this.fechaCaducidad = fechaCaducidad;
+    public void setAnioCaducidad(int anioCaducidad) {
+        this.anioCaducidad = anioCaducidad;
+    }
+
+    public int getMesCaducidad() {
+        return mesCaducidad;
+    }
+
+    public void setMesCaducidad(int mesCaducidad) {
+        this.mesCaducidad = mesCaducidad;
     }
 
     public String getMetodoPago() {
@@ -103,7 +123,7 @@ public class MetodoPagoDTO {
 
     @Override
     public String toString() {
-        return "MetodoPagoDTO{" + "nombreTitular=" + nombreTitular + ", apellidoTitular=" + apellidoTitular + ", direccionFacturacion=" + direccionFacturacion + ", numeroTarjeta=" + numeroTarjeta + ", cvv=" + cvv + ", fechaCaducidad=" + fechaCaducidad + ", metodoPago=" + metodoPago + ", plan=" + plan + '}';
+        return "MetodoPagoDTO{" + "nombreTitular=" + nombreTitular + ", apellidoTitular=" + apellidoTitular + ", direccionFacturacion=" + direccionFacturacion + ", numeroTarjeta=" + numeroTarjeta + ", cvv=" + cvv + ", anioCaducidad=" + anioCaducidad + ", mesCaducidad=" + mesCaducidad + '}';
     }
     
 }

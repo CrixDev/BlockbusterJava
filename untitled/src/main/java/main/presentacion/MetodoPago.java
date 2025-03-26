@@ -31,6 +31,9 @@ public class MetodoPago extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        mesCaducidad = new com.toedter.calendar.JMonthChooser();
+        anioCaducidad = new com.toedter.calendar.JYearChooser();
+        btnSiguiente = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
         titulo = new javax.swing.JLabel();
         subTitulo = new javax.swing.JLabel();
@@ -42,17 +45,9 @@ public class MetodoPago extends javax.swing.JFrame {
         separadorDireccion = new javax.swing.JSeparator();
         tarjeta = new javax.swing.JTextField();
         separadorTarjeta = new javax.swing.JSeparator();
-        fechaCaducidad = new javax.swing.JTextField();
         separadorFechaCaducidad = new javax.swing.JSeparator();
         cvv = new javax.swing.JTextField();
         separadorCvv = new javax.swing.JSeparator();
-        botonPagar = new utils.RoundedPanel();
-        roundedPanel2 = new utils.RoundedPanel();
-        Pagar = new javax.swing.JButton();
-        botonOxxo = new utils.RoundedPanel();
-        jLabel9 = new javax.swing.JLabel();
-        botonPaypal = new utils.RoundedPanel();
-        jLabel5 = new javax.swing.JLabel();
         leyendaMetodoDePago = new javax.swing.JLabel();
         panelAzul = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
@@ -61,6 +56,16 @@ public class MetodoPago extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(22, 36, 64));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(mesCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, -1, -1));
+        jPanel1.add(anioCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, -1, -1));
+
+        btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 500, 120, 40));
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/B (1).png"))); // NOI18N
         logo.setText("jLabel4");
@@ -140,18 +145,6 @@ public class MetodoPago extends javax.swing.JFrame {
         separadorTarjeta.setPreferredSize(new java.awt.Dimension(50, 30));
         jPanel1.add(separadorTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 356, 410, 20));
 
-        fechaCaducidad.setBackground(new java.awt.Color(22, 36, 64));
-        fechaCaducidad.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 20)); // NOI18N
-        fechaCaducidad.setForeground(new java.awt.Color(161, 167, 179));
-        fechaCaducidad.setText("Fecha");
-        fechaCaducidad.setBorder(null);
-        fechaCaducidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fechaCaducidadActionPerformed(evt);
-            }
-        });
-        jPanel1.add(fechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 413, 80, -1));
-
         separadorFechaCaducidad.setForeground(new java.awt.Color(161, 167, 179));
         separadorFechaCaducidad.setPreferredSize(new java.awt.Dimension(50, 30));
         jPanel1.add(separadorFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 443, 80, 20));
@@ -171,119 +164,6 @@ public class MetodoPago extends javax.swing.JFrame {
         separadorCvv.setForeground(new java.awt.Color(161, 167, 179));
         separadorCvv.setPreferredSize(new java.awt.Dimension(50, 30));
         jPanel1.add(separadorCvv, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 443, 80, 20));
-
-        botonPagar.setBackground(new java.awt.Color(234, 205, 54));
-        botonPagar.setRoundBottomLeft(30);
-        botonPagar.setRoundBottomRight(30);
-        botonPagar.setRoundTopLeft(30);
-        botonPagar.setRoundTopRight(30);
-
-        roundedPanel2.setBackground(new java.awt.Color(234, 205, 54));
-        roundedPanel2.setRoundBottomLeft(30);
-        roundedPanel2.setRoundBottomRight(30);
-        roundedPanel2.setRoundTopLeft(30);
-        roundedPanel2.setRoundTopRight(30);
-
-        Pagar.setBackground(new java.awt.Color(234, 205, 54));
-        Pagar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
-        Pagar.setForeground(new java.awt.Color(26, 43, 76));
-        Pagar.setText("Pagar");
-        Pagar.setBorder(null);
-        Pagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PagarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout roundedPanel2Layout = new javax.swing.GroupLayout(roundedPanel2);
-        roundedPanel2.setLayout(roundedPanel2Layout);
-        roundedPanel2Layout.setHorizontalGroup(
-            roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Pagar)
-                .addContainerGap())
-        );
-        roundedPanel2Layout.setVerticalGroup(
-            roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundedPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Pagar)
-                .addContainerGap(8, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout botonPagarLayout = new javax.swing.GroupLayout(botonPagar);
-        botonPagar.setLayout(botonPagarLayout);
-        botonPagarLayout.setHorizontalGroup(
-            botonPagarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botonPagarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(roundedPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        botonPagarLayout.setVerticalGroup(
-            botonPagarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botonPagarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(roundedPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(botonPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, 140, 50));
-
-        botonOxxo.setBackground(new java.awt.Color(234, 205, 54));
-        botonOxxo.setRoundBottomLeft(40);
-        botonOxxo.setRoundBottomRight(40);
-        botonOxxo.setRoundTopLeft(40);
-        botonOxxo.setRoundTopRight(40);
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/oxxo.png"))); // NOI18N
-
-        javax.swing.GroupLayout botonOxxoLayout = new javax.swing.GroupLayout(botonOxxo);
-        botonOxxo.setLayout(botonOxxoLayout);
-        botonOxxoLayout.setHorizontalGroup(
-            botonOxxoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botonOxxoLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(22, 22, 22))
-        );
-        botonOxxoLayout.setVerticalGroup(
-            botonOxxoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botonOxxoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(16, 16, 16))
-        );
-
-        jPanel1.add(botonOxxo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 520, 110, 50));
-
-        botonPaypal.setBackground(new java.awt.Color(234, 205, 54));
-        botonPaypal.setRoundBottomLeft(40);
-        botonPaypal.setRoundBottomRight(40);
-        botonPaypal.setRoundTopLeft(40);
-        botonPaypal.setRoundTopRight(40);
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/paypal (1).png"))); // NOI18N
-
-        javax.swing.GroupLayout botonPaypalLayout = new javax.swing.GroupLayout(botonPaypal);
-        botonPaypal.setLayout(botonPaypalLayout);
-        botonPaypalLayout.setHorizontalGroup(
-            botonPaypalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botonPaypalLayout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(31, 31, 31))
-        );
-        botonPaypalLayout.setVerticalGroup(
-            botonPaypalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botonPaypalLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addContainerGap())
-        );
-
-        jPanel1.add(botonPaypal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 520, 100, 50));
 
         leyendaMetodoDePago.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 20)); // NOI18N
         leyendaMetodoDePago.setForeground(new java.awt.Color(234, 205, 54));
@@ -332,10 +212,6 @@ public class MetodoPago extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tarjetaActionPerformed
 
-    private void fechaCaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaCaducidadActionPerformed
-
-    }//GEN-LAST:event_fechaCaducidadActionPerformed
-
     private void cvvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cvvActionPerformed
 
     }//GEN-LAST:event_cvvActionPerformed
@@ -348,18 +224,16 @@ public class MetodoPago extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_roundedPanel3MouseClicked
 
-    private void PagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagarActionPerformed
-
-        String nombreTxt = nombre.getText().trim();
-        String apellidoTxt = apellido.getText().trim();
-        String direccionTxt = direccion.getText().trim();
-        String tarjetaTxt = tarjeta.getText().trim();
-        String fechaTxt = fechaCaducidad.getText().trim();
-        String cvvTxt = cvv.getText().trim();
-        
-        // elerror esta en el constructor no se porque no funciona
-//        MetodoPagoDTO pago=new MetodoPagoDTO(nombreTxt, apellidoTxt, direccionTxt, nombreTxt, cvvTxt, fechaCaducidad fechaTxt, cvvTxt);
-    }//GEN-LAST:event_PagarActionPerformed
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        String nombreTarjeta = nombre.getText();
+        String apellidoTarjeta = apellido.getText();
+        String codigoSeguridad = cvv.getText();
+        String direccionTarjeta = direccion.getText();
+        String numeroTarjeta = tarjeta.getText();
+        int anio = anioCaducidad.getYear();
+        int mes = mesCaducidad.getMonth();
+        MetodoPagoDTO pago = new MetodoPagoDTO(nombreTarjeta, apellidoTarjeta, direccionTarjeta, numeroTarjeta, codigoSeguridad, anio, mes);
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -398,23 +272,18 @@ public class MetodoPago extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Pagar;
+    private com.toedter.calendar.JYearChooser anioCaducidad;
     private javax.swing.JTextField apellido;
-    private utils.RoundedPanel botonOxxo;
-    private utils.RoundedPanel botonPagar;
-    private utils.RoundedPanel botonPaypal;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JTextField cvv;
     private javax.swing.JTextField direccion;
-    private javax.swing.JTextField fechaCaducidad;
     private javax.swing.JLabel fondo;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel leyendaMetodoDePago;
     private javax.swing.JLabel logo;
+    private com.toedter.calendar.JMonthChooser mesCaducidad;
     private javax.swing.JTextField nombre;
     private javax.swing.JLabel panelAzul;
-    private utils.RoundedPanel roundedPanel2;
     private javax.swing.JSeparator separadorApellido;
     private javax.swing.JSeparator separadorCvv;
     private javax.swing.JSeparator separadorDireccion;
