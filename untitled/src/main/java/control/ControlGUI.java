@@ -8,14 +8,18 @@ import DTOs.GeneroDTO;
 import DTOs.MembresiaDTO;
 import DTOs.MetodoPagoDTO;
 import DTOs.NewUsuarioDTO;
+import DTOs.NuevoPagoDTO;
 import ISubsistemas.IElegirMembresia;
 import ISubsistemas.IGeneroSeleccionado;
 import ISubsistemas.IPagoMembresia;
 import ISubsistemas.IRegistrarUsuario;
+import Interfaces.IGestorPagos;
 import Subsistemas.ElegirMembresia;
 import Subsistemas.GeneroSeleccionado;
 import Subsistemas.PagoMembresia;
 import Subsistemas.RegistrarUsuario;
+import com.mycompany.infraestructura.GestorPagos;
+import com.mycompany.infraestructura.PagoRegistradoDTO;
 import exception.NegocioException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -34,8 +38,13 @@ public class ControlGUI {
     private static ControlGUI instancia;
     private static IRegistrarUsuario usuarioNuevo = new RegistrarUsuario();
     private static IGeneroSeleccionado generoPreferido = new GeneroSeleccionado();
-    private static IElegirMembresia membresiaSeleccionada = new ElegirMembresia();
+    private static IElegirMembresia gestorMembresia = new ElegirMembresia();
     private static IPagoMembresia pagarMembresia = new PagoMembresia();
+    private static IGestorPagos gestionarPagos = new GestorPagos();
+    private MembresiaDTO membresiaSeleccionada;
+    private NewUsuarioDTO usuarioSeleccionado;
+    private List<GeneroDTO> generosSeleccionados;
+    private PagoRegistradoDTO metodoPagoSeleccionado;
 
     private ControlGUI() {
     }
@@ -47,44 +56,65 @@ public class ControlGUI {
         return instancia;
     }
 
-    public void intentarRegistrarUsuario(NewUsuarioDTO nuevoUsuario) {
+    public NewUsuarioDTO intentarRegistrarUsuario(NewUsuarioDTO nuevoUsuario) {
         try {
-            if (usuarioNuevo.validarRegistroUsuario(nuevoUsuario) == nuevoUsuario) {
-                usuarioNuevo.guardarUsuario(nuevoUsuario);
-                mostrarSeleccionGeneros();
-            }
+            this.usuarioSeleccionado = usuarioNuevo.validarRegistroUsuario(nuevoUsuario);;
+            mostrarSeleccionGeneros();
+            return usuarioSeleccionado;
+
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+            return null;
         }
     }
 
-    public void seleccionarGeneroPreferido(List<GeneroDTO> generos) {
+    public List<GeneroDTO> seleccionarGeneroPreferido(List<GeneroDTO> generos) {
         try {
-            generoPreferido.getGenerosSeleccionados(generos);
+            this.generosSeleccionados = generoPreferido.getGenerosSeleccionados(generos);
             mostrarMembresia();
+            return generosSeleccionados;
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+            return null;
         }
     }
 
-    public void seleccionarMembresia(MembresiaDTO membresia) {
+    public MembresiaDTO seleccionarMembresia(MembresiaDTO membresia) {
         try {
-            membresiaSeleccionada.validarEleccionMembresia(membresia);
+            this.membresiaSeleccionada = gestorMembresia.validarEleccionMembresia(membresia);
             mostrarMetodoPago();
+            return membresiaSeleccionada;
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+            return null;
         }
     }
 
-    public void procesarPago(MetodoPagoDTO pagoDTO) {
+    public PagoRegistradoDTO procesarPago(MetodoPagoDTO pagoDTO, MembresiaDTO membresia) {
+
         try {
-            if (pagarMembresia.validarFormatoPago(pagoDTO) == pagoDTO) {
+            pagarMembresia.validarFormatoPago(pagoDTO);
+
+            NuevoPagoDTO nuevoPago = new NuevoPagoDTO(
+                    pagoDTO.getNombreTitular(),
+                    pagoDTO.getNumeroTarjeta(),
+                    pagoDTO.getMesCaducidad(),
+                    pagoDTO.getAnioCaducidad(),
+                    pagoDTO.getCvv());
+
+            PagoRegistradoDTO resultado = gestionarPagos.procesarPago(nuevoPago, membresia);
+
+            if (resultado.isEsValida()) {
                 pagarMembresia.guardarPago(pagoDTO);
+                JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Monto: $" + resultado.getMonto());
+                return resultado;
+            } else {
+                JOptionPane.showMessageDialog(null, "La tarjeta no está registrada o no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (Exception e) {
+        } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
         }
-
+        return null;
     }
 
     public void mostrarLogin() {
@@ -122,4 +152,22 @@ public class ControlGUI {
             ventanaActual.dispose();
         }
     }
+
+    public NewUsuarioDTO getNuevoUsuario() {
+        return usuarioSeleccionado;
+    }
+
+    public List<GeneroDTO> getGenerosSeleccionados() {
+        return generosSeleccionados;
+    }
+
+    public MembresiaDTO getMembresiaSeleccionada() {
+        return membresiaSeleccionada;
+    }
+
+    public PagoRegistradoDTO getProcesarPago() {
+        return metodoPagoSeleccionado;
+    }
+
+
 }
