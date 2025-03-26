@@ -5,10 +5,16 @@
 package control;
 
 import DTOs.GeneroDTO;
+import DTOs.MembresiaDTO;
+import DTOs.MetodoPagoDTO;
 import DTOs.NewUsuarioDTO;
+import ISubsistemas.IElegirMembresia;
 import ISubsistemas.IGeneroSeleccionado;
+import ISubsistemas.IPagoMembresia;
 import ISubsistemas.IRegistrarUsuario;
+import Subsistemas.ElegirMembresia;
 import Subsistemas.GeneroSeleccionado;
+import Subsistemas.PagoMembresia;
 import Subsistemas.RegistrarUsuario;
 import exception.NegocioException;
 import java.util.List;
@@ -28,6 +34,8 @@ public class ControlGUI {
     private static ControlGUI instancia;
     private static IRegistrarUsuario usuarioNuevo = new RegistrarUsuario();
     private static IGeneroSeleccionado generoPreferido = new GeneroSeleccionado();
+    private static IElegirMembresia membresiaSeleccionada = new ElegirMembresia();
+    private static IPagoMembresia pagarMembresia = new PagoMembresia();
 
     private ControlGUI() {
     }
@@ -49,7 +57,7 @@ public class ControlGUI {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }
- 
+
     public void seleccionarGeneroPreferido(List<GeneroDTO> generos) {
         try {
             generoPreferido.getGenerosSeleccionados(generos);
@@ -57,6 +65,26 @@ public class ControlGUI {
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    public void seleccionarMembresia(MembresiaDTO membresia) {
+        try {
+            membresiaSeleccionada.validarEleccionMembresia(membresia);
+            mostrarMetodoPago();
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public void procesarPago(MetodoPagoDTO pagoDTO) {
+        try {
+            if (pagarMembresia.validarFormatoPago(pagoDTO) == pagoDTO) {
+                pagarMembresia.guardarPago(pagoDTO);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }
 
     public void mostrarLogin() {
@@ -82,8 +110,8 @@ public class ControlGUI {
         seleccion.setVisible(true);
         seleccion.setLocationRelativeTo(null);
     }
-    
-    public void mostrarMembresia(){
+
+    public void mostrarMembresia() {
         Membresias membresia = new Membresias();
         membresia.setVisible(true);
         membresia.setLocationRelativeTo(null);
