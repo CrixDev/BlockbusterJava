@@ -31,7 +31,6 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         validarformatoContrasenia(nuevoUsuario);
         validarUsuario(nuevoUsuario, usuariosRegistrados);
         validarFormatoFecha(nuevoUsuario);
-        guardarUsuario(nuevoUsuario);
         return nuevoUsuario;
     }
 
@@ -192,12 +191,6 @@ public class RegistrarUsuario implements IRegistrarUsuario {
             }
         }
 
-        return nuevoUsuario;
-    }
-
-    @Override
-    public NewUsuarioDTO guardarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
-        usuariosRegistrados.add(nuevoUsuario);
         return nuevoUsuario;
     }
 

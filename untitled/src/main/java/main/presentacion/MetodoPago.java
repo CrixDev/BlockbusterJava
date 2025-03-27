@@ -241,12 +241,7 @@ public class MetodoPago extends javax.swing.JFrame {
         int mes = mesCaducidad.getMonth();
         MetodoPagoDTO pago = new MetodoPagoDTO(nombreTarjeta, apellidoTarjeta, direccionTarjeta, numeroTarjeta, codigoSeguridad, anio, mes);
         MembresiaDTO membresia = ControlGUI.getInstancia().getMembresiaSeleccionada();
-        PagoRegistradoDTO pagoRegistrado = ControlGUI.getInstancia().procesarPago(pago,membresia);
-        if (rootPaneCheckingEnabled) {
-            NewUsuarioDTO datosUsuario = ControlGUI.getInstancia().getNuevoUsuario();
-            List<GeneroDTO> generos = ControlGUI.getInstancia().getGenerosSeleccionados();
-            UsuarioDTO usuarioGuardar = new UsuarioDTO(datosUsuario, membresia, generos, pagoRegistrado);
-        }
+        ControlGUI.getInstancia().procesarPago(pago,membresia);
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**
