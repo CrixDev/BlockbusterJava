@@ -67,9 +67,10 @@ public class ControlGUI {
 
     public NewUsuarioDTO intentarRegistrarUsuario(NewUsuarioDTO nuevoUsuario) {
         try {
+            cerrarVentana(frmLoginUsuario);
             this.usuarioSeleccionado = usuarioNuevo.validarRegistroUsuario(nuevoUsuario);
             mostrarSeleccionGeneros();
-            cerrarVentana(frmLoginUsuario);
+            cerrarVentana(frmRegistroUsuario);
             return usuarioSeleccionado;
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -116,6 +117,7 @@ public class ControlGUI {
             if (resultado.isEsValida()) {
                 pagarMembresia.guardarPago(pagoDTO);
                 JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Monto: $" + resultado.getMonto());
+                cerrarVentana(frmLoginUsuario);
                 mostrarLogin();
                 return resultado;
             } else {
