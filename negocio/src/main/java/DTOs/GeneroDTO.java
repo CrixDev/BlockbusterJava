@@ -10,21 +10,30 @@ public class GeneroDTO {
 
     private String nombre;
     private boolean seleccionado;
+    private String imagen;
+    
 
-
-    public GeneroDTO(String nombre ) {
+    public GeneroDTO(String nombre, String imagen) {
         this.nombre = nombre;
+        this.imagen = imagen;
      
         this.seleccionado =false;
     }
     public String getNombre() {
         return nombre;
     }
+    
+      public String getImagen() {
+        return imagen;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
     
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
     public boolean isSeleccionado() {
         return seleccionado;

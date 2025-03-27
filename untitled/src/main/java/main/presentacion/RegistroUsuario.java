@@ -23,10 +23,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
         agregarCampoTexto(nombre, "Nombre");
         agregarCampoTexto(apellido, "Apellido");
         agregarCampoTexto(telefono, "Numero telefonico");
-        agregarCampoTexto(pais, "Pais");
         agregarCampoTexto(correo, "Correo electronico");
         agregarCampoTexto(contrasenia, "Contraseña");
         agregarCampoTexto(confirmarContrasenia, "Confirmar contraseña");
+        String[] paises = {"EUA", "Canada", "Mexico", "Alemania"};
+        pais.setModel(new javax.swing.DefaultComboBoxModel<>(paises));
     }
 
     /**
@@ -43,10 +44,10 @@ public class RegistroUsuario extends javax.swing.JFrame {
         nombre = new javax.swing.JTextField();
         apellido = new javax.swing.JTextField();
         telefono = new javax.swing.JTextField();
-        pais = new javax.swing.JTextField();
+        pais = new javax.swing.JComboBox<>();
+        contrasenia = new javax.swing.JPasswordField();
+        confirmarContrasenia = new javax.swing.JPasswordField();
         correo = new javax.swing.JTextField();
-        contrasenia = new javax.swing.JTextField();
-        confirmarContrasenia = new javax.swing.JTextField();
         fechaN = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -61,6 +62,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nombre.setBackground(new java.awt.Color(22, 35, 65));
+        nombre.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +72,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jPanel2.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 350, 30));
 
         apellido.setBackground(new java.awt.Color(22, 35, 65));
+        apellido.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         apellido.setForeground(new java.awt.Color(255, 255, 255));
         apellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +82,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jPanel2.add(apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 350, 30));
 
         telefono.setBackground(new java.awt.Color(22, 35, 65));
+        telefono.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         telefono.setForeground(new java.awt.Color(255, 255, 255));
         telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,16 +91,20 @@ public class RegistroUsuario extends javax.swing.JFrame {
         });
         jPanel2.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 350, 30));
 
-        pais.setBackground(new java.awt.Color(22, 35, 65));
-        pais.setForeground(new java.awt.Color(255, 255, 255));
-        pais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paisActionPerformed(evt);
-            }
-        });
-        jPanel2.add(pais, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 350, 30));
+        pais.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        pais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(pais, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 262, 350, 30));
+
+        contrasenia.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        contrasenia.setText("jPasswordField1");
+        jPanel2.add(contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 350, 30));
+
+        confirmarContrasenia.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        confirmarContrasenia.setText("jPasswordField1");
+        jPanel2.add(confirmarContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 350, 30));
 
         correo.setBackground(new java.awt.Color(22, 35, 65));
+        correo.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         correo.setForeground(new java.awt.Color(255, 255, 255));
         correo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,24 +112,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
             }
         });
         jPanel2.add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 350, 30));
-
-        contrasenia.setBackground(new java.awt.Color(22, 35, 65));
-        contrasenia.setForeground(new java.awt.Color(255, 255, 255));
-        contrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contraseniaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 350, 30));
-
-        confirmarContrasenia.setBackground(new java.awt.Color(22, 35, 65));
-        confirmarContrasenia.setForeground(new java.awt.Color(255, 255, 255));
-        confirmarContrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmarContraseniaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(confirmarContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 350, 30));
 
         fechaN.setBackground(new java.awt.Color(22, 35, 65));
         fechaN.setForeground(new java.awt.Color(255, 255, 255));
@@ -179,75 +169,29 @@ public class RegistroUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_telefonoActionPerformed
 
-    private void paisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_paisActionPerformed
-
     private void correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_correoActionPerformed
 
-    private void contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_contraseniaActionPerformed
-
-    private void confirmarContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarContraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmarContraseniaActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombreUsuario = limpiarTexto(nombre, "Nombre"); // should NOT be null or empty
+        String nombreUsuario = limpiarTexto(nombre, "Nombre");
         String apellidoUsuario = limpiarTexto(apellido, "Apellido");
         String numeroTelefonico = limpiarTexto(telefono, "Numero telefonico");
         String contra = limpiarTexto(contrasenia, "Contraseña");
-        String paisUsuario = limpiarTexto(pais, "Pais");
+        String paisUsuario = (String) pais.getSelectedItem();
         Date fechaNacimiento = fechaN.getDate();
         String correoElectronico = limpiarTexto(correo, "Correo electronico");
         String confirmarContrasenia2 = limpiarTexto(confirmarContrasenia, "Confirmar contrasenia");
         NewUsuarioDTO nuevoUsuario = new NewUsuarioDTO(nombreUsuario, apellidoUsuario, numeroTelefonico, contra, paisUsuario, fechaNacimiento, correoElectronico, confirmarContrasenia2);
         ControlGUI.getInstancia().intentarRegistrarUsuario(nuevoUsuario);
-        ControlGUI.getInstancia().cerrarVentana(this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegistroUsuario().setVisible(true);
-            }
-        });
-    }
-    
     private void agregarCampoTexto(JTextField field, String campoTexto) {
         field.setText(campoTexto);
-        
+
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -255,7 +199,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
                     field.setText("");
                 }
             }
-            
+
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (field.getText().isEmpty()) {
@@ -264,17 +208,27 @@ public class RegistroUsuario extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private String limpiarTexto(JTextField field, String campoTexto) {
         String text = field.getText().trim();
         return text.equals(campoTexto) ? null : text;
     }
 
+    public void limpiarCampos() {
+        nombre.setText("Nombre");
+        apellido.setText("Apellido");
+        telefono.setText("Numero telefonico");
+        correo.setText("Correo electronico");
+        contrasenia.setText("Contraseña");
+        confirmarContrasenia.setText("Confirmar contraseña");
+        fechaN.setDate(null);
+        pais.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
-    private javax.swing.JTextField confirmarContrasenia;
-    private javax.swing.JTextField contrasenia;
+    private javax.swing.JPasswordField confirmarContrasenia;
+    private javax.swing.JPasswordField contrasenia;
     private javax.swing.JTextField correo;
     private com.toedter.calendar.JDateChooser fechaN;
     private javax.swing.JButton jButton1;
@@ -285,7 +239,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField nombre;
-    private javax.swing.JTextField pais;
+    private javax.swing.JComboBox<String> pais;
     private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }

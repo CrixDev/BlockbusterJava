@@ -5,39 +5,42 @@
 package main.presentacion;
 
 import DTOs.MembresiaDTO;
+import control.ControlGUI;
 
 /**
  *
  * @author devor
  */
 public class PanelMembresia extends javax.swing.JPanel {
+
     private MembresiaDTO membresia;
     private MembresiaSeleccionadaListener listener;
+
     /**
      * Creates new form TemplateMembresia
      */
-    
-     public interface MembresiaSeleccionadaListener {
+
+    public interface MembresiaSeleccionadaListener {
+
         void onMembresiaSeleccionada(MembresiaDTO membresia);
     }
-      public void setMembresiaSeleccionadaListener(MembresiaSeleccionadaListener listener) {
+
+    public void setMembresiaSeleccionadaListener(MembresiaSeleccionadaListener listener) {
         this.listener = listener;
     }
-     
+
     public PanelMembresia(MembresiaDTO membresia) {
         this.membresia = membresia;
         initComponents();
         setupPanel();
     }
-    
-    private void setupPanel(){
-        
+
+    private void setupPanel() {
+
         LabelNombre.setText(membresia.getNombre());
         LabelDescripcion.setText(membresia.getDescripcion());
-        LabelMonto.setText(String.format("$%.2f",  membresia.getMonto()));
-        
-        
-        
+        LabelMonto.setText(String.format("$%.2f", membresia.getMonto()));
+
     }
 
     /**
@@ -168,6 +171,8 @@ public class PanelMembresia extends javax.swing.JPanel {
         BtnSeleccionar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         BtnSeleccionar.setForeground(new java.awt.Color(22, 35, 65));
         BtnSeleccionar.setText("Seleccionar");
+        BtnSeleccionar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        BtnSeleccionar.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         BtnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSeleccionarActionPerformed(evt);
@@ -189,7 +194,7 @@ public class PanelMembresia extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addComponent(BtnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,18 +204,18 @@ public class PanelMembresia extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
                 .addComponent(BtnSeleccionar)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeleccionarActionPerformed
-        
-     if (listener != null) {
-            listener.onMembresiaSeleccionada(this.membresia);
-        }
-        
+        ControlGUI.getInstancia().seleccionarMembresia(this.membresia);
+        BtnSeleccionar.setContentAreaFilled(false);
+        BtnSeleccionar.setFocusPainted(false);
+        BtnSeleccionar.setBorderPainted(false);
+        BtnSeleccionar.setOpaque(false);
     }//GEN-LAST:event_BtnSeleccionarActionPerformed
 
 

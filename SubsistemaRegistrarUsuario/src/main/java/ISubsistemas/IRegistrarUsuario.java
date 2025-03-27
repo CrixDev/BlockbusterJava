@@ -14,5 +14,4 @@ import exception.NegocioException;
 public interface IRegistrarUsuario {
     
     public NewUsuarioDTO validarRegistroUsuario(NewUsuarioDTO nuevoUsuario)throws NegocioException;
-    public NewUsuarioDTO guardarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException;
 }

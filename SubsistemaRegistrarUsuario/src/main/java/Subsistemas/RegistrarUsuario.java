@@ -20,6 +20,7 @@ public class RegistrarUsuario implements IRegistrarUsuario {
 
     private List<NewUsuarioDTO> usuariosRegistrados = new ArrayList<>();
 
+    //Realiza la validación completa del registro de un nuevo usuario. Llama a cada método de validación individual para verificar los campos.
     @Override
     public NewUsuarioDTO validarRegistroUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         List<NewUsuarioDTO> usuarios = usuariosRegistrados;
@@ -31,10 +32,10 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         validarformatoContrasenia(nuevoUsuario);
         validarUsuario(nuevoUsuario, usuariosRegistrados);
         validarFormatoFecha(nuevoUsuario);
-        guardarUsuario(nuevoUsuario);
         return nuevoUsuario;
     }
 
+    //Valida que el nombre del usuario sea válido.
     public NewUsuarioDTO validarFormatoNombre(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         if (nuevoUsuario.getNombre() == null) {
             throw new NegocioException("El nombre no puede estar vacio");
@@ -54,6 +55,7 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    //Valida que el apellido del usuario sea válido.
     public NewUsuarioDTO validarFormatoApellido(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         if (nuevoUsuario.getApellido() == null) {
             throw new NegocioException("El apellido no puede estar vacio");
@@ -73,6 +75,7 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    //Valida que el número telefónico tenga el formato correcto (10 dígitos).
     public NewUsuarioDTO validarFormatoNumeroTelefonico(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         // String[] areaCodeValid = {"+52"};
 
@@ -92,6 +95,7 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    // Verifica que el país del usuario esté dentro de una lista de países válidos.
     public NewUsuarioDTO validarPaisExistente(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         String[] validCountries = {"Mexico"};
 
@@ -108,6 +112,7 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    //Valida que la fecha de nacimiento no sea futura y que el usuario tenga al menos 18 años.   
     public NewUsuarioDTO validarFormatoFecha(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         Date fechaNacimiento = nuevoUsuario.getFechaNacimiento();
         if (fechaNacimiento == null) {
@@ -137,6 +142,7 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    // Valida que el correo electrónico tenga un formato correcto.
     public NewUsuarioDTO validarFormatoCorreo(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         if (nuevoUsuario.getCorreoElectronico() == null) {
             throw new NegocioException("El correo no puede estar vacio");
@@ -147,6 +153,7 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    //Valida que la contraseña cumpla con los requisitos de seguridad. Verifica longitud, caracteres especiales, números, mayúsculas y minúsculas.
     public NewUsuarioDTO validarformatoContrasenia(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         if (nuevoUsuario.getContrasenia() == null) {
             throw new NegocioException("La contrasenia no puede estar vacia");
@@ -179,6 +186,7 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    // Verifica si el correo electrónico o número telefónico ya existen en la lista de usuarios registrados.
     public NewUsuarioDTO validarUsuario(NewUsuarioDTO nuevoUsuario, List<NewUsuarioDTO> usuariosRegistrados) throws NegocioException {
         for (NewUsuarioDTO usuario : usuariosRegistrados) {
             if (usuario.getCorreoElectronico().equalsIgnoreCase(nuevoUsuario.getCorreoElectronico())) {
@@ -192,12 +200,6 @@ public class RegistrarUsuario implements IRegistrarUsuario {
             }
         }
 
-        return nuevoUsuario;
-    }
-
-    @Override
-    public NewUsuarioDTO guardarUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
-        usuariosRegistrados.add(nuevoUsuario);
         return nuevoUsuario;
     }
 

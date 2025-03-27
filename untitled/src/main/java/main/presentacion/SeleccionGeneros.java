@@ -17,109 +17,92 @@ import java.util.List;
  */
 public class SeleccionGeneros extends javax.swing.JFrame {
 
-   private List<GeneroDTO> generos;
+    private List<GeneroDTO> generos;
     private int indiceActual = 0;
     private JPanel panelContenedorPrincipal;
+
+    String[] rutas = {
+        "/imagenes/drama.png",
+        "/imagenes/comedia.png",
+        "/imagenes/accion.png",};
 
     /**
      * Creates new form SeleccionGeneros
      */
- public SeleccionGeneros() {
-    initComponents();
-    inicializarGeneros();
-    configurarInterfaz();
-    mostrarGenero(0); // Mostrar el primer género al iniciar
-}
+    public SeleccionGeneros() {
+        initComponents();
+        inicializarGeneros();
+        configurarInterfaz();
+        mostrarGenero(0); // Mostrar el primer género al iniciar
+    }
 
     private void inicializarGeneros() {
         generos = new ArrayList<>();
-        
-     
-    generos.add(new GeneroDTO("Drama"));
-    generos.add(new GeneroDTO("Terror"));
-    generos.add(new GeneroDTO("Comedia"));
+
+        generos.add(new GeneroDTO("Drama", rutas[0]));
+        generos.add(new GeneroDTO("accion", rutas[2]));
+        generos.add(new GeneroDTO("Comedia", rutas[1]));
     }
 
-    
-    private ImageIcon createImageIcon(String path, String description) {
-       try {
-        return new ImageIcon(getClass().getResource(path));
-    } catch (Exception e) {
-        System.err.println("Error loading image: " + path);
-        return null;
+    private void configurarInterfaz() {
+
+        panelContenedorPrincipal = new JPanel();
+        panelContenedorPrincipal.setLayout(new CardLayout()); // Usamos CardLayout para navegar
+        panelContenedorPrincipal.setBackground(new Color(26, 43, 76));
+
+        // Añade el panel al frame (ajusta según tu diseño)
+        getContentPane().add(panelContenedorPrincipal, BorderLayout.CENTER);
+
+        // Carga todos los paneles de género
+        cargarPanelesGeneros();
+
+        // Configura botones de navegación
+        configurarBotonesNavegacion();
     }
-}
-    
-  private void configurarInterfaz() {
-       
-     panelContenedorPrincipal = new JPanel();
-    panelContenedorPrincipal.setLayout(new CardLayout()); // Usamos CardLayout para navegar
-    panelContenedorPrincipal.setBackground(new Color(26, 43, 76));
-    
-    // Añade el panel al frame (ajusta según tu diseño)
-    getContentPane().add(panelContenedorPrincipal, BorderLayout.CENTER);
-    
-    // Carga todos los paneles de género
-    cargarPanelesGeneros();
-    
-    // Configura botones de navegación
-    configurarBotonesNavegacion();
+
+    private void cargarPanelesGeneros() {
+        for (GeneroDTO genero : generos) {
+            PanelGenero panel = new PanelGenero(genero);
+            panelContenedorPrincipal.add(panel, genero.getNombre());
+        }
     }
-  
-  private void cargarPanelesGeneros() {
-    for (GeneroDTO genero : generos) {
-        PanelGenero panel = new PanelGenero(genero);
-        panelContenedorPrincipal.add(panel, genero.getNombre());
+
+    private void mostrarGenero(int indice) {
+        CardLayout cl = (CardLayout) (panelContenedorPrincipal.getLayout());
+        cl.show(panelContenedorPrincipal, generos.get(indice).getNombre());
+        indiceActual = indice;
+        actualizarEstadoBotones();
     }
-}
-  private void mostrarGenero(int indice) {
-    CardLayout cl = (CardLayout)(panelContenedorPrincipal.getLayout());
-    cl.show(panelContenedorPrincipal, generos.get(indice).getNombre());
-    indiceActual = indice;
-    actualizarEstadoBotones();
-}
-  
-    private void actualizarVisualizacionGeneros() {
-    // Limpia el contenedor
-    jPanelContenedor.removeAll();
-    
-    // Crea y añade el panel del género actual
-    GeneroDTO generoActual = generos.get(indiceActual);
-    panelGeneroActual = new PanelGenero(generoActual);
-    jPanelContenedor.add(panelGeneroActual);
-  
-    
-    // Actualiza la interfaz
-    jPanelContenedor.revalidate();
-    jPanelContenedor.repaint();
-}
-    
+
     private void configurarBotonesNavegacion() {
-    // Asume que tienes jBtnAnterior y jBtnSiguiente en tu diseño
-    jBtnAnterior.addActionListener(e -> {
-        if (indiceActual > 0) {
-            mostrarGenero(indiceActual - 1);
+        // Asume que tienes jBtnAnterior y jBtnSiguiente en tu diseño
+        jBtnAnterior.addActionListener(e -> {
+            if (indiceActual > 0) {
+                mostrarGenero(indiceActual - 1);
+            }
+        });
+
+        jBtnSiguiente.addActionListener(e -> {
+            if (indiceActual < generos.size() - 1) {
+                mostrarGenero(indiceActual + 1);
+            }
+        });
+
+        actualizarEstadoBotones();
+    }
+
+    private void actualizarEstadoBotones() {
+        jBtnAnterior.setEnabled(indiceActual > 0);
+        jBtnSiguiente.setEnabled(indiceActual < generos.size() - 1);
+    }
+
+    public void limpiarCampos() {
+        for (GeneroDTO genero : generos) {
+            genero.setSeleccionado(false);
         }
-    });
-    
-    jBtnSiguiente.addActionListener(e -> {
-        if (indiceActual < generos.size() - 1) {
-            mostrarGenero(indiceActual + 1);
-        }
-    });
-    
-    actualizarEstadoBotones();
-}
+        mostrarGenero(0);
+    }
 
-private void actualizarEstadoBotones() {
-    jBtnAnterior.setEnabled(indiceActual > 0);
-    jBtnSiguiente.setEnabled(indiceActual < generos.size() - 1);
-}
-   
-
-  
-
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -129,17 +112,38 @@ private void actualizarEstadoBotones() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        panelGeneroActual = new javax.swing.JPanel();
         jPanelContenedor = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        panelGeneroActual = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jBtnAnterior = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jBtnSiguiente = new javax.swing.JButton();
         btnSiguienteVentana = new javax.swing.JButton();
         jPanelGeneroContainer = new javax.swing.JPanel();
+        LblTitulo = new javax.swing.JLabel();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout panelGeneroActualLayout = new javax.swing.GroupLayout(panelGeneroActual);
+        panelGeneroActual.setLayout(panelGeneroActualLayout);
+        panelGeneroActualLayout.setHorizontalGroup(
+            panelGeneroActualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 667, Short.MAX_VALUE)
+        );
+        panelGeneroActualLayout.setVerticalGroup(
+            panelGeneroActualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 381, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(panelGeneroActual, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanelContenedorLayout = new javax.swing.GroupLayout(jPanelContenedor);
         jPanelContenedor.setLayout(jPanelContenedorLayout);
@@ -158,7 +162,7 @@ private void actualizarEstadoBotones() {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 833, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,20 +171,10 @@ private void actualizarEstadoBotones() {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
-        javax.swing.GroupLayout panelGeneroActualLayout = new javax.swing.GroupLayout(panelGeneroActual);
-        panelGeneroActual.setLayout(panelGeneroActualLayout);
-        panelGeneroActualLayout.setHorizontalGroup(
-            panelGeneroActualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panelGeneroActualLayout.setVerticalGroup(
-            panelGeneroActualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 409, Short.MAX_VALUE)
-        );
+        jPanel3.setBackground(new java.awt.Color(22, 35, 65));
 
-        getContentPane().add(panelGeneroActual, java.awt.BorderLayout.CENTER);
-
-        jBtnAnterior.setText("jButton2");
+        jBtnAnterior.setBackground(new java.awt.Color(22, 35, 65));
+        jBtnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/izquierdaicon.png"))); // NOI18N
         jBtnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAnteriorActionPerformed(evt);
@@ -201,18 +195,24 @@ private void actualizarEstadoBotones() {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(149, 149, 149)
                 .addComponent(jBtnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.WEST);
 
-        jBtnSiguiente.setText("jButton1");
+        jPanel2.setBackground(new java.awt.Color(22, 35, 65));
+
+        jBtnSiguiente.setBackground(new java.awt.Color(22, 35, 65));
+        jBtnSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/derechaicon.png"))); // NOI18N
         jBtnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSiguienteActionPerformed(evt);
             }
         });
 
+        btnSiguienteVentana.setBackground(new java.awt.Color(234, 205, 55));
+        btnSiguienteVentana.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSiguienteVentana.setForeground(new java.awt.Color(22, 35, 65));
         btnSiguienteVentana.setText("Siguiente");
         btnSiguienteVentana.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,35 +225,48 @@ private void actualizarEstadoBotones() {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(jBtnSiguiente)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnSiguienteVentana)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnSiguienteVentana))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jBtnSiguiente)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addGap(139, 139, 139)
                 .addComponent(jBtnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(btnSiguienteVentana)
                 .addGap(36, 36, 36))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);
 
+        jPanelGeneroContainer.setBackground(new java.awt.Color(22, 35, 65));
+
+        LblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        LblTitulo.setForeground(new java.awt.Color(234, 205, 55));
+        LblTitulo.setText("Selecciona tu género favorito");
+
         javax.swing.GroupLayout jPanelGeneroContainerLayout = new javax.swing.GroupLayout(jPanelGeneroContainer);
         jPanelGeneroContainer.setLayout(jPanelGeneroContainerLayout);
         jPanelGeneroContainerLayout.setHorizontalGroup(
             jPanelGeneroContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
+            .addGroup(jPanelGeneroContainerLayout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(LblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         jPanelGeneroContainerLayout.setVerticalGroup(
             jPanelGeneroContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 73, Short.MAX_VALUE)
+            .addGroup(jPanelGeneroContainerLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(LblTitulo)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelGeneroContainer, java.awt.BorderLayout.NORTH);
@@ -272,39 +285,11 @@ private void actualizarEstadoBotones() {
     private void btnSiguienteVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteVentanaActionPerformed
         List<GeneroDTO> seleccionados = getGenerosSeleccionados();
         ControlGUI.getInstancia().seleccionarGeneroPreferido(seleccionados);
-        ControlGUI.getInstancia().cerrarVentana(this);
     }//GEN-LAST:event_btnSiguienteVentanaActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SeleccionGeneros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SeleccionGeneros().setVisible(true);
-            }
-
-        });
-    }
-
     public List<GeneroDTO> getGenerosSeleccionados() {
         List<GeneroDTO> seleccionados = new ArrayList<>();
         for (GeneroDTO genero : generos) {
@@ -317,14 +302,17 @@ private void actualizarEstadoBotones() {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LblTitulo;
     private javax.swing.JButton btnSiguienteVentana;
     private javax.swing.JButton jBtnAnterior;
     private javax.swing.JButton jBtnSiguiente;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelContenedor;
     private javax.swing.JPanel jPanelGeneroContainer;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JPanel panelGeneroActual;
     // End of variables declaration//GEN-END:variables
 }

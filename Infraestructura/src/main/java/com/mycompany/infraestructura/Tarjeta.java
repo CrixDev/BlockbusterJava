@@ -14,21 +14,41 @@ import java.util.Objects;
 public class Tarjeta {
 
     private String nombreTitular;
+    private String apellidoTitular;
     private String numero;
     private Date fechaExpiracion;
     private String cvv;
+    private double saldo;
 
-    public Tarjeta(String nombreTitular, String numero, Date fechaExpiracion, String cvv) {
+    public Tarjeta(String nombreTitular, String apellidoTitular, String numero, Date fechaExpiracion, String cvv, double saldo) {
         this.nombreTitular = nombreTitular;
+        this.apellidoTitular = apellidoTitular;
         this.numero = numero;
         this.fechaExpiracion = fechaExpiracion;
         this.cvv = cvv;
+        this.saldo = saldo;
     }
 
+    public String getApellidoTitular() {
+        return apellidoTitular;
+    }
+
+    public void setApellidoTitular(String apellidoTitular) {
+        this.apellidoTitular = apellidoTitular;
+    }
+    
     public String getNombreTitular() {
         return nombreTitular;
     }
 
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+    
     public void setNombreTitular(String nombreTitular) {
         this.nombreTitular = nombreTitular;
     }
@@ -57,7 +77,19 @@ public class Tarjeta {
         this.cvv = cvv;
     }
 
-    @Override
+    public boolean saldoSuficiente(double monto){
+        return saldo >= monto;
+    }
+    
+    public void realizarCargo(double monto){
+        if (saldoSuficiente(monto)) {
+            saldo -= monto;
+        }else{
+            throw new IllegalArgumentException("Saldo insuficiente en la tarjeta");
+        }
+    }
+    
+   @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -67,12 +99,13 @@ public class Tarjeta {
         }
         Tarjeta tarjeta = (Tarjeta) o;
         return numero.equals(tarjeta.numero)
-                && nombreTitular.equals(tarjeta.nombreTitular);
+                && nombreTitular.equals(tarjeta.nombreTitular)
+                && apellidoTitular.equals(tarjeta.apellidoTitular);  // Comparar también el apellido
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numero, nombreTitular);
+        return Objects.hash(numero, nombreTitular, apellidoTitular);  // Incluir apellido en el cálculo del hash
     }
 
     public boolean esValida() {

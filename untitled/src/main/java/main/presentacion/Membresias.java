@@ -5,6 +5,7 @@
 package main.presentacion;
 
 import DTOs.MembresiaDTO;
+import control.ControlGUI;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,47 +13,48 @@ import javax.swing.JOptionPane;
  * @author devor
  */
 public class Membresias extends javax.swing.JFrame {
+
     private MembresiaDTO membresiaSeleccionada;
+
     /**
      * Creates new form Membresias
      */
     public Membresias() {
         initComponents();
-         inicializarPanelesMembresias();
+        inicializarPanelesMembresias();
     }
 
-    
     private void inicializarPanelesMembresias() {
         // Crear 3 membresías de ejemplo
         MembresiaDTO membresia1 = new MembresiaDTO("Básica", "Acceso a equipos básicos", 29.99);
         MembresiaDTO membresia2 = new MembresiaDTO("Premium", "Acceso a todos los equipos + clases grupales", 59.99);
-        MembresiaDTO membresia3 = new MembresiaDTO("VIP", String.format( "Acceso ilimitado \n entrenador personal"), 99.99);
+        MembresiaDTO membresia3 = new MembresiaDTO("VIP", String.format("Acceso ilimitado \n entrenador personal"), 99.99);
 
         // Crear los paneles con las membresías
         PanelMembresia panel1 = new PanelMembresia(membresia1);
         PanelMembresia panel2 = new PanelMembresia(membresia2);
         PanelMembresia panel3 = new PanelMembresia(membresia3);
-        
-            panel1.setMembresiaSeleccionadaListener(membresia -> {
+
+        panel1.setMembresiaSeleccionadaListener(membresia -> {
             this.membresiaSeleccionada = membresia;
-             mostrarSeleccion(membresia);
+            mostrarSeleccion(membresia);
         });
-        
+
         panel2.setMembresiaSeleccionadaListener(membresia -> {
             this.membresiaSeleccionada = membresia;
-          mostrarSeleccion(membresia);
+            mostrarSeleccion(membresia);
         });
-        
+
         panel3.setMembresiaSeleccionadaListener(membresia -> {
             this.membresiaSeleccionada = membresia;
-          mostrarSeleccion(membresia);
+            mostrarSeleccion(membresia);
         });
 
         // Configurar el layout y añadir los paneles
         panelContenedor.setLayout(new java.awt.GridLayout(1, 3, 10, 10));
-        panelContenedor1.setLayout(new java.awt.GridLayout(1, 3, 10, 10)); 
+        panelContenedor1.setLayout(new java.awt.GridLayout(1, 3, 10, 10));
         panelContenedor2.setLayout(new java.awt.GridLayout(1, 3, 10, 10));
-        
+
         panelContenedor.add(panel1);
         panelContenedor1.add(panel2);
         panelContenedor2.add(panel3);
@@ -61,11 +63,16 @@ public class Membresias extends javax.swing.JFrame {
     public MembresiaDTO getMembresiaSeleccionada() {
         return membresiaSeleccionada;
     }
-     private void mostrarSeleccion(MembresiaDTO membresia) {
-          JOptionPane.showMessageDialog(this, "Has seleccionado: " + membresia.getNombre());
-        
-     }
-    
+
+    private void mostrarSeleccion(MembresiaDTO membresia) {
+        JOptionPane.showMessageDialog(this, "Has seleccionado: " + membresia.getNombre());
+        ControlGUI.getInstancia().cerrarVentana(this);
+    }
+
+    public void limpiarSeleccion() {
+        this.membresiaSeleccionada = null;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -163,37 +170,6 @@ public class Membresias extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Membresias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Membresias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Membresias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Membresias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Membresias().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

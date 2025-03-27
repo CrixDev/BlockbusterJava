@@ -4,11 +4,8 @@
  */
 package Subsistemas;
 
-import DTOs.MembresiaDTO;
 import DTOs.MetodoPagoDTO;
-import DTOs.NewUsuarioDTO;
 import exception.NegocioException;
-import java.util.Calendar;
 import java.util.Date;
 import ISubsistemas.IPagoMembresia;
 import java.util.ArrayList;
@@ -23,17 +20,15 @@ public class PagoMembresia implements IPagoMembresia {
     private final List<MetodoPagoDTO> pagosRegistrados = new ArrayList<>();
 
     @Override
-    public MetodoPagoDTO validarEleccionMembresia(MetodoPagoDTO MetodoPago) throws NegocioException {
+    public MetodoPagoDTO validarFormatoPago(MetodoPagoDTO metodoPago) throws NegocioException {
 
-        validarFormatoNombre(MetodoPago);
-        validarFormatoApellido(MetodoPago);
-        validarCVV(MetodoPago);
-        validarDireccion(MetodoPago);
-        validarFechaCaducidad(MetodoPago);
-        validarTarjeta(MetodoPago);
-        guardarPago(MetodoPago);
-        return MetodoPago;
-
+        validarFormatoNombre(metodoPago);
+        validarFormatoApellido(metodoPago);
+        validarCVV(metodoPago);
+        validarDireccion(metodoPago);
+        validarFechaCaducidad(metodoPago.getMesCaducidad(), metodoPago.getAnioCaducidad());
+        validarTarjeta(metodoPago);
+        return metodoPago;
     }
 
     public MetodoPagoDTO validarFormatoNombre(MetodoPagoDTO metodoPago) throws NegocioException {
@@ -74,31 +69,18 @@ public class PagoMembresia implements IPagoMembresia {
         return metodoPago;
     }
 
-    public MetodoPagoDTO validarFechaCaducidad(MetodoPagoDTO metodoPago) throws NegocioException {
-        Date fecha = metodoPago.getFechaCaducidad(); // tipo java.util.Date
+    public void validarFechaCaducidad(int mesTarjeta, int anioTarjeta) throws NegocioException {
+        Date fechaActual = new Date();
+        int mesActual = fechaActual.getMonth();
+        int anioActual = fechaActual.getYear();
 
-        if (fecha == null) {
-            throw new NegocioException("La fecha de caducidad no puede estar vacía.");
-        }
-
-        Calendar fechaCaducidad = Calendar.getInstance();
-        fechaCaducidad.setTime(fecha);
-
-        Calendar hoy = Calendar.getInstance();
-
-        // Comparar por año y mes (ignorar día)
-        int mesTarjeta = fechaCaducidad.get(Calendar.MONTH);
-        int anioTarjeta = fechaCaducidad.get(Calendar.YEAR);
-
-        int mesActual = hoy.get(Calendar.MONTH);
-        int anioActual = hoy.get(Calendar.YEAR);
+        mesTarjeta += 1;
 
         if (anioTarjeta < anioActual || (anioTarjeta == anioActual && mesTarjeta < mesActual)) {
             throw new NegocioException("La tarjeta ya ha vencido.");
         }
-
-        return metodoPago;
     }
+
 
     public MetodoPagoDTO validarTarjeta(MetodoPagoDTO metodoPago) throws NegocioException {
         String numeroTarjeta = metodoPago.getNumeroTarjeta();
@@ -106,12 +88,6 @@ public class PagoMembresia implements IPagoMembresia {
         if (numeroTarjeta == null || numeroTarjeta.trim().isEmpty()) {
             throw new NegocioException("El número de tarjeta no puede estar vacío.");
         }
-
-        // Validar formato: xxxx-xxxx-xxxx-xxxx (16 dígitos con guiones)
-        if (!numeroTarjeta.matches("^\\d{4}-\\d{4}-\\d{4}-\\d{4}$")) {
-            throw new NegocioException("El número de tarjeta debe tener el formato xxxx-xxxx-xxxx-xxxx.");
-        }
-
         return metodoPago;
     }
 
@@ -149,8 +125,6 @@ public class PagoMembresia implements IPagoMembresia {
     }
 
     public MetodoPagoDTO guardarPago(MetodoPagoDTO metodoPago) throws NegocioException {
-        validarEleccionMembresia(metodoPago);
-
         pagosRegistrados.add(metodoPago);
         return metodoPago;
     }

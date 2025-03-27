@@ -1,6 +1,7 @@
 package Subsistemas;
 
 import DTOs.MembresiaDTO;
+import DTOs.MetodoPagoDTO;
 import ISubsistemas.IElegirMembresia;
 import exception.NegocioException;
 
@@ -17,7 +18,6 @@ public class ElegirMembresia implements IElegirMembresia {
         if (elegirMembresia == null) {
             throw new NegocioException("No se ha seleccionado ninguna membresía");
         }
-        
         return elegirMembresia;
     }
 }

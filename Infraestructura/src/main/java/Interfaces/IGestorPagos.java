@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package ISubsistemas;
+package Interfaces;
 
 import DTOs.MembresiaDTO;
-import DTOs.MetodoPagoDTO;
-import exception.NegocioException;
+import DTOs.NuevoPagoDTO;
+import DTOs.PagoRegistradoDTO;
 
 /**
  *
- * @author Usuario
+ * @author jrasc
  */
-public interface IElegirMembresia {
-    
-     public MembresiaDTO validarEleccionMembresia(MembresiaDTO membresia)throws NegocioException;
+public interface IGestorPagos {
+
+    public PagoRegistradoDTO procesarPago(NuevoPagoDTO dto, MembresiaDTO membresia);
 }

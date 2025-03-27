@@ -4,15 +4,16 @@
  */
 package ISubsistemas;
 
-import DTOs.MembresiaDTO;
-import DTOs.MetodoPagoDTO;
+import DTOs.UsuarioDTO;
 import exception.NegocioException;
 
 /**
  *
- * @author Usuario
+ * @author jrasc
  */
-public interface IElegirMembresia {
+public interface IGuardarUsuario {
     
-     public MembresiaDTO validarEleccionMembresia(MembresiaDTO membresia)throws NegocioException;
+    public void persistirUsuario(UsuarioDTO usuario) throws NegocioException;
+    
+    
 }
