@@ -19,4 +19,14 @@ public class Exe {
         ControlGUI.getInstancia().mostrarLogin();
     }
     
+    /*
+    Datos de tarjeta precargada
+    nombre: Jose
+    apellido: Garduño
+    alias: El zombie del betos bar(El lugar de los rockstar y los malditos punks)
+    noTarjeta: 1234567891234567
+    fecha: Diciembre/2025
+    cvv: 123
+    */
+    
 }
