@@ -65,6 +65,15 @@ public class ControlGUI {
         return instancia;
     }
 
+    /**
+     * (( Intenta registrar un nuevo usuario utilizando los datos
+     * proporcionados. Si el registro es exitoso, avanza a la selección de
+     * géneros. Muestra mensajes informativos si ocurre una excepción de
+     * negocio. ))
+     *
+     * @param nuevoUsuario Datos del nuevo usuario a registrar.
+     * @return NewUsuarioDTO con los datos registrados o null si hay error.
+     */
     public NewUsuarioDTO intentarRegistrarUsuario(NewUsuarioDTO nuevoUsuario) {
         try {
             this.usuarioSeleccionado = usuarioNuevo.validarRegistroUsuario(nuevoUsuario);
@@ -77,6 +86,13 @@ public class ControlGUI {
         }
     }
 
+    /**
+     * (( Permite seleccionar los géneros preferidos del usuario. Si se
+     * seleccionan correctamente, se muestra la pantalla de membresía. ))
+     *
+     * @param generos Lista de géneros seleccionados por el usuario.
+     * @return Lista de GeneroDTO seleccionados o null si hay error.
+     */
     public List<GeneroDTO> seleccionarGeneroPreferido(List<GeneroDTO> generos) {
         try {
             this.generosSeleccionados = generoPreferido.getGenerosSeleccionados(generos);
@@ -89,6 +105,13 @@ public class ControlGUI {
         }
     }
 
+    /**
+     * (( Permite seleccionar una membresía y valida que sea una opción válida.
+     * Si es correcta, se muestra la pantalla de método de pago. ))
+     *
+     * @param membresia Membresía seleccionada por el usuario.
+     * @return MembresiaDTO validada o null si hay error.
+     */
     public MembresiaDTO seleccionarMembresia(MembresiaDTO membresia) {
         try {
             this.membresiaSeleccionada = gestorMembresia.validarEleccionMembresia(membresia);
@@ -101,6 +124,14 @@ public class ControlGUI {
         }
     }
 
+    /**
+     * (( Procesa el pago del usuario validando el método de pago ingresado. Si
+     * el pago es exitoso, lo guarda y muestra el login. ))
+     *
+     * @param pagoDTO Datos del método de pago.
+     * @param membresia Membresía a pagar.
+     * @return PagoRegistradoDTO si el pago es exitoso o null si falla.
+     */
     public PagoRegistradoDTO procesarPago(MetodoPagoDTO pagoDTO, MembresiaDTO membresia) {
 
         try {
@@ -129,6 +160,10 @@ public class ControlGUI {
         return null;
     }
 
+    /**
+     * (( Construye un UsuarioDTO final con todos los datos recolectados y lo
+     * guarda en el sistema. Limpia las pantallas y variables de sesión. ))
+     */
     public void guardarUsuario() {
         try {
             NewUsuarioDTO datosUsuario = getNuevoUsuario();
@@ -152,6 +187,9 @@ public class ControlGUI {
 
     }
 
+    /**
+     * (( Muestra la ventana de login de usuario. Si no existe, la instancia. ))
+     */
     public void mostrarLogin() {
         if (this.frmLoginUsuario == null) {
             this.frmLoginUsuario = new Login();
@@ -161,6 +199,10 @@ public class ControlGUI {
 
     }
 
+    /**
+     * (( Muestra la ventana de registro de usuario. Cierra la de login si está
+     * activa. ))
+     */
     public void mostrarRegistroUsuario() {
         cerrarVentana(frmLoginUsuario);
         if (this.frmRegistroUsuario == null) {
@@ -171,6 +213,9 @@ public class ControlGUI {
         frmRegistroUsuario.setVisible(true);
     }
 
+    /**
+     * (( Muestra la ventana de método de pago. Si no existe, la instancia. ))
+     */
     public void mostrarMetodoPago() {
         if (this.frmMetodoPago == null) {
             this.frmMetodoPago = new MetodoPago();
@@ -180,6 +225,10 @@ public class ControlGUI {
         frmMetodoPago.setVisible(true);
     }
 
+    /**
+     * (( Muestra la ventana de selección de géneros. Si no existe, la
+     * instancia. ))
+     */
     public void mostrarSeleccionGeneros() {
         if (this.frmSeleccionGeneros == null) {
             this.frmSeleccionGeneros = new SeleccionGeneros();
@@ -189,6 +238,9 @@ public class ControlGUI {
         frmSeleccionGeneros.setVisible(true);
     }
 
+    /**
+     * (( Muestra la ventana de membresía. Si no existe, la instancia. ))
+     */
     public void mostrarMembresia() {
         if (this.frmMembresia == null) {
             this.frmMembresia = new Membresias();
@@ -198,24 +250,46 @@ public class ControlGUI {
         this.frmMembresia.setVisible(true);
     }
 
+    /**
+     * (( Cierra la ventana pasada como parámetro si no es null. ))
+     *
+     * @param ventanaActual Ventana que se desea cerrar.
+     */
     public void cerrarVentana(javax.swing.JFrame ventanaActual) {
         if (ventanaActual != null) {
             ventanaActual.dispose();
         }
     }
 
+    /**
+     * (( Obtiene los datos del usuario nuevo ya validados. ))
+     *
+     * @return NewUsuarioDTO con los datos del usuario.
+     */
     public NewUsuarioDTO getNuevoUsuario() {
         return usuarioSeleccionado;
     }
-
+    /**
+     * (( Retorna la lista de géneros seleccionados por el usuario. ))
+     *
+     * @return Lista de GeneroDTO.
+     */
     public List<GeneroDTO> getGenerosSeleccionados() {
         return generosSeleccionados;
     }
-
+    /**
+     * (( Obtiene la membresía seleccionada por el usuario. ))
+     *
+     * @return MembresiaDTO.
+     */
     public MembresiaDTO getMembresiaSeleccionada() {
         return membresiaSeleccionada;
     }
-
+    /**
+     * (( Obtiene el resultado del pago procesado. ))
+     *
+     * @return PagoRegistradoDTO si el pago fue válido, o null.
+     */
     public PagoRegistradoDTO getProcesarPago() {
         return metodoPagoSeleccionado;
     }
