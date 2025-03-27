@@ -45,6 +45,11 @@ public class ControlGUI {
     private NewUsuarioDTO usuarioSeleccionado;
     private List<GeneroDTO> generosSeleccionados;
     private PagoRegistradoDTO metodoPagoSeleccionado;
+    private RegistroUsuario frmRegistroUsuario;
+    private Login frmLoginUsuario;
+    private MetodoPago frmMetodoPago;
+    private SeleccionGeneros frmSeleccionGeneros;
+    private Membresias frmMembresia;
 
     private ControlGUI() {
     }
@@ -58,12 +63,13 @@ public class ControlGUI {
 
     public NewUsuarioDTO intentarRegistrarUsuario(NewUsuarioDTO nuevoUsuario) {
         try {
-            this.usuarioSeleccionado = usuarioNuevo.validarRegistroUsuario(nuevoUsuario);;
+            this.usuarioSeleccionado = usuarioNuevo.validarRegistroUsuario(nuevoUsuario);
             mostrarSeleccionGeneros();
             return usuarioSeleccionado;
-
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+            mostrarLogin();
+            cerrarVentana(frmRegistroUsuario);
             return null;
         }
     }
@@ -119,33 +125,33 @@ public class ControlGUI {
     }
 
     public void mostrarLogin() {
-        Login login = new Login();
-        login.setVisible(true);
-        login.setLocationRelativeTo(null);
+        this.frmLoginUsuario = new Login();
+        frmLoginUsuario.setVisible(true);
+        frmLoginUsuario.setLocationRelativeTo(null);
     }
 
     public void mostrarRegistroUsuario() {
-        RegistroUsuario registro = new RegistroUsuario();
-        registro.setVisible(true);
-        registro.setLocationRelativeTo(null);
+        this.frmRegistroUsuario = new RegistroUsuario();
+        frmRegistroUsuario.setVisible(true);
+        frmRegistroUsuario.setLocationRelativeTo(null);
     }
 
     public void mostrarMetodoPago() {
-        MetodoPago metodoPago = new MetodoPago();
-        metodoPago.setVisible(true);
-        metodoPago.setLocationRelativeTo(null);
+        this.frmMetodoPago = new MetodoPago();
+        frmMetodoPago.setVisible(true);
+        frmMetodoPago.setLocationRelativeTo(null);
     }
 
     public void mostrarSeleccionGeneros() {
-        SeleccionGeneros seleccion = new SeleccionGeneros();
-        seleccion.setVisible(true);
-        seleccion.setLocationRelativeTo(null);
+        this.frmSeleccionGeneros = new SeleccionGeneros();
+        frmSeleccionGeneros.setVisible(true);
+        frmSeleccionGeneros.setLocationRelativeTo(null);
     }
 
     public void mostrarMembresia() {
-        Membresias membresia = new Membresias();
-        membresia.setVisible(true);
-        membresia.setLocationRelativeTo(null);
+        this.frmMembresia = new Membresias();
+        this.frmMembresia.setVisible(true);
+        this.frmMembresia.setLocationRelativeTo(null);
     }
 
     public void cerrarVentana(javax.swing.JFrame ventanaActual) {
@@ -169,6 +175,5 @@ public class ControlGUI {
     public PagoRegistradoDTO getProcesarPago() {
         return metodoPagoSeleccionado;
     }
-
 
 }
