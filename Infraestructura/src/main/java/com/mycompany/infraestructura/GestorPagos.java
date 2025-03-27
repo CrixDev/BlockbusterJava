@@ -28,22 +28,19 @@ public class GestorPagos implements IGestorPagos {
 
     private void cargarTarjetasRegistradas() {
         Date fecha1 = new Date(2025 - 1900, 11, 1); // Diciembre 2025
-        tarjetasRegistradas.add(new Tarjeta("Luis", "1234567812345678", fecha1, "321"));
+        tarjetasRegistradas.add(new Tarjeta("Jose", "Garduño", "1234567891234567", fecha1, "123"));
 
-        Date fecha2 = new Date(2026 - 1900, 5, 1); // Junio 2026
-        tarjetasRegistradas.add(new Tarjeta("Maria", "8765432187654321", fecha2, "456"));
     }
 
     @Override
     public PagoRegistradoDTO procesarPago(NuevoPagoDTO dto, MembresiaDTO membresia) {
         Date fechaExpiracion = new Date(dto.getAnioCaducidad() - 1900, dto.getMesCaducidad(), 1);
 
-        Tarjeta tarjetaEntrada = new Tarjeta(
-                dto.getNombreTitular(),
-                dto.getNumero(),
-                fechaExpiracion,
-                dto.getCvv()
-        );
+        Tarjeta tarjetaEntrada = new Tarjeta(dto.getNombreTitular(),
+                 dto.getApelllidoTitular(),
+                 dto.getApelllidoTitular(),
+                 fechaExpiracion,
+                 dto.getCvv());
 
         if (!tarjetaEntrada.esValida()) {
             return new PagoRegistradoDTO(false, 0, null);

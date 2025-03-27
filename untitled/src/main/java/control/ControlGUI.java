@@ -106,12 +106,12 @@ public class ControlGUI {
         try {
             pagarMembresia.validarFormatoPago(pagoDTO);
 
-            NuevoPagoDTO nuevoPago = new NuevoPagoDTO(
-                    pagoDTO.getNombreTitular(),
-                    pagoDTO.getNumeroTarjeta(),
-                    pagoDTO.getMesCaducidad(),
-                    pagoDTO.getAnioCaducidad(),
-                    pagoDTO.getCvv());
+            NuevoPagoDTO nuevoPago = new NuevoPagoDTO(pagoDTO.getNombreTitular(),
+                     pagoDTO.getApellidoTitular(),
+                     pagoDTO.getNumeroTarjeta(),
+                     pagoDTO.getMesCaducidad(),
+                     pagoDTO.getAnioCaducidad(),
+                     pagoDTO.getCvv());
             PagoRegistradoDTO resultado = gestionarPagos.procesarPago(nuevoPago, membresia);
             if (resultado.isEsValida()) {
                 pagarMembresia.guardarPago(pagoDTO);

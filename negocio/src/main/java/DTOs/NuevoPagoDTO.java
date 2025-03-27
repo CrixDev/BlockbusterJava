@@ -13,6 +13,7 @@ import java.util.Date;
 public class NuevoPagoDTO {
     
     private String nombreTitular;
+    private String apelllidoTitular;
     private String numero;
     private int mesCaducidad;
     private int anioCaducidad;
@@ -21,12 +22,21 @@ public class NuevoPagoDTO {
     public NuevoPagoDTO() {
     }
 
-    public NuevoPagoDTO(String nombreTitular, String numero, int mesCaducidad, int anioCaducidad, String cvv) {
+    public NuevoPagoDTO(String nombreTitular, String apelllidoTitular, String numero, int mesCaducidad, int anioCaducidad, String cvv) {
         this.nombreTitular = nombreTitular;
+        this.apelllidoTitular = apelllidoTitular;
         this.numero = numero;
         this.mesCaducidad = mesCaducidad;
         this.anioCaducidad = anioCaducidad;
         this.cvv = cvv;
+    }
+
+    public String getApelllidoTitular() {
+        return apelllidoTitular;
+    }
+
+    public void setApelllidoTitular(String apelllidoTitular) {
+        this.apelllidoTitular = apelllidoTitular;
     }
   
     public String getNombreTitular() {
@@ -72,8 +82,7 @@ public class NuevoPagoDTO {
 
     @Override
     public String toString() {
-        return "NuevoPagoDTO{" + "nombreTitular=" + nombreTitular + ", numero=" + numero + ", mesCaducidad=" + mesCaducidad + ", anioCaducidad=" + anioCaducidad + ", cvv=" + cvv + '}';
+        return "NuevoPagoDTO{" + "nombreTitular=" + nombreTitular + ", apelllidoTitular=" + apelllidoTitular + ", numero=" + numero + ", mesCaducidad=" + mesCaducidad + ", anioCaducidad=" + anioCaducidad + ", cvv=" + cvv + '}';
     }
-
 
 }
