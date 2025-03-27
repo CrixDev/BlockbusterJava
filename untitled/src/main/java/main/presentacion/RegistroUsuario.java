@@ -27,10 +27,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
         agregarCampoTexto(nombre, "Nombre");
         agregarCampoTexto(apellido, "Apellido");
         agregarCampoTexto(telefono, "Numero telefonico");
-        agregarCampoTexto(pais, "Pais");
         agregarCampoTexto(correo, "Correo electronico");
         agregarCampoTexto(contrasenia, "Contraseña");
         agregarCampoTexto(confirmarContrasenia, "Confirmar contraseña");
+        String[] paises = {"EUA", "Canada", "Mexico", "Alemania"};
+        pais.setModel(new javax.swing.DefaultComboBoxModel<>(paises));
     }
 
     /**
@@ -47,7 +48,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         nombre = new javax.swing.JTextField();
         apellido = new javax.swing.JTextField();
         telefono = new javax.swing.JTextField();
-        pais = new javax.swing.JTextField();
+        pais = new javax.swing.JComboBox<>();
         correo = new javax.swing.JTextField();
         contrasenia = new javax.swing.JTextField();
         confirmarContrasenia = new javax.swing.JTextField();
@@ -91,14 +92,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
         });
         jPanel2.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 350, 30));
 
-        pais.setBackground(new java.awt.Color(22, 35, 65));
-        pais.setForeground(new java.awt.Color(255, 255, 255));
-        pais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paisActionPerformed(evt);
-            }
-        });
-        jPanel2.add(pais, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 350, 30));
+        pais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(pais, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 262, 350, 30));
 
         correo.setBackground(new java.awt.Color(22, 35, 65));
         correo.setForeground(new java.awt.Color(255, 255, 255));
@@ -183,10 +178,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_telefonoActionPerformed
 
-    private void paisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_paisActionPerformed
-
     private void correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_correoActionPerformed
@@ -204,7 +195,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         String apellidoUsuario = limpiarTexto(apellido, "Apellido");
         String numeroTelefonico = limpiarTexto(telefono, "Numero telefonico");
         String contra = limpiarTexto(contrasenia, "Contraseña");
-        String paisUsuario = limpiarTexto(pais, "Pais");
+        String paisUsuario = (String) pais.getSelectedItem();
         Date fechaNacimiento = fechaN.getDate();
         String correoElectronico = limpiarTexto(correo, "Correo electronico");
         String confirmarContrasenia2 = limpiarTexto(confirmarContrasenia, "Confirmar contrasenia");
@@ -288,7 +279,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField nombre;
-    private javax.swing.JTextField pais;
+    private javax.swing.JComboBox<String> pais;
     private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }
