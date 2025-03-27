@@ -28,7 +28,7 @@ public class GestorPagos implements IGestorPagos {
 
     private void cargarTarjetasRegistradas() {
         Date fecha1 = new Date(2025 - 1900, 11, 1); // Diciembre 2025
-        tarjetasRegistradas.add(new Tarjeta("Jose", "Garduno", "1234567891234567", fecha1, "123"));
+        tarjetasRegistradas.add(new Tarjeta("Jose", "Garduno", "1234567891234567", fecha1, "123", 1000));
 
     }
 
@@ -37,17 +37,30 @@ public class GestorPagos implements IGestorPagos {
         Date fechaExpiracion = new Date(dto.getAnioCaducidad() - 1900, dto.getMesCaducidad(), 1);
 
         Tarjeta tarjetaEntrada = new Tarjeta(dto.getNombreTitular(),
-                 dto.getApelllidoTitular(),
-                 dto.getApelllidoTitular(),
-                 fechaExpiracion,
-                 dto.getCvv());
+                dto.getApelllidoTitular(),
+                dto.getApelllidoTitular(),
+                fechaExpiracion,
+                dto.getCvv(),
+                0);
 
         if (!tarjetaEntrada.esValida()) {
             return new PagoRegistradoDTO(false, 0, null);
         }
 
+        Tarjeta tarjetaRegistrada = null;
+        for (Tarjeta tarjeta : tarjetasRegistradas) {
+            if (tarjeta.equals(tarjetaEntrada)) {
+                tarjetaRegistrada = tarjeta;
+                break;
+            }
+        }
+
         if (tarjetasRegistradas.contains(tarjetaEntrada)) {
             double monto = membresia.getMonto();
+            if (tarjetaRegistrada.saldoSuficiente(monto)) {
+                tarjetaRegistrada.realizarCargo(monto);
+                return new PagoRegistradoDTO(true, monto, new Date());
+            }
             return new PagoRegistradoDTO(true, monto, new Date());
         } else {
             return new PagoRegistradoDTO(false, 0, null);

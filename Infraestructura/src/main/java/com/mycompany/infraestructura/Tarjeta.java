@@ -18,13 +18,15 @@ public class Tarjeta {
     private String numero;
     private Date fechaExpiracion;
     private String cvv;
+    private double saldo;
 
-    public Tarjeta(String nombreTitular, String apellidoTitular, String numero, Date fechaExpiracion, String cvv) {
+    public Tarjeta(String nombreTitular, String apellidoTitular, String numero, Date fechaExpiracion, String cvv, double saldo) {
         this.nombreTitular = nombreTitular;
         this.apellidoTitular = apellidoTitular;
         this.numero = numero;
         this.fechaExpiracion = fechaExpiracion;
         this.cvv = cvv;
+        this.saldo = saldo;
     }
 
     public String getApellidoTitular() {
@@ -39,6 +41,14 @@ public class Tarjeta {
         return nombreTitular;
     }
 
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+    
     public void setNombreTitular(String nombreTitular) {
         this.nombreTitular = nombreTitular;
     }
@@ -67,6 +77,18 @@ public class Tarjeta {
         this.cvv = cvv;
     }
 
+    public boolean saldoSuficiente(double monto){
+        return saldo >= monto;
+    }
+    
+    public void realizarCargo(double monto){
+        if (saldoSuficiente(monto)) {
+            saldo -= monto;
+        }else{
+            throw new IllegalArgumentException("Saldo insuficiente en la tarjeta");
+        }
+    }
+    
    @Override
     public boolean equals(Object o) {
         if (this == o) {
