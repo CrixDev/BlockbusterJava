@@ -13,7 +13,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <name>presentacion</name>
+    <name>Presentacion</name>
     <dependencies>
         <dependency>
             <groupId>org.netbeans.external</groupId>

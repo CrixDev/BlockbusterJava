@@ -20,6 +20,14 @@ public class RegistrarUsuario implements IRegistrarUsuario {
 
     private List<NewUsuarioDTO> usuariosRegistrados = new ArrayList<>();
 
+    /**
+    * Realiza la validación completa del registro de un nuevo usuario.
+    * Llama a cada método de validación individual para verificar los campos.
+    *
+    * @param nuevoUsuario el DTO con los datos del nuevo usuario
+    * @return el mismo DTO si todas las validaciones son correctas
+    * @throws NegocioException si alguna validación no se cumple
+    */
     @Override
     public NewUsuarioDTO validarRegistroUsuario(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         List<NewUsuarioDTO> usuarios = usuariosRegistrados;
@@ -34,6 +42,13 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    /**
+    * Valida que el nombre del usuario sea válido.
+    *
+    * @param nuevoUsuario el DTO con el nombre a validar
+    * @return el mismo DTO si el nombre es válido
+    * @throws NegocioException si el nombre es nulo, contiene números o caracteres inválidos
+    */
     public NewUsuarioDTO validarFormatoNombre(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         if (nuevoUsuario.getNombre() == null) {
             throw new NegocioException("El nombre no puede estar vacio");
@@ -53,6 +68,13 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    /**
+    * Valida que el apellido del usuario sea válido.
+    *
+    * @param nuevoUsuario el DTO con el apellido a validar
+    * @return el mismo DTO si el apellido es válido
+    * @throws NegocioException si el apellido es nulo, contiene números o caracteres inválidos
+    */
     public NewUsuarioDTO validarFormatoApellido(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         if (nuevoUsuario.getApellido() == null) {
             throw new NegocioException("El apellido no puede estar vacio");
@@ -72,6 +94,13 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    /**
+     * Valida que el número telefónico tenga el formato correcto (10 dígitos).
+     *
+     * @param nuevoUsuario el DTO con el número a validar
+     * @return el mismo DTO si el número es válido
+     * @throws NegocioException si el número es nulo o no tiene 10 dígitos
+     */
     public NewUsuarioDTO validarFormatoNumeroTelefonico(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         // String[] areaCodeValid = {"+52"};
 
@@ -91,6 +120,14 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    /**
+     * Verifica que el país del usuario esté dentro de una lista de países
+     * válidos.
+     *
+     * @param nuevoUsuario el DTO con el país a validar
+     * @return el mismo DTO si el país es válido
+     * @throws NegocioException si el país no está permitido
+     */
     public NewUsuarioDTO validarPaisExistente(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         String[] validCountries = {"Mexico"};
 
@@ -107,6 +144,15 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    /**
+     * Valida que la fecha de nacimiento no sea futura y que el usuario tenga al
+     * menos 18 años.
+     *
+     * @param nuevoUsuario el DTO con la fecha a validar
+     * @return el mismo DTO si la fecha es válida
+     * @throws NegocioException si la fecha es inválida o el usuario es menor de
+     * edad
+     */
     public NewUsuarioDTO validarFormatoFecha(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         Date fechaNacimiento = nuevoUsuario.getFechaNacimiento();
         if (fechaNacimiento == null) {
@@ -136,6 +182,13 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    /**
+     * Valida que el correo electrónico tenga un formato correcto.
+     *
+     * @param nuevoUsuario el DTO con el correo a validar
+     * @return el mismo DTO si el correo es válido
+     * @throws NegocioException si el correo es nulo o tiene formato incorrecto
+     */
     public NewUsuarioDTO validarFormatoCorreo(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         if (nuevoUsuario.getCorreoElectronico() == null) {
             throw new NegocioException("El correo no puede estar vacio");
@@ -146,6 +199,14 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    /**
+     * Valida que la contraseña cumpla con los requisitos de seguridad. Verifica
+     * longitud, caracteres especiales, números, mayúsculas y minúsculas.
+     *
+     * @param nuevoUsuario el DTO con la contraseña a validar
+     * @return el mismo DTO si la contraseña es válida
+     * @throws NegocioException si la contraseña no cumple los requisitos
+     */
     public NewUsuarioDTO validarformatoContrasenia(NewUsuarioDTO nuevoUsuario) throws NegocioException {
         if (nuevoUsuario.getContrasenia() == null) {
             throw new NegocioException("La contrasenia no puede estar vacia");
@@ -178,6 +239,15 @@ public class RegistrarUsuario implements IRegistrarUsuario {
         return nuevoUsuario;
     }
 
+    /**
+     * Verifica si el correo electrónico o número telefónico ya existen en la
+     * lista de usuarios registrados.
+     *
+     * @param nuevoUsuario el usuario que se intenta registrar
+     * @param usuariosRegistrados la lista de usuarios previamente registrados
+     * @return el mismo DTO si no hay duplicados
+     * @throws NegocioException si el correo o teléfono ya están registrados
+     */
     public NewUsuarioDTO validarUsuario(NewUsuarioDTO nuevoUsuario, List<NewUsuarioDTO> usuariosRegistrados) throws NegocioException {
         for (NewUsuarioDTO usuario : usuariosRegistrados) {
             if (usuario.getCorreoElectronico().equalsIgnoreCase(nuevoUsuario.getCorreoElectronico())) {
