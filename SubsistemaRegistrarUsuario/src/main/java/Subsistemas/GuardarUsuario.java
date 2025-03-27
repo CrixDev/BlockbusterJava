@@ -25,4 +25,10 @@ public class GuardarUsuario implements IGuardarUsuario {
     public List<UsuarioDTO> obtenerUsuarios() {
         return usuariosRegistrados;
     }
+    
+    public void imprimirUsuarios(){
+        for (UsuarioDTO usuario : usuariosRegistrados) {
+            System.out.println(usuario);
+        }
+    }
 }

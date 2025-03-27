@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 C:\Users\devor\Programacion\Java\Java_Itson\Blockbuster_Proyecto\Blockbuster\Infraestructura\src\main\java\Interfaces\IGestorPagos.java
 C:\Users\devor\Programacion\Java\Java_Itson\Blockbuster_Proyecto\Blockbuster\Infraestructura\src\main\java\com\mycompany\infraestructura\Tarjeta.java
 C:\Users\devor\Programacion\Java\Java_Itson\Blockbuster_Proyecto\Blockbuster\Infraestructura\src\main\java\com\mycompany\infraestructura\GestorPagos.java
+=======
+C:\Users\jrasc\Documents\NetBeansProjects\Diseño\BlockbusterJava\Infraestructura\src\main\java\com\mycompany\infraestructura\GestorPagos.java
+C:\Users\jrasc\Documents\NetBeansProjects\Diseño\BlockbusterJava\Infraestructura\src\main\java\com\mycompany\infraestructura\Tarjeta.java
+C:\Users\jrasc\Documents\NetBeansProjects\Diseño\BlockbusterJava\Infraestructura\src\main\java\Interfaces\IGestorPagos.java
+>>>>>>> 0bc88a6764c6903f89d6964139b6529f110a9579

@@ -4,11 +4,8 @@
  */
 package main.presentacion;
 
-import DTOs.CredencialesUsuarioDTO;
-import DTOs.NewUsuarioDTO;
 import control.ControlGUI;
 //import exception.NegocioException;
-import javax.swing.JOptionPane;
 //import main.presentacion.registrarUsuario;
 //import seleccionGenero.SeleccionGeneros;
 
@@ -273,32 +270,11 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ControlGUI.getInstancia().mostrarRegistroUsuario();
+        ControlGUI.getInstancia().cerrarVentana(this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        IUsuarioBO usuarioBO = new UsuarioBO();
-//
-//        String correo = jTextFieldIngresarUsuario.getText().trim();
-//        String contraseña = new String(jPasswordFieldIngresarContraseña.getPassword()).trim();
-//
-//        if (correo.isEmpty() || contraseña.isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Debes ingresar correo y contraseña", "Advertencia", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//
-//        try{
-//            CredencialesUsuarioDTO credenciales = new CredencialesUsuarioDTO(correo, contraseña);
-//            NewUsuarioDTO usuario = usuarioBO.validarUsuario(credenciales.getCorreo(), credenciales.getContraseña());
-//
-//            SeleccionGeneros ventanaGeneros = new SeleccionGeneros();
-//            ventanaGeneros.setVisible(true);
-//            ventanaGeneros.setLocationRelativeTo(null);
-//            this.dispose();
-//
-//        }catch(NegocioException ex){
-//            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
-//            limpiarCampos();
-//        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPasswordFieldIngresarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldIngresarContraseñaActionPerformed

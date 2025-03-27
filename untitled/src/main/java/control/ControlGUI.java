@@ -69,11 +69,10 @@ public class ControlGUI {
         try {
             this.usuarioSeleccionado = usuarioNuevo.validarRegistroUsuario(nuevoUsuario);
             mostrarSeleccionGeneros();
+            cerrarVentana(frmRegistroUsuario);
             return usuarioSeleccionado;
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
-            mostrarLogin();
-            cerrarVentana(frmRegistroUsuario);
             return null;
         }
     }
@@ -82,6 +81,7 @@ public class ControlGUI {
         try {
             this.generosSeleccionados = generoPreferido.getGenerosSeleccionados(generos);
             mostrarMembresia();
+            cerrarVentana(frmSeleccionGeneros);
             return generosSeleccionados;
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -93,6 +93,7 @@ public class ControlGUI {
         try {
             this.membresiaSeleccionada = gestorMembresia.validarEleccionMembresia(membresia);
             mostrarMetodoPago();
+            cerrarVentana(frmMembresia);
             return membresiaSeleccionada;
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -116,6 +117,7 @@ public class ControlGUI {
                 pagarMembresia.guardarPago(pagoDTO);
                 JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Monto: $" + resultado.getMonto());
                 mostrarLogin();
+                cerrarVentana(frmMetodoPago);
                 return resultado;
             } else {
                 JOptionPane.showMessageDialog(null, "La tarjeta no está registrada o no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
