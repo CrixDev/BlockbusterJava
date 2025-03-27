@@ -20,6 +20,12 @@ public class SeleccionGeneros extends javax.swing.JFrame {
    private List<GeneroDTO> generos;
     private int indiceActual = 0;
     private JPanel panelContenedorPrincipal;
+    
+     String[] rutas = {
+    "/imagenes/drama.png",
+    "/imagenes/comedia.png",
+    "/imagenes/accion.png",
+};
 
     /**
      * Creates new form SeleccionGeneros
@@ -35,9 +41,9 @@ public class SeleccionGeneros extends javax.swing.JFrame {
         generos = new ArrayList<>();
         
      
-    generos.add(new GeneroDTO("Drama"));
-    generos.add(new GeneroDTO("Terror"));
-    generos.add(new GeneroDTO("Comedia"));
+    generos.add(new GeneroDTO("Drama", rutas[0]));
+    generos.add(new GeneroDTO("accion",  rutas[2]));
+    generos.add(new GeneroDTO("Comedia",  rutas[1] ));
     }
 
     

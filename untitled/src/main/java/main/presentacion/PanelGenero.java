@@ -5,8 +5,11 @@
 package main.presentacion;
 
 import DTOs.GeneroDTO;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.net.URL;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -16,9 +19,11 @@ import javax.swing.ImageIcon;
 public class PanelGenero extends javax.swing.JPanel {
 
     private GeneroDTO genero;
+    private String rutaImagen;
     
     public PanelGenero(GeneroDTO genero) {
         this.genero = genero;
+        this.rutaImagen = genero.getImagen();
         initComponents();
         setupPanel();
         }
@@ -33,11 +38,32 @@ public class PanelGenero extends javax.swing.JPanel {
             genero.setSeleccionado(CheckBoxSeleccionar.isSelected());
         });
         
-
+        setImagen(rutaImagen);
+        
+        
+         this.add(LblImagen, BorderLayout.CENTER);
         setPreferredSize(new Dimension(300, 200));
     }
 
+         public void setImagen(String rutaImagen) {
+         if (rutaImagen != null && !rutaImagen.isEmpty()) {
+        // Cargando la imagen desde el directorio de recursos
+        URL imageURL = getClass().getResource("/imagenes/" + rutaImagen);
         
+        if (imageURL != null) {
+            ImageIcon icon = new ImageIcon(imageURL);
+            LblImagen.setIcon(icon);
+        } else {
+            // Si no se encuentra la imagen, usa una imagen predeterminada
+            ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/accion.png"));
+            LblImagen.setIcon(icon);
+        }
+    } else {
+        // Si la ruta de la imagen es null o vacía, muestra una imagen predeterminada
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/accion.png"));
+        LblImagen.setIcon(icon);
+    }
+    }
         
     
     /**
@@ -49,19 +75,21 @@ public class PanelGenero extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        LabelNombre = new javax.swing.JLabel();
-        CheckBoxSeleccionar = new javax.swing.JCheckBox();
         LabelImagen = new javax.swing.JLabel();
+        LabelNombre = new javax.swing.JLabel();
+        LblImagen = new javax.swing.JLabel();
+        CheckBoxSeleccionar = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(255, 102, 0));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         LabelNombre.setText("Nombre Categoria");
         LabelNombre.setToolTipText("");
         LabelNombre.setVerifyInputWhenFocusTarget(false);
         LabelNombre.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 210, -1));
+
+        LblImagen.setText("jLabel1");
+        LblImagen.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         CheckBoxSeleccionar.setText("Seleccionar");
         CheckBoxSeleccionar.addActionListener(new java.awt.event.ActionListener() {
@@ -69,8 +97,45 @@ public class PanelGenero extends javax.swing.JPanel {
                 CheckBoxSeleccionarActionPerformed(evt);
             }
         });
-        add(CheckBoxSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 128, 77));
-        add(LabelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(LabelImagen)
+                .addGap(5, 5, 5)
+                .addComponent(LabelNombre)
+                .addGap(5, 5, 5)
+                .addComponent(CheckBoxSeleccionar)
+                .addGap(60, 61, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(LblImagen)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(LabelImagen))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(LabelNombre))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(CheckBoxSeleccionar)))
+                .addContainerGap(263, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(LblImagen)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void CheckBoxSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxSeleccionarActionPerformed
@@ -82,5 +147,6 @@ public class PanelGenero extends javax.swing.JPanel {
     private javax.swing.JCheckBox CheckBoxSeleccionar;
     private javax.swing.JLabel LabelImagen;
     private javax.swing.JLabel LabelNombre;
+    private javax.swing.JLabel LblImagen;
     // End of variables declaration//GEN-END:variables
 }
