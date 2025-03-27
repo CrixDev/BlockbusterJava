@@ -69,7 +69,7 @@ public class ControlGUI {
         try {
             this.usuarioSeleccionado = usuarioNuevo.validarRegistroUsuario(nuevoUsuario);
             mostrarSeleccionGeneros();
-            cerrarVentana(frmRegistroUsuario);
+            cerrarVentana(frmLoginUsuario);
             return usuarioSeleccionado;
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
