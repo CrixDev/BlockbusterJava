@@ -45,9 +45,9 @@ public class RegistroUsuario extends javax.swing.JFrame {
         apellido = new javax.swing.JTextField();
         telefono = new javax.swing.JTextField();
         pais = new javax.swing.JComboBox<>();
+        contrasenia = new javax.swing.JPasswordField();
+        confirmarContrasenia = new javax.swing.JPasswordField();
         correo = new javax.swing.JTextField();
-        contrasenia = new javax.swing.JTextField();
-        confirmarContrasenia = new javax.swing.JTextField();
         fechaN = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -62,6 +62,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nombre.setBackground(new java.awt.Color(22, 35, 65));
+        nombre.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +72,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jPanel2.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 350, 30));
 
         apellido.setBackground(new java.awt.Color(22, 35, 65));
+        apellido.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         apellido.setForeground(new java.awt.Color(255, 255, 255));
         apellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +82,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jPanel2.add(apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 350, 30));
 
         telefono.setBackground(new java.awt.Color(22, 35, 65));
+        telefono.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         telefono.setForeground(new java.awt.Color(255, 255, 255));
         telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,10 +91,20 @@ public class RegistroUsuario extends javax.swing.JFrame {
         });
         jPanel2.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 350, 30));
 
+        pais.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         pais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(pais, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 262, 350, 30));
 
+        contrasenia.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        contrasenia.setText("jPasswordField1");
+        jPanel2.add(contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 350, 30));
+
+        confirmarContrasenia.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        confirmarContrasenia.setText("jPasswordField1");
+        jPanel2.add(confirmarContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 350, 30));
+
         correo.setBackground(new java.awt.Color(22, 35, 65));
+        correo.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         correo.setForeground(new java.awt.Color(255, 255, 255));
         correo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,24 +112,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
             }
         });
         jPanel2.add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 350, 30));
-
-        contrasenia.setBackground(new java.awt.Color(22, 35, 65));
-        contrasenia.setForeground(new java.awt.Color(255, 255, 255));
-        contrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contraseniaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 350, 30));
-
-        confirmarContrasenia.setBackground(new java.awt.Color(22, 35, 65));
-        confirmarContrasenia.setForeground(new java.awt.Color(255, 255, 255));
-        confirmarContrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmarContraseniaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(confirmarContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 350, 30));
 
         fechaN.setBackground(new java.awt.Color(22, 35, 65));
         fechaN.setForeground(new java.awt.Color(255, 255, 255));
@@ -177,14 +172,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private void correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_correoActionPerformed
-
-    private void contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_contraseniaActionPerformed
-
-    private void confirmarContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarContraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmarContraseniaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String nombreUsuario = limpiarTexto(nombre, "Nombre");
@@ -263,8 +250,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
-    private javax.swing.JTextField confirmarContrasenia;
-    private javax.swing.JTextField contrasenia;
+    private javax.swing.JPasswordField confirmarContrasenia;
+    private javax.swing.JPasswordField contrasenia;
     private javax.swing.JTextField correo;
     private com.toedter.calendar.JDateChooser fechaN;
     private javax.swing.JButton jButton1;

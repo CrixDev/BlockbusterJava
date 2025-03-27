@@ -47,12 +47,12 @@ public class MetodoPago extends javax.swing.JFrame {
         apellido = new javax.swing.JTextField();
         separadorApellido = new javax.swing.JSeparator();
         separadorNombre = new javax.swing.JSeparator();
+        cvv = new javax.swing.JPasswordField();
         direccion = new javax.swing.JTextField();
         separadorDireccion = new javax.swing.JSeparator();
         tarjeta = new javax.swing.JTextField();
         separadorTarjeta = new javax.swing.JSeparator();
         separadorFechaCaducidad = new javax.swing.JSeparator();
-        cvv = new javax.swing.JTextField();
         separadorCvv = new javax.swing.JSeparator();
         leyendaMetodoDePago = new javax.swing.JLabel();
         panelAzul = new javax.swing.JLabel();
@@ -119,6 +119,15 @@ public class MetodoPago extends javax.swing.JFrame {
         separadorNombre.setPreferredSize(new java.awt.Dimension(50, 30));
         jPanel1.add(separadorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 209, 147, 20));
 
+        cvv.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        cvv.setText("jPasswordField1");
+        cvv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cvvActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cvv, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 80, 30));
+
         direccion.setBackground(new java.awt.Color(22, 36, 64));
         direccion.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 20)); // NOI18N
         direccion.setForeground(new java.awt.Color(161, 167, 179));
@@ -154,18 +163,6 @@ public class MetodoPago extends javax.swing.JFrame {
         separadorFechaCaducidad.setForeground(new java.awt.Color(161, 167, 179));
         separadorFechaCaducidad.setPreferredSize(new java.awt.Dimension(50, 30));
         jPanel1.add(separadorFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 443, 80, 20));
-
-        cvv.setBackground(new java.awt.Color(22, 36, 64));
-        cvv.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 20)); // NOI18N
-        cvv.setForeground(new java.awt.Color(161, 167, 179));
-        cvv.setText("CVV");
-        cvv.setBorder(null);
-        cvv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cvvActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cvv, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 413, 80, -1));
 
         separadorCvv.setForeground(new java.awt.Color(161, 167, 179));
         separadorCvv.setPreferredSize(new java.awt.Dimension(50, 30));
@@ -218,10 +215,6 @@ public class MetodoPago extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tarjetaActionPerformed
 
-    private void cvvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cvvActionPerformed
-
-    }//GEN-LAST:event_cvvActionPerformed
-
     private void roundedPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roundedPanel2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_roundedPanel2MouseClicked
@@ -243,6 +236,10 @@ public class MetodoPago extends javax.swing.JFrame {
         ControlGUI.getInstancia().procesarPago(pago, membresia);
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void cvvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cvvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cvvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,7 +306,7 @@ public class MetodoPago extends javax.swing.JFrame {
     private com.toedter.calendar.JYearChooser anioCaducidad;
     private javax.swing.JTextField apellido;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JTextField cvv;
+    private javax.swing.JPasswordField cvv;
     private javax.swing.JTextField direccion;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
