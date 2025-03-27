@@ -28,7 +28,7 @@ public class GestorPagos implements IGestorPagos {
 
     private void cargarTarjetasRegistradas() {
         Date fecha1 = new Date(2025 - 1900, 12, 1); // Diciembre 2025
-        tarjetasRegistradas.add(new Tarjeta("Jose", "Garduno", "1234567891234567", fecha1, "123", 1000));
+        tarjetasRegistradas.add(new Tarjeta("Jose", "Garduno", "1234567891234567", fecha1, "123", 200));
 
     }
 
@@ -60,8 +60,9 @@ public class GestorPagos implements IGestorPagos {
             if (tarjetaRegistrada.saldoSuficiente(monto)) {
                 tarjetaRegistrada.realizarCargo(monto);
                 return new PagoRegistradoDTO(true, monto, new Date());
+            }else{
+                return new PagoRegistradoDTO(false, 0, null);      
             }
-            return new PagoRegistradoDTO(true, monto, new Date());
         } else {
             return new PagoRegistradoDTO(false, 0, null);
         }

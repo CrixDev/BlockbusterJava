@@ -141,6 +141,10 @@ public class ControlGUI {
             usuarioSeleccionado = null;
             generosSeleccionados = null;
             metodoPagoSeleccionado = null;
+            frmMembresia.limpiarSeleccion();
+            frmRegistroUsuario.limpiarCampos();
+            frmMetodoPago.limpiarCampos();
+            frmSeleccionGeneros.limpiarCampos();
 
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -190,6 +194,7 @@ public class ControlGUI {
             this.frmMembresia = new Membresias();
             this.frmMembresia.setLocationRelativeTo(null);
         }
+        frmMembresia.limpiarSeleccion();
         this.frmMembresia.setVisible(true);
     }
 
