@@ -244,7 +244,6 @@ public class MetodoPago extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
     private void agregarCampoTexto(JTextField field, String campoTexto) {
         field.setText(campoTexto);
 
@@ -268,6 +267,16 @@ public class MetodoPago extends javax.swing.JFrame {
     private String limpiarTexto(JTextField field, String campoTexto) {
         String text = field.getText().trim();
         return text.equals(campoTexto) ? null : text;
+    }
+
+    public void limpiarCampos() {
+        nombre.setText("Nombre");
+        apellido.setText("Apellido");
+        direccion.setText("Direccion");
+        tarjeta.setText("Tarjeta");
+        cvv.setText("CVV");
+        anioCaducidad.setYear(new java.util.GregorianCalendar().get(java.util.Calendar.YEAR));
+        mesCaducidad.setMonth(0);
     }
 
 

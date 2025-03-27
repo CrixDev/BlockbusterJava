@@ -17,95 +17,92 @@ import java.util.List;
  */
 public class SeleccionGeneros extends javax.swing.JFrame {
 
-   private List<GeneroDTO> generos;
+    private List<GeneroDTO> generos;
     private int indiceActual = 0;
     private JPanel panelContenedorPrincipal;
-    
-     String[] rutas = {
-    "/imagenes/drama.png",
-    "/imagenes/comedia.png",
-    "/imagenes/accion.png",
-};
+
+    String[] rutas = {
+        "/imagenes/drama.png",
+        "/imagenes/comedia.png",
+        "/imagenes/accion.png",};
 
     /**
      * Creates new form SeleccionGeneros
      */
- public SeleccionGeneros() {
-    initComponents();
-    inicializarGeneros();
-    configurarInterfaz();
-    mostrarGenero(0); // Mostrar el primer género al iniciar
-}
+    public SeleccionGeneros() {
+        initComponents();
+        inicializarGeneros();
+        configurarInterfaz();
+        mostrarGenero(0); // Mostrar el primer género al iniciar
+    }
 
     private void inicializarGeneros() {
         generos = new ArrayList<>();
-        
-     
-    generos.add(new GeneroDTO("Drama", rutas[0]));
-    generos.add(new GeneroDTO("accion", rutas[2]));
-    generos.add(new GeneroDTO("Comedia", rutas[1] ));
+
+        generos.add(new GeneroDTO("Drama", rutas[0]));
+        generos.add(new GeneroDTO("accion", rutas[2]));
+        generos.add(new GeneroDTO("Comedia", rutas[1]));
     }
 
-    
-   
-    
-  private void configurarInterfaz() {
-       
-     panelContenedorPrincipal = new JPanel();
-    panelContenedorPrincipal.setLayout(new CardLayout()); // Usamos CardLayout para navegar
-    panelContenedorPrincipal.setBackground(new Color(26, 43, 76));
-    
-    // Añade el panel al frame (ajusta según tu diseño)
-    getContentPane().add(panelContenedorPrincipal, BorderLayout.CENTER);
-    
-    // Carga todos los paneles de género
-    cargarPanelesGeneros();
-    
-    // Configura botones de navegación
-    configurarBotonesNavegacion();
+    private void configurarInterfaz() {
+
+        panelContenedorPrincipal = new JPanel();
+        panelContenedorPrincipal.setLayout(new CardLayout()); // Usamos CardLayout para navegar
+        panelContenedorPrincipal.setBackground(new Color(26, 43, 76));
+
+        // Añade el panel al frame (ajusta según tu diseño)
+        getContentPane().add(panelContenedorPrincipal, BorderLayout.CENTER);
+
+        // Carga todos los paneles de género
+        cargarPanelesGeneros();
+
+        // Configura botones de navegación
+        configurarBotonesNavegacion();
     }
-  
-  private void cargarPanelesGeneros() {
-    for (GeneroDTO genero : generos) {
-        PanelGenero panel = new PanelGenero(genero);
-        panelContenedorPrincipal.add(panel, genero.getNombre());
+
+    private void cargarPanelesGeneros() {
+        for (GeneroDTO genero : generos) {
+            PanelGenero panel = new PanelGenero(genero);
+            panelContenedorPrincipal.add(panel, genero.getNombre());
+        }
     }
-}
-  private void mostrarGenero(int indice) {
-    CardLayout cl = (CardLayout)(panelContenedorPrincipal.getLayout());
-    cl.show(panelContenedorPrincipal, generos.get(indice).getNombre());
-    indiceActual = indice;
-    actualizarEstadoBotones();
-}
-  
-   
-    
+
+    private void mostrarGenero(int indice) {
+        CardLayout cl = (CardLayout) (panelContenedorPrincipal.getLayout());
+        cl.show(panelContenedorPrincipal, generos.get(indice).getNombre());
+        indiceActual = indice;
+        actualizarEstadoBotones();
+    }
+
     private void configurarBotonesNavegacion() {
-    // Asume que tienes jBtnAnterior y jBtnSiguiente en tu diseño
-    jBtnAnterior.addActionListener(e -> {
-        if (indiceActual > 0) {
-            mostrarGenero(indiceActual - 1);
+        // Asume que tienes jBtnAnterior y jBtnSiguiente en tu diseño
+        jBtnAnterior.addActionListener(e -> {
+            if (indiceActual > 0) {
+                mostrarGenero(indiceActual - 1);
+            }
+        });
+
+        jBtnSiguiente.addActionListener(e -> {
+            if (indiceActual < generos.size() - 1) {
+                mostrarGenero(indiceActual + 1);
+            }
+        });
+
+        actualizarEstadoBotones();
+    }
+
+    private void actualizarEstadoBotones() {
+        jBtnAnterior.setEnabled(indiceActual > 0);
+        jBtnSiguiente.setEnabled(indiceActual < generos.size() - 1);
+    }
+
+    public void limpiarCampos() {
+        for (GeneroDTO genero : generos) {
+            genero.setSeleccionado(false);
         }
-    });
-    
-    jBtnSiguiente.addActionListener(e -> {
-        if (indiceActual < generos.size() - 1) {
-            mostrarGenero(indiceActual + 1);
-        }
-    });
-    
-    actualizarEstadoBotones();
-}
+        mostrarGenero(0);
+    }
 
-private void actualizarEstadoBotones() {
-    jBtnAnterior.setEnabled(indiceActual > 0);
-    jBtnSiguiente.setEnabled(indiceActual < generos.size() - 1);
-}
-   
-
-  
-
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -293,7 +290,6 @@ private void actualizarEstadoBotones() {
     /**
      * @param args the command line arguments
      */
-
     public List<GeneroDTO> getGenerosSeleccionados() {
         List<GeneroDTO> seleccionados = new ArrayList<>();
         for (GeneroDTO genero : generos) {

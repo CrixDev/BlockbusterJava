@@ -189,7 +189,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
     private void agregarCampoTexto(JTextField field, String campoTexto) {
         field.setText(campoTexto);
 
@@ -215,6 +214,16 @@ public class RegistroUsuario extends javax.swing.JFrame {
         return text.equals(campoTexto) ? null : text;
     }
 
+    public void limpiarCampos() {
+        nombre.setText("Nombre");
+        apellido.setText("Apellido");
+        telefono.setText("Numero telefonico");
+        correo.setText("Correo electronico");
+        contrasenia.setText("Contraseña");
+        confirmarContrasenia.setText("Confirmar contraseña");
+        fechaN.setDate(null);
+        pais.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;

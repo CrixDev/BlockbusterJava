@@ -115,8 +115,9 @@ public class ControlGUI {
             PagoRegistradoDTO resultado = gestionarPagos.procesarPago(nuevoPago, membresia);
             if (resultado.isEsValida()) {
                 pagarMembresia.guardarPago(pagoDTO);
+                metodoPagoSeleccionado = resultado;
                 JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Monto: $" + resultado.getMonto());
-                cerrarVentana(frmLoginUsuario);
+                cerrarVentana(frmMetodoPago);
                 mostrarLogin();
                 return resultado;
             } else {
@@ -136,6 +137,11 @@ public class ControlGUI {
             PagoRegistradoDTO pagoRegistrado = getProcesarPago();
             UsuarioDTO usuarioGuardar = new UsuarioDTO(datosUsuario, membresia, generos, pagoRegistrado);
             guardarUsuario.persistirUsuario(usuarioGuardar);
+            membresiaSeleccionada = null;
+            usuarioSeleccionado = null;
+            generosSeleccionados = null;
+            metodoPagoSeleccionado = null;
+
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -157,6 +163,7 @@ public class ControlGUI {
             this.frmRegistroUsuario = new RegistroUsuario();
             frmRegistroUsuario.setLocationRelativeTo(null);
         }
+        frmRegistroUsuario.limpiarCampos();
         frmRegistroUsuario.setVisible(true);
     }
 
@@ -165,7 +172,8 @@ public class ControlGUI {
             this.frmMetodoPago = new MetodoPago();
             frmMetodoPago.setLocationRelativeTo(null);
         }
-        frmMetodoPago.setVisible(true);  // Mostrar la ventana
+        frmMetodoPago.limpiarCampos();
+        frmMetodoPago.setVisible(true);
     }
 
     public void mostrarSeleccionGeneros() {
@@ -173,6 +181,7 @@ public class ControlGUI {
             this.frmSeleccionGeneros = new SeleccionGeneros();
             frmSeleccionGeneros.setLocationRelativeTo(null);
         }
+        frmSeleccionGeneros.limpiarCampos();
         frmSeleccionGeneros.setVisible(true);
     }
 
