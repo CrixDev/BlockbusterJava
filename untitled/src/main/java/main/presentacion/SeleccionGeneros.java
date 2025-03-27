@@ -288,7 +288,6 @@ private void actualizarEstadoBotones() {
     private void btnSiguienteVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteVentanaActionPerformed
         List<GeneroDTO> seleccionados = getGenerosSeleccionados();
         ControlGUI.getInstancia().seleccionarGeneroPreferido(seleccionados);
-        ControlGUI.getInstancia().cerrarVentana(this);
     }//GEN-LAST:event_btnSiguienteVentanaActionPerformed
 
     /**
