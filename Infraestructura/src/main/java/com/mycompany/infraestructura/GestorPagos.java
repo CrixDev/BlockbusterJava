@@ -27,7 +27,7 @@ public class GestorPagos implements IGestorPagos {
     }
 
     private void cargarTarjetasRegistradas() {
-        Date fecha1 = new Date(2025 - 1900, 11, 1); // Diciembre 2025
+        Date fecha1 = new Date(2025 - 1900, 12, 1); // Diciembre 2025
         tarjetasRegistradas.add(new Tarjeta("Jose", "Garduno", "1234567891234567", fecha1, "123", 1000));
 
     }
@@ -38,7 +38,7 @@ public class GestorPagos implements IGestorPagos {
 
         Tarjeta tarjetaEntrada = new Tarjeta(dto.getNombreTitular(),
                 dto.getApelllidoTitular(),
-                dto.getApelllidoTitular(),
+                dto.getNumero(),
                 fechaExpiracion,
                 dto.getCvv(),
                 0);
