@@ -22,7 +22,7 @@ public class Exe {
     /*
     Datos de tarjeta precargada
     nombre: Jose
-    apellido: Garduño
+    apellido: Garduno
     alias: El zombie del betos bar(El lugar de los rockstar y los malditos punks)
     noTarjeta: 1234567891234567
     fecha: Diciembre/2025
