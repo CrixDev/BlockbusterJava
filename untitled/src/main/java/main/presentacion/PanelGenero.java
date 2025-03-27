@@ -22,10 +22,14 @@ public class PanelGenero extends javax.swing.JPanel {
     private String rutaImagen;
     
     public PanelGenero(GeneroDTO genero) {
-        this.genero = genero;
+       
+          initComponents();
+          this.genero = genero;
         this.rutaImagen = genero.getImagen();
-        initComponents();
-        setupPanel();
+       
+      
+         setupPanel();
+        
         }
        private void setupPanel() {
      
@@ -48,19 +52,19 @@ public class PanelGenero extends javax.swing.JPanel {
          public void setImagen(String rutaImagen) {
          if (rutaImagen != null && !rutaImagen.isEmpty()) {
         // Cargando la imagen desde el directorio de recursos
-        URL imageURL = getClass().getResource("/imagenes/" + rutaImagen);
+        URL imageURL = getClass().getResource(rutaImagen);
         
         if (imageURL != null) {
             ImageIcon icon = new ImageIcon(imageURL);
             LblImagen.setIcon(icon);
         } else {
             // Si no se encuentra la imagen, usa una imagen predeterminada
-            ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/accion.png"));
+            ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/derechaicon.png"));
             LblImagen.setIcon(icon);
         }
     } else {
         // Si la ruta de la imagen es null o vacía, muestra una imagen predeterminada
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/accion.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/oxxo.png"));
         LblImagen.setIcon(icon);
     }
     }
@@ -80,17 +84,19 @@ public class PanelGenero extends javax.swing.JPanel {
         LblImagen = new javax.swing.JLabel();
         CheckBoxSeleccionar = new javax.swing.JCheckBox();
 
-        setBackground(new java.awt.Color(255, 102, 0));
+        setBackground(new java.awt.Color(22, 35, 65));
 
-        LabelNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        LabelNombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LabelNombre.setForeground(new java.awt.Color(234, 205, 55));
         LabelNombre.setText("Nombre Categoria");
         LabelNombre.setToolTipText("");
         LabelNombre.setVerifyInputWhenFocusTarget(false);
         LabelNombre.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        LblImagen.setText("jLabel1");
         LblImagen.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        CheckBoxSeleccionar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        CheckBoxSeleccionar.setForeground(new java.awt.Color(234, 205, 55));
         CheckBoxSeleccionar.setText("Seleccionar");
         CheckBoxSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +115,7 @@ public class PanelGenero extends javax.swing.JPanel {
                 .addComponent(LabelNombre)
                 .addGap(5, 5, 5)
                 .addComponent(CheckBoxSeleccionar)
-                .addGap(60, 61, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
