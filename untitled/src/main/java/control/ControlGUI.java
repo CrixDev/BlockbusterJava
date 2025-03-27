@@ -110,10 +110,8 @@ public class ControlGUI {
                     pagoDTO.getNumeroTarjeta(),
                     pagoDTO.getMesCaducidad(),
                     pagoDTO.getAnioCaducidad(),
-                    pagoDTO.getCvv());
-            
-            PagoRegistradoDTO resultado = gestionarPagos.procesarPago(nuevoPago, membresia);
-            
+                    pagoDTO.getCvv());   
+            PagoRegistradoDTO resultado = gestionarPagos.procesarPago(nuevoPago, membresia);       
             if (resultado.isEsValida()) {
                 pagarMembresia.guardarPago(pagoDTO);
                 JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Monto: $" + resultado.getMonto());
