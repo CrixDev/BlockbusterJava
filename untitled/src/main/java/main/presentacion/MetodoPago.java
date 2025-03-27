@@ -4,16 +4,10 @@
  */
 package main.presentacion;
 
-import DTOs.GeneroDTO;
 import DTOs.MembresiaDTO;
 import DTOs.MetodoPagoDTO;
-import DTOs.NewUsuarioDTO;
-import DTOs.UsuarioDTO;
-import Subsistemas.PagoMembresia;
-import DTOs.PagoRegistradoDTO;
 import control.ControlGUI;
-import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -26,6 +20,11 @@ public class MetodoPago extends javax.swing.JFrame {
      */
     public MetodoPago() {
         initComponents();
+        agregarCampoTexto(nombre, "Nombre");
+        agregarCampoTexto(apellido, "Apellido");
+        agregarCampoTexto(direccion, "Direccion");
+        agregarCampoTexto(cvv, "CVV");
+        agregarCampoTexto(tarjeta, "Tarjeta");
     }
 
     /**
@@ -232,16 +231,17 @@ public class MetodoPago extends javax.swing.JFrame {
     }//GEN-LAST:event_roundedPanel3MouseClicked
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        String nombreTarjeta = nombre.getText();
-        String apellidoTarjeta = apellido.getText();
-        String codigoSeguridad = cvv.getText();
-        String direccionTarjeta = direccion.getText();
-        String numeroTarjeta = tarjeta.getText();
+        String nombreTarjeta = limpiarTexto(nombre, "Nombre");
+        String apellidoTarjeta = limpiarTexto(apellido, "Apellido");
+        String codigoSeguridad = limpiarTexto(cvv, "CVV");
+        String direccionTarjeta = limpiarTexto(direccion, "Direccion");
+        String numeroTarjeta = limpiarTexto(tarjeta, "Tarjeta");
         int anio = anioCaducidad.getYear();
         int mes = mesCaducidad.getMonth();
         MetodoPagoDTO pago = new MetodoPagoDTO(nombreTarjeta, apellidoTarjeta, direccionTarjeta, numeroTarjeta, codigoSeguridad, anio, mes);
         MembresiaDTO membresia = ControlGUI.getInstancia().getMembresiaSeleccionada();
-        ControlGUI.getInstancia().procesarPago(pago,membresia);
+        ControlGUI.getInstancia().procesarPago(pago, membresia);
+
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**
@@ -277,6 +277,31 @@ public class MetodoPago extends javax.swing.JFrame {
                 new MetodoPago().setVisible(true);
             }
         });
+    }
+
+    private void agregarCampoTexto(JTextField field, String campoTexto) {
+        field.setText(campoTexto);
+
+        field.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (field.getText().equals(campoTexto)) {
+                    field.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (field.getText().isEmpty()) {
+                    field.setText(campoTexto);
+                }
+            }
+        });
+    }
+
+    private String limpiarTexto(JTextField field, String campoTexto) {
+        String text = field.getText().trim();
+        return text.equals(campoTexto) ? null : text;
     }
 
 
