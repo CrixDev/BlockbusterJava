@@ -67,7 +67,6 @@ public class ControlGUI {
 
     public NewUsuarioDTO intentarRegistrarUsuario(NewUsuarioDTO nuevoUsuario) {
         try {
-            cerrarVentana(frmLoginUsuario);
             this.usuarioSeleccionado = usuarioNuevo.validarRegistroUsuario(nuevoUsuario);
             mostrarSeleccionGeneros();
             cerrarVentana(frmRegistroUsuario);
@@ -108,11 +107,11 @@ public class ControlGUI {
             pagarMembresia.validarFormatoPago(pagoDTO);
 
             NuevoPagoDTO nuevoPago = new NuevoPagoDTO(pagoDTO.getNombreTitular(),
-                     pagoDTO.getApellidoTitular(),
-                     pagoDTO.getNumeroTarjeta(),
-                     pagoDTO.getMesCaducidad(),
-                     pagoDTO.getAnioCaducidad(),
-                     pagoDTO.getCvv());
+                    pagoDTO.getApellidoTitular(),
+                    pagoDTO.getNumeroTarjeta(),
+                    pagoDTO.getMesCaducidad(),
+                    pagoDTO.getAnioCaducidad(),
+                    pagoDTO.getCvv());
             PagoRegistradoDTO resultado = gestionarPagos.procesarPago(nuevoPago, membresia);
             if (resultado.isEsValida()) {
                 pagarMembresia.guardarPago(pagoDTO);
@@ -153,6 +152,7 @@ public class ControlGUI {
     }
 
     public void mostrarRegistroUsuario() {
+        cerrarVentana(frmLoginUsuario);
         if (this.frmRegistroUsuario == null) {
             this.frmRegistroUsuario = new RegistroUsuario();
             frmRegistroUsuario.setLocationRelativeTo(null);
