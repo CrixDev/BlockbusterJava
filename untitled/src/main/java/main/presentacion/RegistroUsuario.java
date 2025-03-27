@@ -6,12 +6,8 @@ package main.presentacion;
 
 import DTOs.NewUsuarioDTO;
 import control.ControlGUI;
-import exception.NegocioException;
 import java.util.Date;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 /**
  *

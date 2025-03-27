@@ -37,7 +37,7 @@ import main.presentacion.RegistroUsuario;
  * @author jrasc
  */
 public class ControlGUI {
-    
+
     private static ControlGUI instancia;
     private static IRegistrarUsuario usuarioNuevo = new RegistrarUsuario();
     private static IGeneroSeleccionado generoPreferido = new GeneroSeleccionado();
@@ -54,17 +54,17 @@ public class ControlGUI {
     private MetodoPago frmMetodoPago;
     private SeleccionGeneros frmSeleccionGeneros;
     private Membresias frmMembresia;
-    
+
     private ControlGUI() {
     }
-    
+
     public static ControlGUI getInstancia() {
         if (instancia == null) {
             instancia = new ControlGUI();
         }
         return instancia;
     }
-    
+
     public NewUsuarioDTO intentarRegistrarUsuario(NewUsuarioDTO nuevoUsuario) {
         try {
             this.usuarioSeleccionado = usuarioNuevo.validarRegistroUsuario(nuevoUsuario);
@@ -76,7 +76,7 @@ public class ControlGUI {
             return null;
         }
     }
-    
+
     public List<GeneroDTO> seleccionarGeneroPreferido(List<GeneroDTO> generos) {
         try {
             this.generosSeleccionados = generoPreferido.getGenerosSeleccionados(generos);
@@ -88,7 +88,7 @@ public class ControlGUI {
             return null;
         }
     }
-    
+
     public MembresiaDTO seleccionarMembresia(MembresiaDTO membresia) {
         try {
             this.membresiaSeleccionada = gestorMembresia.validarEleccionMembresia(membresia);
@@ -100,24 +100,23 @@ public class ControlGUI {
             return null;
         }
     }
-    
+
     public PagoRegistradoDTO procesarPago(MetodoPagoDTO pagoDTO, MembresiaDTO membresia) {
-        
+
         try {
             pagarMembresia.validarFormatoPago(pagoDTO);
-            
+
             NuevoPagoDTO nuevoPago = new NuevoPagoDTO(
                     pagoDTO.getNombreTitular(),
                     pagoDTO.getNumeroTarjeta(),
                     pagoDTO.getMesCaducidad(),
                     pagoDTO.getAnioCaducidad(),
-                    pagoDTO.getCvv());   
-            PagoRegistradoDTO resultado = gestionarPagos.procesarPago(nuevoPago, membresia);       
+                    pagoDTO.getCvv());
+            PagoRegistradoDTO resultado = gestionarPagos.procesarPago(nuevoPago, membresia);
             if (resultado.isEsValida()) {
                 pagarMembresia.guardarPago(pagoDTO);
                 JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Monto: $" + resultado.getMonto());
                 mostrarLogin();
-                cerrarVentana(frmMetodoPago);
                 return resultado;
             } else {
                 JOptionPane.showMessageDialog(null, "La tarjeta no está registrada o no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -127,7 +126,7 @@ public class ControlGUI {
         }
         return null;
     }
-    
+
     public void guardarUsuario() {
         try {
             NewUsuarioDTO datosUsuario = getNuevoUsuario();
@@ -139,59 +138,70 @@ public class ControlGUI {
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
     }
-    
+
     public void mostrarLogin() {
-        this.frmLoginUsuario = new Login();
+        if (this.frmLoginUsuario == null) {
+            this.frmLoginUsuario = new Login();
+            frmLoginUsuario.setLocationRelativeTo(null);
+        }
         frmLoginUsuario.setVisible(true);
-        frmLoginUsuario.setLocationRelativeTo(null);
+
     }
-    
+
     public void mostrarRegistroUsuario() {
-        this.frmRegistroUsuario = new RegistroUsuario();
+        if (this.frmRegistroUsuario == null) {
+            this.frmRegistroUsuario = new RegistroUsuario();
+            frmRegistroUsuario.setLocationRelativeTo(null);
+        }
         frmRegistroUsuario.setVisible(true);
-        frmRegistroUsuario.setLocationRelativeTo(null);
     }
-    
+
     public void mostrarMetodoPago() {
-        this.frmMetodoPago = new MetodoPago();
-        frmMetodoPago.setVisible(true);
-        frmMetodoPago.setLocationRelativeTo(null);
+        if (this.frmMetodoPago == null) {
+            this.frmMetodoPago = new MetodoPago();
+            frmMetodoPago.setLocationRelativeTo(null);
+        }
+        frmMetodoPago.setVisible(true);  // Mostrar la ventana
     }
-    
+
     public void mostrarSeleccionGeneros() {
-        this.frmSeleccionGeneros = new SeleccionGeneros();
+        if (this.frmSeleccionGeneros == null) {
+            this.frmSeleccionGeneros = new SeleccionGeneros();
+            frmSeleccionGeneros.setLocationRelativeTo(null);
+        }
         frmSeleccionGeneros.setVisible(true);
-        frmSeleccionGeneros.setLocationRelativeTo(null);
     }
-    
+
     public void mostrarMembresia() {
-        this.frmMembresia = new Membresias();
+        if (this.frmMembresia == null) {
+            this.frmMembresia = new Membresias();
+            this.frmMembresia.setLocationRelativeTo(null);
+        }
         this.frmMembresia.setVisible(true);
-        this.frmMembresia.setLocationRelativeTo(null);
     }
-    
+
     public void cerrarVentana(javax.swing.JFrame ventanaActual) {
         if (ventanaActual != null) {
             ventanaActual.dispose();
         }
     }
-    
+
     public NewUsuarioDTO getNuevoUsuario() {
         return usuarioSeleccionado;
     }
-    
+
     public List<GeneroDTO> getGenerosSeleccionados() {
         return generosSeleccionados;
     }
-    
+
     public MembresiaDTO getMembresiaSeleccionada() {
         return membresiaSeleccionada;
     }
-    
+
     public PagoRegistradoDTO getProcesarPago() {
         return metodoPagoSeleccionado;
     }
-    
+
 }
